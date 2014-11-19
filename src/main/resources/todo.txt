@@ -1,0 +1,12 @@
+1. Apache lucane Search system.(add pagination to solr search, Add facet search to the advanced search,Add hithighling to the solr search,add indexer asservlet with startup,auto suggestion 
+2. Oauth Sign On (Google and Facebook.).
+3. Customize Quiz by allowing user to select which kind of questions they are interested in..
+4. Attaching comments engine to track users thoughts about the questions.
+5. Adding links to different documents.
+6. Pass/Fail grade, ability to download the certificate in pdf format.
+7. Mail the question to different user/share the questions with different social media apps.(Facebook and google plus).
+8. Expose all the above functionality using apache cxf SOAP Web Service.
+9. Activiti workflow.
+10.Quartz scheduler to send the newsletter everyday.
+11.Customize the  user profile (adding images, Change password, Change Email Address etc.).
+12.Internationalization using resource bundle and format jstl tags.
