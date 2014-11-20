@@ -130,6 +130,7 @@
 		    <security:user name="user" password="user" authorities="ROLE_USER" />
 		     <security:user name="guest" password="guest" authorities="ROLE_GUEST" />
 	</security:user-service>
+	
 	<security:http pattern="/resources/**" security="none" />
 	<security:http pattern="/login" security="none"/>
     <security:http auto-config='true' authentication-manager-ref="userAuthenticationManager" use-expressions="true">
@@ -143,8 +144,8 @@
 		</security:authentication-provider>
   </security:authentication-manager>
    
-   <security:global-method-security>
-   <security:protect-pointcut access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" expression="execution(* com.tocgroup.tradeshow.*Service.*(..))"/>
+<!--    <security:global-method-security> -->
+<!--    <security:protect-pointcut access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" expression="execution(* com.tocgroup.tradeshow.*Service.*(..))"/> -->
    
-   </security:global-method-security>
+<!--    </security:global-method-security> -->
 </beans:beans>

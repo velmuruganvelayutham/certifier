@@ -41,7 +41,7 @@
 		<beans:property name="maxUploadSize" value="10000000"/>
 	</beans:bean>
 	
-	<context:component-scan base-package="com.tocgroup.tradeshow" />
+	<context:component-scan base-package="com.velmurugan.certifier" />
 	
 <!-- 	 <beans:bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
 <!--       <beans:property name="dataSource" ref="dataSource" /> -->
@@ -80,7 +80,7 @@
 
  <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <beans:property name="dataSource" ref="dataSource" />
-        <beans:property name="packagesToScan" value="com.tocgroup.tradeshow.model" />
+        <beans:property name="packagesToScan" value="com.velmurugan.certifier.model" />
         <beans:property name="hibernateProperties">
             <beans:props>
                 <beans:prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</beans:prop>

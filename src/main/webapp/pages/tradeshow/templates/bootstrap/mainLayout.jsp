@@ -37,6 +37,7 @@ response.setDateHeader ("Expires", -1);
 
  	</head>
  	<body>
+ 	 <jsp:include page="/pages/tradeshow/templates/bootstrap/sections/jsLinks.jsp" />
   
 	<div id="pageContainer" class="container">
 	
@@ -50,7 +51,7 @@ response.setDateHeader ("Expires", -1);
 	</div>
 	
 	<!-- end container -->
-	   <jsp:include page="/pages/tradeshow/templates/bootstrap/sections/jsLinks.jsp" />
+	  
 
  	</body>
  

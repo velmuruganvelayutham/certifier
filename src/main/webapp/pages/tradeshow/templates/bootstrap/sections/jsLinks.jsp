@@ -40,5 +40,5 @@
   <link href="<c:url value="/resources/css/tradeshow.css" />" rel="stylesheet">
    
      <!-- Custom javascript:  -->
-  <script src="<c:url value="/resources/js/tradeshow.js" />"></script>
+<%--   <script src="<c:url value="/resources/js/tradeshow.js" />"></script> --%>
     
