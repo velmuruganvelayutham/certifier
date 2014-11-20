@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+ 		<beans:property name="viewClass">
+  			<beans:value>org.springframework.web.servlet.view.tiles2.TilesView</beans:value> 
+  		</beans:property>
+  	</beans:bean>
+
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+ 			<beans:property name="definitions">
+ 				<beans:list>
+  					<beans:value>/WEB-INF/tiles/tiles-tradeshow.xml</beans:value>
+  				</beans:list>
+  			</beans:property>
+  	</beans:bean>
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- Only needed because we require fileupload in the org.springframework.samples.mvc.fileupload package -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000"/>
+	</beans:bean>
+	
+	<context:component-scan base-package="com.tocgroup.tradeshow" />
+	
+<!-- 	 <beans:bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
+<!--       <beans:property name="dataSource" ref="dataSource" /> -->
+<!--       <beans:property name="packagesToScan" value="com.tocgroup.tradeshow.model" /> -->
+<!--       <beans:property name="jpaVendorAdapter"> -->
+<!--          <beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> -->
+<!--       </beans:property> -->
+<!--       <beans:property name="jpaProperties"> -->
+<!--          <beans:props> -->
+<!--             <beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop> -->
+<!--             <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</beans:prop> -->
+<!--          </beans:props> -->
+<!--       </beans:property> -->
+<!--    </beans:bean> -->
+ 
+<!--    <beans:bean  id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--       <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!--       <beans:property name="url" value="jdbc:mysql://localhost:3306/tradeshow" /> -->
+<!--       <beans:property name="username" value="root" /> -->
+<!--       <beans:property name="password" value="root" /> -->
+<!--   </beans:bean> -->
+ 
+<!--   <beans:bean  id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> -->
+<!--       <beans:property name="entityManagerFactory" ref="myEmf" /> -->
+<!--       <beans:property name="persistenceUnitName" value="tradeshow-unit"> </beans:property> -->
+<!--   </beans:bean> -->
+
+<!--    <tx:annotation-driven transaction-manager="transactionManager" /> -->
+ 
+<!--    <beans:bean id="persistenceExceptionTranslationPostProcessor" -->
+<!--       class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> -->
+
+
+ <context:property-placeholder location="classpath:persistence-mysql.properties" />
+
+
+ <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="packagesToScan" value="com.tocgroup.tradeshow.model" />
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</beans:prop>
+                <beans:prop key="hibernate.dialect">${hibernate.dialect}</beans:prop>
+                 <beans:prop key="hibernate.show_sql">${hibernate.show_sql}</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+        <beans:property name="driverClassName" value="${jdbc.driverClassName}" />
+        <beans:property name="url" value="${jdbc.url}" />
+        <beans:property name="username" value="${jdbc.user}" />
+        <beans:property name="password" value="${jdbc.pass}" />
+    </beans:bean>
+
+    <beans:bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="sessionFactory" />
+    </beans:bean>
+    <tx:annotation-driven transaction-manager="txManager" />
+    <beans:bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    
+</beans:beans>

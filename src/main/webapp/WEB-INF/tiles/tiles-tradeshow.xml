@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<!-- 
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ */
+--> 
+<!DOCTYPE tiles-definitions PUBLIC
+         "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+         "http://struts.apache.org/dtds/tiles-config_2_0.dtd">
+ 
+
+<tiles-definitions>
+ 	
+ 	<definition name="login.*" template="/pages/tradeshow/templates/bootstrap/pages/login.jsp">
+ 	<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+ 	
+ 	<definition name="landing.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+ 		<put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/landing.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+  	
+  	<definition name="exhibitors.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/exhibitors.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" /> 
+  	</definition>
+  	
+  	<definition name="search.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/search.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+  	
+  	<definition name="profile.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/profile.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+  	
+  	<definition name="notifications.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/notifications.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+  	
+  	<definition name="settings.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/settings.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+  	
+  	<definition name="advancedSearch.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/advancedSearch.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
+  	
+</tiles-definitions>

@@ -1,0 +1,7 @@
+1. Add a footer/
+2. Add Apache Solr to index documents in the Database.
+3. Add quartz scheduler which will eventually execute the scrap utility in the background.
+4. Add Spring Security .
+5. Give seperate URL's for vendor to enter their details and catelog information.
+6. Add a error page incase exception is thrown at any time.
+7. 
