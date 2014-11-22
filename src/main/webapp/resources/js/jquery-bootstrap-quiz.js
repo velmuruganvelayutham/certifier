@@ -1,0 +1,247 @@
+/*!
+ * jQuery lightweight plugin boilerplate
+ * Original author: @ajpiano
+ * Further changes, comments: @addyosmani
+ * Licensed under the MIT license
+ */
+
+// the semi-colon before the function invocation is a safety
+// net against concatenated scripts and/or other plugins
+// that are not closed properly.
+;
+(function($, window, document, undefined) {
+
+    // undefined is used here as the undefined global
+    // variable in ECMAScript 3 and is mutable (i.e. it can
+    // be changed by someone else). undefined isn't really
+    // being passed in so we can ensure that its value is
+    // truly undefined. In ES5, undefined can no longer be
+    // modified.
+
+    // window and document are passed through as local
+    // variables rather than as globals, because this (slightly)
+    // quickens the resolution process and can be more
+    // efficiently minified (especially when both are
+    // regularly referenced in your plugin).
+
+    // Create the defaults once
+    var pluginName = "jBootQuiz"
+       
+
+    // The actual plugin constructor
+
+    function Plugin(element, options) {
+        this.element = element;
+
+        // jQuery has an extend method that merges the
+        // contents of two or more objects, storing the
+        // result in the first object. The first object
+        // is generally empty because we don't want to alter
+        // the default options for future instances of the plugin
+        this.options = options;
+		this._defaults = options;
+        this._name = pluginName;
+        this.init();
+    }
+
+	Plugin.defaults = {
+			
+				url:"http://localhost:8080/certifier/exam/data",
+		        params:
+		              {
+						limit: 1,
+						offset: 0,
+						order: "asc"
+					   },
+				method: 'get',
+        		contentType: 'application/json',
+				dataType: 'json',
+		
+				data:{},
+		        
+		    	/*{
+					
+					   "totalQ":"60",
+					   "q": "What number is the letter A in the English alphabet?",
+					   "a": [
+							{"option": "8",      "checked": false},
+							{"option": "14",     "checked": false},
+							{"option": "1",      "checked": false},
+							{"option": "23",     "checked": false}
+					]
+				} */      
+    }
+				
+	
+	
+	Plugin.events={
+	
+		onNext:'onNext',
+		onNext:'onPrevious',
+		onNext:'onReview',
+		onNext:'onComplete',
+		
+	}
+    Plugin.prototype = {
+
+        init: function() {
+            // Place initialization logic here
+            // You already have access to the DOM element and
+            // the options via the instance, e.g. this.element
+            // and this.options
+            // you can add more functions like the one below and
+            // call them like so: this.yourOtherFunction(this.element, this.options).
+			this.options=$.extend({}, this.options, Plugin.defaults);
+			this.$container=$(['<div class="container">',    
+					 '<div class="row">',
+'<div class="col-md-4">Question <span class="j-boot-quiz-current-question-no">1</span> of <span class="j-boot-quiz-total-no-of-question">60</span></div>',
+						'<div class="col-md-offset-6 col-md-2"><p> Timer will be placed here: </p></div>',
+					 '</div>',
+					 ' <div class="row">',
+						'<h4 class="j-boot-quiz-question" >  </h4>',
+					  '</div>',
+					 ' <div class="row j-boot-quiz-options"> ',
+					   					
+					'  </div>',							   
+				     ' <div class="row">',
+					  '<div class="progress j-boot-quiz-progress">',
+					  '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">',
+						'<span class="sr-only">Loading next Question !</span>',
+					 ' </div>',
+					'</div>',
+					 ' </div>',				   
+							   
+					'<div class="row">',
+					 '<div class="btn-group btn-group-justified" role="group" aria-label="...">',
+					  '<div class="btn-group" role="group">',
+						'<button type="button" class="btn btn-default j-boot-quiz-previous" data-index="0" disabled="disabled" >  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Previous</button>',
+					 ' </div>',
+					  '<div class="btn-group" role="group">',
+						'<button type="button" class="btn btn-default j-boot-quiz-next" data-index="0">  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Next</button>',
+					  '</div>',
+					  '<div class="btn-group" role="group">',
+						'<button type="button" class="btn btn-default j-boot-quiz-review"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Review</button>',
+					 ' </div>',
+					  ' <div class="btn-group" role="group">',
+						'<button type="button" class="btn btn-default j-boot-quiz-complete">',
+							   '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
+							  'Complete</button>',
+					 ' </div>',
+					'</div>',
+					 ' </div>',
+			'</div>'].join(''))		
+		
+			$(this.element).append(this.$container);
+			$('.j-boot-quiz-progress').hide();
+			this.$questionDiv= this.$container.find('.j-boot-quiz-question');
+			this.$questionDiv.text(this.options.data.q);
+			this.$optionDiv= this.$container.find('.j-boot-quiz-options');
+			this.$container.data({"cache":[]});
+			this.fetchFromServer();		
+			
+			
+        },
+			next: function(event) {
+				$that=this;
+				this.$container.find('.j-boot-quiz-previous').removeAttr('disabled');
+				this.$questionDiv.text(this.options.data.q);
+				this.$container.find('.j-boot-quiz-previous').data('index',$(event.currentTarget).data('index'));
+		   
+				$( ":checkbox" ).each(function(i,option){					
+					if($(this).prop('checked')){
+					   console.log(i,'checked')
+					   $that.options.data.a[$(option).data('id')].checked=true;
+					   }
+				})
+				this.$container.data("cache")[$(event.currentTarget).data('index')]=this.options.data
+				$(event.currentTarget).data('index',$(event.currentTarget).data('index')+1)
+				
+				
+				this.fetchFromServer();
+				
+			},
+		  //next question ajax will come here: 
+		    fetchFromServer:function(){
+				$that=this
+				this.$optionDiv.empty();
+				$('.j-boot-quiz-progress').show();
+				
+				$.ajax({
+						type: this.options.method,
+						url: this.options.url,
+						data: this.options.params,
+						contentType: this.options.contentType,
+						dataType: this.options.dataType,
+						success: function (res) {
+							$that.options.data=res
+							$.each($that.options.data.a, function (i, option) {
+							$optionHtml=$(['<div class="checkbox">',
+									 ' <label>',
+										'<input type="checkbox" value=""  data-id=',i,'>',
+										option.option,
+									'  </label>',
+									'</div>'].join(''));
+							$that.$optionDiv.append($optionHtml);							   
+							$previousBtn= $that.$container.find('.j-boot-quiz-previous');
+							$nextBtn=$that.$container.find('.j-boot-quiz-next');
+							$reviewBtn=$that.$container.find('.j-boot-quiz-review')
+							$completeBtn=$that.$container.find('.j-boot-quiz-complete')
+							$previousBtn.off().on("click",$.proxy($that.previous, $that))
+							$nextBtn.off().on("click",$.proxy($that.next, $that))
+							$reviewBtn.off().on("click",$.proxy($that.review, $that))
+							$completeBtn.off().on("click",$.proxy($that.complete, $that))
+							});
+						},
+						error: function (res) {
+							console.log('Error occured: '+ res);
+						},
+						complete: function () {							
+								$('.j-boot-quiz-progress').hide();
+						}
+        });
+				
+				
+				
+				
+			},
+			previous: function(event) {
+				$that=this;
+				$that.$optionDiv.empty();
+				$.each(this.$container.data("cache")[$(event.currentTarget).data('index')].a, function (i, option) {
+				$optionHtml=$(['<div class="checkbox">',
+						 ' <label>',
+							'<input id="',i,'" type="checkbox" value=""  data-id=',i,'>',
+							option.option,
+						'  </label>',
+						'</div>'].join(''));
+				
+			    $that.$optionDiv.append($optionHtml);
+				if(option.checked){
+					 $('#'+i).prop("checked",true);
+				}
+				})
+			
+			},
+			review: function(el) {
+				alert('review');
+			},
+			complete: function(el) {
+				alert('complete');
+			}
+		
+    };
+
+    // A really lightweight plugin wrapper around the constructor,
+    // preventing against multiple instantiations
+    $.fn[pluginName] = function(options) {
+        return this.each(function() {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName,
+                    new Plugin(this, options));
+            }
+        });
+    };
+    $(function () {
+		$('[data-toggle="jbootquiz"]').jBootQuiz()	 
+	 })
+})(jQuery, window, document);
