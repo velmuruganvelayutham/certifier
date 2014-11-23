@@ -111,7 +111,7 @@
 		this.$container=$(['<div class="container">',    
 				 '<div class="row">',
 		'<div class="col-md-4">Question <span class="j-boot-quiz-current-question-no">1</span> of <span class="j-boot-quiz-total-no-of-question">60</span></div>',
-					'<div class="col-md-offset-6 col-md-2"><p> Timer will be placed here: </p></div>',
+					'<div class="col-md-offset-6 col-md-2"><span class="j-boot-quiz-timer"> Timer will be placed here: </span></div>',
 				 '</div>',
 				 ' <div class="row">',
 					'<h4 class="j-boot-quiz-question" >  </h4>',
@@ -168,6 +168,9 @@
 		$reviewBtn.off().on("click",$.proxy(this.review, this))
 		$completeBtn.off().on("click",$.proxy(this.complete, this))
 		this.fetchFromServer();
+		if(this.options.enableTimer){
+			this.initTimer();
+		}
 		},
 			
 		next: function(event) {
@@ -273,11 +276,32 @@
 		},
 
 		review: function(el) {
+			this.pauseTimer();
 			alert('review');
 		},
 		complete: function(el) {
 			alert('complete');
-		},			
+		},	
+		initTimer:function(){
+			currentTime=30000
+			incrementTime=100
+			this.updateTimer=function() {
+		    $('.j-boot-quiz-timer').html(formatTime(currentTime));
+            if (currentTime == 0) {
+              	alert('time is completed ! ');
+                return;
+            }
+            currentTime -= incrementTime / 10;
+            if (currentTime < 0) currentTime = 0;
+			}
+			
+			timer = this.timer(this.updateTimer,100,true);
+			$('.j-boot-quiz-timer').data('timer',timer);
+			
+		},
+		pauseTimer:function(){			
+			$('.j-boot-quiz-timer').data('timer').pause();
+		},
 		timer: function(func, time, autostart) {
 			
 	 	this.set = function(func, time, autostart) {
@@ -352,14 +376,8 @@
 	 			this.setTimer();
 	 		}
 	 	};
-		
-	 	
-	 	if(this.init) {
-	 		return new $.timer(func, time, autostart);
-	 	} else {
 			this.set(func, time, autostart);
 	 		return this;
-	 	}
 		}
 	};
 

@@ -16,6 +16,7 @@ response.setDateHeader ("Expires", -1);
 <div id="jbootquiz" data-toggle="jbootquiz" > </div>
 
 
+
 <script src="resources/js/jquery-bootstrap-quiz.js"></script>
 			
 		
