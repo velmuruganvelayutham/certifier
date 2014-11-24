@@ -111,7 +111,11 @@
 		this.$container=$(['<div class="container">',    
 				 '<div class="row">',
 		'<div class="col-md-4">Question <span class="j-boot-quiz-current-question-no">1</span> of <span class="j-boot-quiz-total-no-of-question">60</span></div>',
-					'<div class="col-md-offset-6 col-md-2"><span class="j-boot-quiz-timer"> Timer will be placed here: </span></div>',
+					'<div class="col-md-offset-4 col-md-4">',
+				'<button type="button" id="playButton" data-btnstate="Pause" class="btn btn-primary j-boot-quiz-play-btn" autocomplete="off">',
+			  'Play/Pause',
+			'</button>',
+			'<span class="j-boot-quiz-timer"> Timer will be placed here: </span></div>',
 				 '</div>',
 				 ' <div class="row">',
 					'<h4 class="j-boot-quiz-question" >  </h4>',
@@ -157,16 +161,17 @@
 	  	this.$currentQ.text("1").data('index',0)
 		this.$previousBtn= this.$container.find('.j-boot-quiz-previous');
 		this.$previousBtn.data('index',-1);
-			this.$nextBtn=this.$container.find('.j-boot-quiz-next');
+		this.$nextBtn=this.$container.find('.j-boot-quiz-next');
 		this.$nextBtn.data('index',1);
-		
-		
+		this.$playBtn=this.$container.find('.j-boot-quiz-play-btn');
+				
 		$reviewBtn=this.$container.find('.j-boot-quiz-review')
 		$completeBtn=this.$container.find('.j-boot-quiz-complete')
 		this.$previousBtn.off().on("click",$.proxy(this.previous, this))
 		this.$nextBtn.off().on("click",$.proxy(this.next, this))
 		$reviewBtn.off().on("click",$.proxy(this.review, this))
 		$completeBtn.off().on("click",$.proxy(this.complete, this))
+		this.$playBtn.off().on("click",$.proxy(this.playPauseTimer, this))
 		this.fetchFromServer();
 		if(this.options.enableTimer){
 			this.initTimer();
@@ -276,7 +281,6 @@
 		},
 
 		review: function(el) {
-			this.pauseTimer();
 			alert('review');
 		},
 		complete: function(el) {
@@ -299,8 +303,17 @@
 			$('.j-boot-quiz-timer').data('timer',timer);
 			
 		},
-		pauseTimer:function(){			
-			$('.j-boot-quiz-timer').data('timer').pause();
+		playPauseTimer:function(){				
+            
+			if(this.$playBtn.data('btnstate')==="Pause"){
+				$('.j-boot-quiz-timer').data('timer').pause();	
+				this.$playBtn.data('btnstate','Play');
+			}
+			else{
+				$('.j-boot-quiz-timer').data('timer').play(true);
+				this.$playBtn.data('btnstate','Pause');
+			}
+			
 		},
 		timer: function(func, time, autostart) {
 			

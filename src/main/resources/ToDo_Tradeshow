@@ -1,7 +1,36 @@
 1. Add a footer/
 2. Add Apache Solr to index documents in the Database.
-3. Add quartz scheduler which will eventually execute the scrap utility in the background.
-4. Add Spring Security .
-5. Give seperate URL's for vendor to enter their details and catelog information.
-6. Add a error page incase exception is thrown at any time.
-7. 
+3. Add quartz scheduler which will eventually execute the email sending Tasks asynchronly. .
+4. Give seperate URL's for vendor to enter their details and catelog information.
+5. Add a error page incase exception is thrown at any time.
+6
+
+
+
+
+
+
+###############  Standard Mock Test  #################
+
+1.mark for review.
+2.show all the questions in the modal when review button is clicked.
+3.Jump to a particular question.
+4.Review the whole tests once Tests is completed and evaluated with green color showing the correct answer and
+  red color showing the incorrect answer also provide the valid explanation for each question.
+5.Tests Results with Score and Grade which should be in a printable and sharable format.
+6.Instruction page for each Tests which explains the rules to take the exam.
+
+
+
+##############  Practice Tests ################
+
+Similar to standard Test , but answers can be evaluated before moving to the next question.
+
+
+############## Custom Tests ###############
+
+It can be either standard or practice test or Objective wise Tests but Total no of questions , timings, 
+Question Toughness can be choosen by the Candidate.
+
+ 
+ 
