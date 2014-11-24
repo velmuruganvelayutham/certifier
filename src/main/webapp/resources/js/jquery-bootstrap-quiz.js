@@ -66,12 +66,16 @@
 					limit: 1,
 					offset: 0,
 					order: "asc"
-				   },
+		    },
 			method: 'get',
 			contentType: 'application/json',
 			dataType: 'json',
 			enableTimer:true,
-			timerDuration:undefined,
+			timerSettings:{
+				    durationPerQuestion: 15000, 
+					totalTime : 1800000, // Total Timer time , by default this value will be 
+					incrementTime: 100 // count down change every second
+			},
 
 			data:{},
 
@@ -173,9 +177,7 @@
 		$completeBtn.off().on("click",$.proxy(this.complete, this))
 		this.$playBtn.off().on("click",$.proxy(this.playPauseTimer, this))
 		this.fetchFromServer();
-		if(this.options.enableTimer){
-			this.initTimer();
-		}
+		
 		},
 			
 		next: function(event) {
@@ -246,6 +248,7 @@
 					success: function (res) {
 						$that.options.data=res	
 						$that.loadQuestion();
+						$that.initTimer();
 						},
 					error: function (res) {
 						console.log('Error occured: '+ res);
@@ -287,22 +290,24 @@
 			alert('complete');
 		},	
 		initTimer:function(){
-			currentTime=30000
-			incrementTime=100
+			if(! $('.j-boot-quiz-timer').data('timer') && this.options.enableTimer){
+			currentTime=this.options.timerSettings.durationPerQuestion * this.options.data.totalQ
+			incrementTime=this.options.timerSettings.incrementTime;
 			this.updateTimer=function() {
 		    $('.j-boot-quiz-timer').html(formatTime(currentTime));
             if (currentTime == 0) {
-              	alert('time is completed ! ');
+              	timer.stop();
+				alert('time up ! ');
                 return;
             }
             currentTime -= incrementTime / 10;
             if (currentTime < 0) currentTime = 0;
 			}
 			
-			timer = this.timer(this.updateTimer,100,true);
+			timer = this.timer(this.updateTimer,incrementTime,true);
 			$('.j-boot-quiz-timer').data('timer',timer);
-			
-		},
+		}
+	},
 		playPauseTimer:function(){				
             
 			if(this.$playBtn.data('btnstate')==="Pause"){
