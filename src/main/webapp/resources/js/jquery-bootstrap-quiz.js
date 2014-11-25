@@ -61,6 +61,7 @@
 		Plugin.defaults = {
 
 			url:"http://localhost:8080/certifier/exam/data",
+			
 			params:
 				  {
 					limit: 1,
@@ -68,9 +69,13 @@
 					order: "asc"
 		    },
 			method: 'get',
+			
 			contentType: 'application/json',
+			
 			dataType: 'json',
+			
 			enableTimer:true,
+			
 			timerSettings:{
 				    durationPerQuestion: 15000, 
 					totalTime : 1800000, // Total Timer time , by default this value will be 
@@ -95,11 +100,11 @@
 
 
 		Plugin.events={
-
+			
 		onNext:'onNext',
 		onNext:'onPrevious',
 		onNext:'onReview',
-		onNext:'onComplete',
+		onNext:'onComplete'
 
 		}
 		Plugin.prototype = {
