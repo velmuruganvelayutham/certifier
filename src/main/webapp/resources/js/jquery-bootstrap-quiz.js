@@ -182,6 +182,7 @@
 		this.$nextBtn=this.$container.find('.j-boot-quiz-next');
 		this.$nextBtn.data('index',1);
 		this.$playBtn=this.$container.find('.j-boot-quiz-play-btn');
+		this.$questionList = this.$container.find('.j-boot-quiz-dropdown-menu a');
 				
 		$reviewBtn=this.$container.find('.j-boot-quiz-review')
 		$completeBtn=this.$container.find('.j-boot-quiz-complete')
@@ -190,6 +191,7 @@
 		$reviewBtn.off().on("click",$.proxy(this.review, this))
 		$completeBtn.off().on("click",$.proxy(this.complete, this))
 		this.$playBtn.off().on("click",$.proxy(this.playPauseTimer, this))
+		
 		this.fetchFromServer();
 		
 		},
@@ -263,7 +265,7 @@
 						$that.options.data=res	
 						$that.loadQuestion();
 						$that.initTimer();
-						$that.initQuestionDropDown();
+						$that.initQuestionList();
 						},
 					error: function (res) {
 						console.log('Error occured: '+ res);
@@ -323,7 +325,7 @@
 			$('.j-boot-quiz-timer').data('timer',timer);
 		}
 	},
-		initQuestionDropDown:function(){
+		initQuestionList:function(){
 			if(! $('.j-boot-quiz-dropdown-menu').data('initialized')){
 				html = [];
 				for(i=0;i<this.options.data.totalQ;i++){
@@ -331,9 +333,18 @@
 				    html.push(i+1);
 				    html.push('</a></li>')
 				}				
-				this.$container.find('.j-boot-quiz-dropdown-menu').append(html.join(''));								
+				this.$container.find('.j-boot-quiz-dropdown-menu').append(html.join(''));	
+				this.$questionList = this.$container.find('.j-boot-quiz-dropdown-menu a');
+				this.$questionList.off().on("click",$.proxy(this.questionListChange, this))
 				$('.j-boot-quiz-dropdown-menu').data('initialized',true)
 			}
+			
+		},
+		questionListChange:function(event){
+			
+			var $this = $(event.currentTarget);
+			$this.parent().addClass('active').siblings().removeClass('active');
+			this.$currentQ.text($this.text());
 			
 		},
 		playPauseTimer:function(){				
