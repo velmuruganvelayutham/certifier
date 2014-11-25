@@ -3,7 +3,11 @@ body { padding-top: 70px; }
 .spacer {
     margin-top: 40px; /* define margin as you see fit */
 }
-
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
 
 /* custom styles for the typeahead */
 

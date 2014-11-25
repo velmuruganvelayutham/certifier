@@ -114,7 +114,16 @@
 		this.options=$.extend({}, this.options, Plugin.defaults);
 		this.$container=$(['<div class="container">',    
 				 '<div class="row">',
-		'<div class="col-md-4">Question <span class="j-boot-quiz-current-question-no">1</span> of <span class="j-boot-quiz-total-no-of-question">60</span></div>',
+		'<div class="col-md-4">Question ',
+						   
+						   '<div class="btn-group">',
+  '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">',
+    '<span class="j-boot-quiz-current-question-no">1</span>  <span class="caret"></span>',
+  '</button>',
+  '<ul class="dropdown-menu scrollable-menu j-boot-quiz-dropdown-menu" role="menu">',
+  '</ul>',
+'</div>',
+' <span> of </span> <span class="j-boot-quiz-total-no-of-question">60</span></div>',
 					'<div class="col-md-offset-4 col-md-4">',
 				'<button type="button" id="playButton" data-btnstate="Pause" class="btn btn-primary j-boot-quiz-play-btn" autocomplete="off">',
 			  'Play/Pause',
@@ -249,6 +258,7 @@
 						$that.options.data=res	
 						$that.loadQuestion();
 						$that.initTimer();
+						$that.initQuestionDropDown();
 						},
 					error: function (res) {
 						console.log('Error occured: '+ res);
@@ -308,6 +318,19 @@
 			$('.j-boot-quiz-timer').data('timer',timer);
 		}
 	},
+		initQuestionDropDown:function(){
+			if(! $('.j-boot-quiz-dropdown-menu').data('initialized')){
+				html = [];
+				for(i=0;i<this.options.data.totalQ;i++){
+					html .push ('<li><a href="javascript:void(0)">');
+				    html.push(i+1);
+				    html.push('</a></li>')
+				}				
+				this.$container.find('.j-boot-quiz-dropdown-menu').append(html.join(''));								
+				$('.j-boot-quiz-dropdown-menu').data('initialized',true)
+			}
+			
+		},
 		playPauseTimer:function(){				
             
 			if(this.$playBtn.data('btnstate')==="Pause"){
