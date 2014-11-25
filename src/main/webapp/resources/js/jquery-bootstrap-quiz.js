@@ -120,7 +120,7 @@
 		            this.options = $.extend({}, this.options, Plugin.defaults);
 		            this.$container = $(['<div class="container">',
 		                '<div class="row">',
-		                '<div class="col-md-4">Question ',
+		                '<div class="col-md-3">Question ',
 		                '<div class="btn-group">',
 		                '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">',
 		                '<span class="j-boot-quiz-current-question-no">1</span>  <span class="caret"></span>',
@@ -129,7 +129,15 @@
 		                '</ul>',
 		                '</div>',
 		                '<span> of </span> <span class="j-boot-quiz-total-no-of-question">60</span></div>',
-		                '<div class="col-md-offset-4 col-md-4">',
+						'<div class="col-md-3">',
+						'<div class="checkbox">',
+      					'<label>',
+        				'<input class= "j-boot-quiz-mark-for-review" type="checkbox" value="">',
+        				'Mark for review',
+						'</label>',
+    					'</div>',
+						'</div>',
+		                '<div class="col-md-offset-3 col-md-3">',
 		                '<button type="button" id="playButton" data-btnstate="Pause" class="btn btn-primary j-boot-quiz-play-btn" 																		autocomplete="off">', 'Play/Pause',
 		                '</button>',
 		                '<span class="j-boot-quiz-timer"> Timer will be placed here: </span></div>',
@@ -166,6 +174,7 @@
 		                ' </div>',
 		                '</div>',
 		                ' </div>',
+					    
 		                '</div>'
 		            ].join(''))
 
@@ -185,6 +194,8 @@
 		            this.$nextBtn.data('index', 1);
 		            this.$playBtn = this.$container.find('.j-boot-quiz-play-btn');
 		            this.$questionList = this.$container.find('.j-boot-quiz-dropdown-menu a');
+					this.$markForReview = this.$container.find('.j-boot-quiz-mark-for-review');
+					
 
 		            $reviewBtn = this.$container.find('.j-boot-quiz-review')
 		            $completeBtn = this.$container.find('.j-boot-quiz-complete')
@@ -193,6 +204,7 @@
 		            $reviewBtn.off().on("click", $.proxy(this.review, this))
 		            $completeBtn.off().on("click", $.proxy(this.complete, this))
 		            this.$playBtn.off().on("click", $.proxy(this.playPauseTimer, this))
+					this.$markForReview.off().on("click", $.proxy(this.markForReview, this))
 		            this.fetchFromServer();
 		        },
 		        initQuizHeader: function() {
@@ -353,6 +365,9 @@
 
 
 		        },
+				markForReview:function(){
+					alert('Marked for review ');
+				},
 		        playPauseTimer: function() {
 
 		            if (this.$playBtn.data('btnstate') === "Pause") {
