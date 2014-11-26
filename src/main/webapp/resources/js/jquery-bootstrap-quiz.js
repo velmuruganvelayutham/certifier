@@ -1,8 +1,8 @@
 		/*!
-		 * jQuery lightweight plugin boilerplate
-		 * Original author: @ajpiano
-		 * Further changes, comments: @addyosmani
-		 * Licensed under the MIT license
+		 * jQuery Quiz plugin 
+		 * Original author: @velmurugan
+		 * Further changes, comments: @velmurugan
+		 * Licensed under the Apache V2 license
 		 */
 		// the semi-colon before the function invocation is a safety
 		// net against concatenated scripts and/or other plugins
@@ -165,7 +165,7 @@
 		                '<button type="button" class="btn btn-default j-boot-quiz-next" data-index="1">  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Next</button>',
 		                '</div>',
 		                '<div class="btn-group" role="group">',
-		                '<button type="button" class="btn btn-default j-boot-quiz-review"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Review</button>',
+		                '<button type="button" data-toggle="modal" data-target="#reviewModal" class="btn btn-default j-boot-quiz-review"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Review</button>',
 		                ' </div>',
 		                ' <div class="btn-group" role="group">',
 		                '<button type="button" class="btn btn-default j-boot-quiz-complete">',
@@ -175,6 +175,23 @@
 		                '</div>',
 		                ' </div>',
 					    
+					    '<div id="reviewModal" class="modal fade" tabindex="-1" role="dialog">',
+						'<div class="modal-dialog">',
+						'<div class="modal-content">',
+						'<div class="modal-header">',
+						'<button type="button" class="close" data-dismiss="modal">×</button>',
+						'<h3>Modal header</h3>',
+						'</div>',
+						'<div class="modal-body">',
+						'<p>My modal content here…</p>',
+						'</div>',
+						'<div class="modal-footer">',
+						'<button class="btn" data-dismiss="modal">Close</button>',
+						'</div>',
+						'</div>',
+						'</div>',	
+						'</div>',
+										
 		                '</div>'
 		            ].join(''))
 
@@ -201,10 +218,11 @@
 		            $completeBtn = this.$container.find('.j-boot-quiz-complete')
 		            this.$previousBtn.off().on("click", $.proxy(this.previous, this))
 		            this.$nextBtn.off().on("click", $.proxy(this.next, this))
-		            $reviewBtn.off().on("click", $.proxy(this.review, this))
+//		            $reviewBtn.off().on("click", $.proxy(this.review, this))
 		            $completeBtn.off().on("click", $.proxy(this.complete, this))
 		            this.$playBtn.off().on("click", $.proxy(this.playPauseTimer, this))
 					this.$markForReview.off().on("click", $.proxy(this.markForReview, this))
+					this.$container.find('#reviewModal').off().on('show.bs.modal',$.proxy(this.review, this))
 		            this.fetchFromServer();
 		        },
 		        initQuizHeader: function() {
@@ -216,6 +234,9 @@
 		        initQuizBody: function() {
 
 		        },
+				initReviewModal:function(){
+					
+				},
 		        next: function(event) {
 		            $that = this;
 		            this.$questionDiv.text(this.options.data.q);
@@ -317,8 +338,10 @@
 		            })
 		        },
 
-		        review: function(el) {
-		            alert('review');
+		        review: function(el) {			
+					  
+					 this.$container.find('.modal-body').text('new messae body will be pushed here !.')	
+					 
 		        },
 		        complete: function(el) {
 		            alert('complete');
@@ -365,8 +388,8 @@
 
 
 		        },
-				markForReview:function(){
-					alert('Marked for review ');
+				markForReview:function(event){
+					alert('question marked for review');
 				},
 		        playPauseTimer: function() {
 
