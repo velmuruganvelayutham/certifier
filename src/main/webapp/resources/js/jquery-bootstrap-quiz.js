@@ -26,9 +26,30 @@
 		    // Create the defaults once
 		    var pluginName = "jBootQuiz"
 
-
+			
 
 		    // Common functions
+			 // it only does '%s', and return '' when arguments are undefined
+				var sprintf = function(str) {
+					var args = arguments,
+						flag = true,
+						i = 1;
+
+					str = str.replace(/%s/g, function () {
+						var arg = args[i++];
+
+						if (typeof arg === 'undefined') {
+							flag = false;
+							return '';
+						}
+						return arg;
+					});
+					if (flag) {
+						return str;
+					}
+					return '';
+				};
+			
 		    function pad(number, length) {
 		        var str = '' + number;
 		        while (str.length < length) {
@@ -119,88 +140,12 @@
 		            // call them like so: this.yourOtherFunction(this.element, this.options).
 		            this.options = $.extend({}, this.options, Plugin.defaults);
 		            this.$container = $(['<div class="container">',
-		                '<div class="row">',
-		                '<div class="col-md-3">Question ',
-		                '<div class="btn-group">',
-		                '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">',
-		                '<span class="j-boot-quiz-current-question-no">1</span>  <span class="caret"></span>',
-		                '</button>',
-		                '<ul class="dropdown-menu scrollable-menu j-boot-quiz-dropdown-menu" role="menu">',
-		                '</ul>',
-		                '</div>',
-		                '<span> of </span> <span class="j-boot-quiz-total-no-of-question">60</span></div>',
-						'<div class="col-md-3">',
-						'<div class="checkbox">',
-      					'<label>',
-        				'<input class= "j-boot-quiz-mark-for-review" type="checkbox" value="">',
-        				'Mark for review',
-						'</label>',
-    					'</div>',
-						'</div>',
-		                '<div class="col-md-offset-3 col-md-3">',
-		                '<button type="button" id="playButton" data-btnstate="Pause" class="btn btn-primary j-boot-quiz-play-btn" 																		autocomplete="off">', 'Play/Pause',
-		                '</button>',
-		                '<span class="j-boot-quiz-timer"> Timer will be placed here: </span></div>',
-		                '</div>',
-		                '<div class="row">',
-		                '<h4 class="j-boot-quiz-question" >  </h4>',
-		                '</div>',
-		                ' <div class="row j-boot-quiz-options"> ',
-
-		                '  </div>',
-		                ' <div class="row">',
-		                '<div class="progress j-boot-quiz-progress">',
-		                '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">',
-		                '<span class="sr-only">Loading next Question !</span>',
-		                ' </div>',
-		                '</div>',
-		                ' </div>',
-
-		                '<div class="row">',
-		                '<div class="btn-group btn-group-justified" role="group" aria-label="...">',
-		                '<div class="btn-group" role="group">',
-		                '<button type="button" class="btn btn-default j-boot-quiz-previous" data-index="-1" disabled="disabled" >  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Previous</button>',
-		                ' </div>',
-		                '<div class="btn-group" role="group">',
-		                '<button type="button" class="btn btn-default j-boot-quiz-next" data-index="1">  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Next</button>',
-		                '</div>',
-		                '<div class="btn-group" role="group">',
-		                '<button type="button" data-toggle="modal" data-target="#reviewModal" class="btn btn-default j-boot-quiz-review"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Review</button>',
-		                ' </div>',
-		                ' <div class="btn-group" role="group">',
-		                '<button type="button" class="btn btn-default j-boot-quiz-complete">',
-		                '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
-		                'Complete</button>',
-		                ' </div>',
-		                '</div>',
-		                ' </div>',
-										 
-					    '<div id="reviewModal" class="modal fade" tabindex="-1" role="dialog">',
-						'<div class="modal-dialog modal-lg">',
-						'<div class="modal-content">',
-						'<div class="modal-header">',
-						'<button type="button" class="close" data-dismiss="modal">×</button>',
-						'<h3>Modal header</h3>',
-						'</div>',
-						'<div class="modal-body">',
-						'<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-review-table">',
-    					'<thead>',
-    					'<tr>',
-        				'<th data-field="totalQ" data-radio="true" >Name</th>',
-        				'<th data-field="q">Stars</th>',
-        				'<th data-field="a">Forks</th>',
-						'</tr>',
-						'</thead>',
-						'</table>',
-						'</div>',
-						'<div class="modal-footer">',
-						'<button class="btn" data-dismiss="modal">Close</button>',
-						'</div>',
-						'</div>',
-						'</div>',	
-						'</div>',
-										
-		                '</div>'
+										 this.initQuizHeader(),
+										 this.initQuizBody(),
+										 this.initButtons(),							 
+										 this.initModal('review'),
+										 this.initModal('test-results'),										
+											'</div>'
 		            ].join(''))
 
 		            $(this.element).append(this.$container);
@@ -234,18 +179,111 @@
 		            this.fetchFromServer();
 		        },
 		        initQuizHeader: function() {
+					return [ '<div class="row">',
+		                '<div class="col-md-3">Question ',
+		                '<div class="btn-group">',
+		                '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">',
+		                '<span class="j-boot-quiz-current-question-no">1</span>  <span class="caret"></span>',
+		                '</button>',
+		                '<ul class="dropdown-menu scrollable-menu j-boot-quiz-dropdown-menu" role="menu">',
+		                '</ul>',
+		                '</div>',
+		                '<span> of </span> <span class="j-boot-quiz-total-no-of-question">60</span></div>',
+						'<div class="col-md-3">',
+						'<div class="checkbox">',
+      					'<label>',
+        				'<input class= "j-boot-quiz-mark-for-review" type="checkbox" value="">',
+        				'Mark for review',
+						'</label>',
+    					'</div>',
+						'</div>',
+		                '<div class="col-md-offset-3 col-md-3">',
+		                '<button type="button" id="playButton" data-btnstate="Pause" class="btn btn-primary j-boot-quiz-play-btn" 																		autocomplete="off">', 'Play/Pause',
+		                '</button>',
+		                '<span class="j-boot-quiz-timer"> Timer will be placed here: </span></div>',
+		                '</div>'].join('');
 
 		        },
 		        initButtons: function() {
-
+					    return ['<div class="row">',
+		                '<div class="btn-group btn-group-justified" role="group" aria-label="...">',
+		                '<div class="btn-group" role="group">',
+		                '<button type="button" class="btn btn-default j-boot-quiz-previous" data-index="-1" disabled="disabled" >  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Previous</button>',
+		                ' </div>',
+		                '<div class="btn-group" role="group">',
+		                '<button type="button" class="btn btn-default j-boot-quiz-next" data-index="1">  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Next</button>',
+		                '</div>',
+		                '<div class="btn-group" role="group">',
+		                '<button type="button" data-toggle="modal" data-target="#reviewModal" class="btn btn-default j-boot-quiz-review"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Review</button>',
+		                ' </div>',
+		                ' <div class="btn-group" role="group">',
+		                '<button type="button" class="btn btn-default j-boot-quiz-complete">',
+		                '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
+		                'Complete</button>',
+		                ' </div>',
+		                '</div>',
+		                ' </div>'].join('');
 		        },
 		        initQuizBody: function() {
-
+ 						return ['<div class="row">',
+						'<h4 class="j-boot-quiz-question" >  </h4>',
+						'</div>',
+						' <div class="row j-boot-quiz-options"> ',
+						'</div>',
+						'<div class="row">',
+						'<div class="progress j-boot-quiz-progress">',
+						'<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">',
+						'<span class="sr-only">Loading next Question !</span>',
+						'</div>',
+						'</div>',
+						'</div>'].join('');
 		        },
-				initReviewModal:function(){
-					
+				initModal:function(name){
+					var modal=[]
+					var reviewModalheader=['<div id="',sprintf("%s",name),'Modal" class="',sprintf("j-boot-quiz-%sModal ",name),'modal fade" tabindex="-1" role="dialog">',
+						'<div class="modal-dialog modal-lg">',
+						'<div class="modal-content">',
+						'<div class="modal-header">',
+						'<button type="button" class="close" data-dismiss="modal">×</button>',
+						'</div>',
+						'<div class="modal-body">'].join('');
+				     	modal.push(reviewModalheader)
+						if(name==='review'){
+							modal.push(this.initModalTable())
+						}					
+						else{
+							modal.push(this.initTestResultModal());
+							modal.push(this.initModalTable());						
+						}					
+					var reviewModalFooter=[];
+						reviewModalFooter.push('</div>')
+						reviewModalFooter.push('<div class="modal-footer">')
+						reviewModalFooter.push('<button class="btn" data-dismiss="modal">Close</button>')
+						reviewModalFooter.push('</div>')
+						reviewModalFooter.push('</div>')
+						reviewModalFooter.push('</div>')
+						reviewModalFooter.push('</div>')
+						modal.push(reviewModalFooter.join(''))				
+					return modal.join('')
 				},
-				initTestResults:function(){
+				initModalTable:function(){
+					var modalTable=['<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-review-table">',
+    					'<thead>',
+    					'<tr>',
+        				'<th data-field="id" data-radio="true" >Q.No</th>',
+        				'<th data-field="q">Marked</th>',
+        				'<th data-field="a">Attempt</th>',
+						'<th data-field="q">Result</th>',
+        				'<th data-field="a">Exam Objective</th>',
+						'<th data-field="q">Difficulty Level</th>',
+        				'<th data-field="a">Problem Statement</th>',
+						'<th data-field="q">Note</th>',
+						'</tr>',
+						'</thead>',
+						'</table>'];
+					return modalTable.join('');
+				},
+				initTestResultModal:function(){					
 					
 					var testResultHtml=['<div class="row">']
 						testResultHtml.push('<div class=" col-md-offset-5 col-md-7">')
@@ -308,8 +346,9 @@
 						testResultHtml.push('</div>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('</div>')
-						testResultHtml.push('</div>)
-						testResultHtml.push('</div>')			
+						testResultHtml.push('</div>')
+						testResultHtml.push('</div>')
+						return testResultHtml.join('');
 				},
 		        next: function(event) {
 		            $that = this;
