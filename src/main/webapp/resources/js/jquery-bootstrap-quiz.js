@@ -345,15 +345,21 @@
 		            })
 		        },
 
-		        review: function(el) {			
-					var $table =this.$container.find('.modal-body');
+		        review: function(el) {	
+					$that=this
 					var data = this.$container.data('cache');
-					
-//					 this.$container.find('.modal-body').text('new messae body will be pushed here !.')	 j-boot-quiz-review-table
 					if(this.$container.find('.j-boot-quiz-review-table').data('bootstrap.table')){
 						this.$container.find('.j-boot-quiz-review-table').bootstrapTable('destroy');
 					}
 				    this.$container.find('.j-boot-quiz-review-table').bootstrapTable({data:data})
+//					.off().on('click-row.bs.table', function (e, row, $element) {
+//							alert('Event: click-row.bs.table, data: ' + JSON.stringify(row));
+//            			}).
+					
+					.off().on('dbl-click-row.bs.table', function (e, row, $element) {
+							//alert('Event: dbl-click-row.bs.table, data: ' + JSON.stringify(row));
+							$that.$container.find('#reviewModal').modal('hide');
+						})
 					 
 		        },
 		        complete: function(el) {
