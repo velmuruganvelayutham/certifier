@@ -176,17 +176,17 @@
 		                ' </div>',
 					    
 					    '<div id="reviewModal" class="modal fade" tabindex="-1" role="dialog">',
-						'<div class="modal-dialog">',
+						'<div class="modal-dialog modal-lg">',
 						'<div class="modal-content">',
 						'<div class="modal-header">',
 						'<button type="button" class="close" data-dismiss="modal">×</button>',
 						'<h3>Modal header</h3>',
 						'</div>',
 						'<div class="modal-body">',
-						'<table class="j-boot-quiz-review-table">',
+						'<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-review-table">',
     					'<thead>',
     					'<tr>',
-        				'<th data-field="totalQ">Name</th>',
+        				'<th data-field="totalQ" data-radio="true" >Name</th>',
         				'<th data-field="q">Stars</th>',
         				'<th data-field="a">Forks</th>',
 						'</tr>',
@@ -341,8 +341,7 @@
 		                $that.$optionDiv.append($optionHtml);
 		                if (option.checked) {
 		                    $('#' + i).prop("checked", true);
-		                }
-
+						}
 		            })
 		        },
 
