@@ -242,7 +242,7 @@
 		        },
 				initModal:function(name){
 					var modal=[]
-					var reviewModalheader=['<div id="',sprintf("%s",name),'Modal" class="',sprintf("j-boot-quiz-%sModal ",name),'modal fade" tabindex="-1" role="dialog">',
+					var reviewModalheader=['<div id="',sprintf("%s",name),'Modal" class="',sprintf("j-boot-quiz-%s-modal ",name),'modal fade" tabindex="-1" role="dialog">',
 						'<div class="modal-dialog modal-lg">',
 						'<div class="modal-content">',
 						'<div class="modal-header">',
@@ -251,11 +251,11 @@
 						'<div class="modal-body">'].join('');
 				     	modal.push(reviewModalheader)
 						if(name==='review'){
-							modal.push(this.initModalTable())
+							modal.push(this.initModalTable(name))
 						}					
 						else{
 							modal.push(this.initTestResultModal());
-							modal.push(this.initModalTable());						
+							modal.push(this.initModalTable(name));						
 						}					
 					var reviewModalFooter=[];
 						reviewModalFooter.push('</div>')
@@ -268,8 +268,8 @@
 						modal.push(reviewModalFooter.join(''))				
 					return modal.join('')
 				},
-				initModalTable:function(){
-					var modalTable=['<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-review-table">',
+				initModalTable:function(name){
+					var modalTable=['<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-',sprintf("%s",name),'-table">',
     					'<thead>',
     					'<tr>',
         				'<th data-field="id" data-radio="true" >Q.No</th>',
@@ -472,6 +472,16 @@
 		        complete: function(el) {
 		            if(confirm('Are you sure to complete the exam ? '))
 					{
+						$that=this
+					var data = this.$container.data('cache');
+					if(this.$container.find('.j-boot-quiz-test-results-table').data('bootstrap.table')){
+						this.$container.find('.j-boot-quiz-test-results-table').bootstrapTable('destroy');
+					}
+				    this.$container.find('.j-boot-quiz-test-results-table').bootstrapTable({data:data})
+					.off().on('dbl-click-row.bs.table', function (e, row, $element) {
+							//alert('Event: dbl-click-row.bs.table, data: ' + JSON.stringify(row));
+							$that.$container.find('#test-resultsModal').modal('hide');
+						})
 						//this.$container.find('#test-resultsModal').modal('show');
 					}
 		        },

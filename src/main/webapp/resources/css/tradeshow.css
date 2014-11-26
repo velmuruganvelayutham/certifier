@@ -13,7 +13,11 @@ body { padding-top: 70px; }
   height:600px;
   overflow:auto;
 }
-
+#test-resultsModal .modal-content
+{
+  height:600px;
+  overflow:auto;
+}
 .label {
 display: inline-block;
 }
