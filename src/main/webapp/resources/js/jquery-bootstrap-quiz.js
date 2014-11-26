@@ -174,7 +174,7 @@
 		                ' </div>',
 		                '</div>',
 		                ' </div>',
-					    
+										 
 					    '<div id="reviewModal" class="modal fade" tabindex="-1" role="dialog">',
 						'<div class="modal-dialog modal-lg">',
 						'<div class="modal-content">',
@@ -244,6 +244,72 @@
 		        },
 				initReviewModal:function(){
 					
+				},
+				initTestResults:function(){
+					
+					var testResultHtml=['<div class="row">']
+						testResultHtml.push('<div class=" col-md-offset-5 col-md-7">')
+						testResultHtml.push('<h3> Test Results: </h3>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('<div class="row">');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<div class="row">');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">Name:</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">SCJP 1.8</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">Correct Questions:</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">20</span>');
+						testResultHtml.push(' </div>');
+						testResultHtml.push(' <div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">Time Taken:</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push(' <div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">77 Min</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">Start Time:</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<span class="label label-default">20-Nov-2014</span>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('</div>');
+						testResultHtml.push('</div>'); 
+						testResultHtml.push('<div class="col-md-6">');
+						testResultHtml.push('<div class="row">')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">Status: </span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">Passed 88 %</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">Total Questions:</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">65</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">Total Taken:</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">89 Min</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">Finish Time:</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('<div class="col-md-6">')
+						testResultHtml.push('<span class="label label-default">20-Nov-2014</span>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('</div>')
+						testResultHtml.push('</div>)
+						testResultHtml.push('</div>')			
 				},
 		        next: function(event) {
 		            $that = this;
