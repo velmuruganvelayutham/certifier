@@ -363,7 +363,10 @@
 					 
 		        },
 		        complete: function(el) {
-		            alert('complete');
+		            if(confirm('Are you sure to complete the exam ? '))
+					{
+						this.$container.find('#reviewModal').modal('show');
+					}
 		        },
 		        initTimer: function() {
 		            if (!$('.j-boot-quiz-timer').data('timer') && this.options.enableTimer) {
