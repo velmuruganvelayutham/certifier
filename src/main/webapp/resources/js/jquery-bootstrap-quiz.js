@@ -183,7 +183,15 @@
 						'<h3>Modal header</h3>',
 						'</div>',
 						'<div class="modal-body">',
-						'<p>My modal content here…</p>',
+						'<table class="j-boot-quiz-review-table">',
+    					'<thead>',
+    					'<tr>',
+        				'<th data-field="totalQ">Name</th>',
+        				'<th data-field="q">Stars</th>',
+        				'<th data-field="a">Forks</th>',
+						'</tr>',
+						'</thead>',
+						'</table>',
 						'</div>',
 						'<div class="modal-footer">',
 						'<button class="btn" data-dismiss="modal">Close</button>',
@@ -340,7 +348,11 @@
 
 		        review: function(el) {			
 					  
-					 this.$container.find('.modal-body').text('new messae body will be pushed here !.')	
+					var $table =this.$container.find('.modal-body');
+					var data = this.$container.data('cache');
+					
+//					 this.$container.find('.modal-body').text('new messae body will be pushed here !.')	 j-boot-quiz-review-table
+				    this.$container.find('.j-boot-quiz-review-table').bootstrapTable({data:data});
 					 
 		        },
 		        complete: function(el) {

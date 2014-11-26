@@ -16,7 +16,8 @@ response.setDateHeader ("Expires", -1);
 <div id="jbootquiz" data-toggle="jbootquiz" > </div>
 
 
-
+<link href="<c:url value="/resources/css/bootstrap-table.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/js/bootstrap-table.js" />"></script>
 <script src="resources/js/jquery-bootstrap-quiz.js"></script>
 			
 		
