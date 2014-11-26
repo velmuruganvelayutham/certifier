@@ -8,6 +8,11 @@ body { padding-top: 70px; }
     max-height: 200px;
     overflow-x: hidden;
 }
+#reviewModal .modal-content
+{
+  height:300px;
+  overflow:auto;
+}
 
 /* custom styles for the typeahead */
 
