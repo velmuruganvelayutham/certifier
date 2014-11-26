@@ -172,10 +172,12 @@
 		            this.$previousBtn.off().on("click", $.proxy(this.previous, this))
 		            this.$nextBtn.off().on("click", $.proxy(this.next, this))
 //		            $reviewBtn.off().on("click", $.proxy(this.review, this))
-		            $completeBtn.off().on("click", $.proxy(this.complete, this))
+//		            $completeBtn.off().on("click", $.proxy(this.complete, this))
 		            this.$playBtn.off().on("click", $.proxy(this.playPauseTimer, this))
 					this.$markForReview.off().on("click", $.proxy(this.markForReview, this))
 					this.$container.find('#reviewModal').off().on('show.bs.modal',$.proxy(this.review, this))
+					this.$container.find('#test-resultsModal').off().on('show.bs.modal',$.proxy(this.complete, this))
+					
 		            this.fetchFromServer();
 		        },
 		        initQuizHeader: function() {
@@ -217,7 +219,7 @@
 		                '<button type="button" data-toggle="modal" data-target="#reviewModal" class="btn btn-default j-boot-quiz-review"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Review</button>',
 		                ' </div>',
 		                ' <div class="btn-group" role="group">',
-		                '<button type="button" class="btn btn-default j-boot-quiz-complete">',
+		                '<button type="button" data-toggle="modal" data-target="#test-resultsModal" class="btn btn-default j-boot-quiz-complete">',
 		                '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>',
 		                'Complete</button>',
 		                ' </div>',
@@ -287,62 +289,62 @@
 					
 					var testResultHtml=['<div class="row">']
 						testResultHtml.push('<div class=" col-md-offset-5 col-md-7">')
-						testResultHtml.push('<h3> Test Results: </h3>');
+						testResultHtml.push('<span> Test Results: </span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('<div class="row">');
 						testResultHtml.push('<div class="col-md-6">');
 						testResultHtml.push('<div class="row">');
 						testResultHtml.push('<div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">Name:</span>');
+						testResultHtml.push('<span class="label label-info">Name:</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('<div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">SCJP 1.8</span>');
+						testResultHtml.push('<span class="label label-info">SCJP 1.8</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('<div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">Correct Questions:</span>');
+						testResultHtml.push('<span class="label label-info">Correct Questions:</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('<div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">20</span>');
+						testResultHtml.push('<span class="label label-info">20</span>');
 						testResultHtml.push(' </div>');
 						testResultHtml.push(' <div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">Time Taken:</span>');
+						testResultHtml.push('<span class="label label-info">Time Taken:</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push(' <div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">77 Min</span>');
+						testResultHtml.push('<span class="label label-info">77 Min</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('<div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">Start Time:</span>');
+						testResultHtml.push('<span class="label label-info">Start Time:</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('<div class="col-md-6">');
-						testResultHtml.push('<span class="label label-default">20-Nov-2014</span>');
+						testResultHtml.push('<span class="label label-info">20-Nov-2014</span>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('</div>');
 						testResultHtml.push('</div>'); 
 						testResultHtml.push('<div class="col-md-6">');
 						testResultHtml.push('<div class="row">')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">Status: </span>')
+						testResultHtml.push('<span class="label label-info">Status: </span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">Passed 88 %</span>')
+						testResultHtml.push('<span class="label label-info">Passed 88 %</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">Total Questions:</span>')
+						testResultHtml.push('<span class="label label-info">Total Questions:</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">65</span>')
+						testResultHtml.push('<span class="label label-info">65</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">Total Taken:</span>')
+						testResultHtml.push('<span class="label label-info">Total Taken:</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">89 Min</span>')
+						testResultHtml.push('<span class="label label-info">89 Min</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">Finish Time:</span>')
+						testResultHtml.push('<span class="label label-info">Finish Time:</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('<div class="col-md-6">')
-						testResultHtml.push('<span class="label label-default">20-Nov-2014</span>')
+						testResultHtml.push('<span class="label label-info">20-Nov-2014</span>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('</div>')
 						testResultHtml.push('</div>')
@@ -470,7 +472,7 @@
 		        complete: function(el) {
 		            if(confirm('Are you sure to complete the exam ? '))
 					{
-						this.$container.find('#reviewModal').modal('show');
+						//this.$container.find('#test-resultsModal').modal('show');
 					}
 		        },
 		        initTimer: function() {
