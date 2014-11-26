@@ -347,12 +347,14 @@
 		        },
 
 		        review: function(el) {			
-					  
 					var $table =this.$container.find('.modal-body');
 					var data = this.$container.data('cache');
 					
 //					 this.$container.find('.modal-body').text('new messae body will be pushed here !.')	 j-boot-quiz-review-table
-				    this.$container.find('.j-boot-quiz-review-table').bootstrapTable({data:data});
+					if(this.$container.find('.j-boot-quiz-review-table').data('bootstrap.table')){
+						this.$container.find('.j-boot-quiz-review-table').bootstrapTable('destroy');
+					}
+				    this.$container.find('.j-boot-quiz-review-table').bootstrapTable({data:data})
 					 
 		        },
 		        complete: function(el) {
