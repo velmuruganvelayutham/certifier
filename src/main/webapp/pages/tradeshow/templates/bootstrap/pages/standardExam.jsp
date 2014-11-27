@@ -21,7 +21,10 @@ response.setDateHeader ("Expires", -1);
 <script src="resources/js/jquery-bootstrap-quiz.js"></script>
 <script> $
 $(function(){	
-	 $('body').popover({selector:'.j-boot-quiz-mouseover'});
+	 $('body').popover({
+		  trigger:"hover",
+		  selector:'.j-boot-quiz-mouseover'
+	 });
 	
 })
         

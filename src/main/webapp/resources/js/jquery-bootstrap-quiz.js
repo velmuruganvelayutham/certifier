@@ -204,7 +204,7 @@
 						'<div class="col-md-3">',
 						'<div class="checkbox">',
       					'<label>',
-        				'<input class= "j-boot-quiz-mark-for-review" type="checkbox" value="">',
+        				'<input class= "j-boot-quiz-mark-for-review" type="checkbox" value="review">',
         				'Mark for review',
 						'</label>',
     					'</div>',
@@ -372,7 +372,7 @@
 		            console.log('index value of previous , current , next ' + prevIndex + ' ,' + currentIndex + ' ,' + nextIndex);
 
 		            $(":checkbox").each(function(i, option) {
-		                if ($(this).prop('checked')) {
+		                if ($(this).prop('checked')&& ($(this).val()!=="review")) {
 		                    console.log(i, 'checked')
 		                    $that.options.data.a[$(option).data('id')].checked = true;
 		                }
