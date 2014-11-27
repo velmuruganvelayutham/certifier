@@ -64,6 +64,18 @@
 		            hundredths = pad(time - (sec * 100) - (min * 6000), 2);
 		        return (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + ":" + hundredths;
 		    }
+			
+			window.nameFormatter=function(value) {
+				$('[data-toggle="popover"]').popover()
+				
+				return '<a data-toggle="popover" class="j-boot-quiz-mouseover" href="#" data-content="Popover with data-trigger" rel="popover" data-placement="bottom" data-original-title="Question" data-trigger="hover"' + value + '">' + value + '</a>';
+			}
+			window.mouseoverEvent={
+				'mouseover .j-boot-quiz-mouseover': function (e, value, row, index) {				 
+			     console.log(value, row, index);
+//				$('body').popover({selector:'.j-boot-quiz-mouseover'});
+    		}
+			}
 
 		    // The actual plugin constructor
 
@@ -278,7 +290,7 @@
 						'<th data-field="q">Result</th>',
         				'<th data-field="a">Exam Objective</th>',
 						'<th data-field="q">Difficulty Level</th>',
-        				'<th data-field="a">Problem Statement</th>',
+        				'<th data-field="a" data-formatter="nameFormatter" data-events="mouseoverEvent">Problem Statement</th>',
 						'<th data-field="q">Note</th>',
 						'</tr>',
 						'</thead>',

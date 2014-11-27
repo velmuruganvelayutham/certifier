@@ -4,6 +4,9 @@
 4. Give seperate URL's for vendor to enter their details and catelog information.
 5. Add a error page incase exception is thrown at any time.
 6  Add breadcrump in every page to show where exactly in every page.
+7. Add sign-up page and confirmation email will be sent after successful completion.
+8. Add forgot password feature.
+9. 
 
 
 
