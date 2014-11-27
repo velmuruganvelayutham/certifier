@@ -66,14 +66,12 @@
 		    }
 			
 			window.nameFormatter=function(value) {
-				$('[data-toggle="popover"]').popover()
 				
-				return '<a data-toggle="popover" class="j-boot-quiz-mouseover" href="#" data-content="Popover with data-trigger" rel="popover" data-placement="bottom" data-original-title="Question" data-trigger="hover"' + value + '">' + value + '</a>';
+				return '<a data-toggle="popover" class="j-boot-quiz-mouseover" href="#" data-content='+ value + 'rel="popover" data-placement="bottom" data-original-title="Question" data-trigger="hover">' + value + '</a>';
 			}
 			window.mouseoverEvent={
 				'mouseover .j-boot-quiz-mouseover': function (e, value, row, index) {				 
-			     console.log(value, row, index);
-//				$('body').popover({selector:'.j-boot-quiz-mouseover'});
+			     console.log(value, row, index)
     		}
 			}
 

@@ -20,7 +20,10 @@ response.setDateHeader ("Expires", -1);
 <script src="<c:url value="/resources/js/bootstrap-table.js" />"></script>
 <script src="resources/js/jquery-bootstrap-quiz.js"></script>
 <script> $
-(function () {
-  
+$(function(){	
+	 $('body').popover({selector:'.j-boot-quiz-mouseover'});
+	
 })
-</script>
+        
+
+	</script>
