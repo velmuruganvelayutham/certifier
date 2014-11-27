@@ -269,7 +269,7 @@
 					return modal.join('')
 				},
 				initModalTable:function(name){
-					var modalTable=['<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-',sprintf("%s",name),'-table">',
+					var modalTable=['<table data-pagination="true" data-search=true  data-click-to-select=true data-select-item-name="radioName" class="j-boot-quiz-',sprintf("%s",name),'-table"  data-show-refresh="true" data-show-toggle="true"  data-show-columns="true" data-toolbar="#toolbar">',
     					'<thead>',
     					'<tr>',
         				'<th data-field="id" data-radio="true" >Q.No</th>',

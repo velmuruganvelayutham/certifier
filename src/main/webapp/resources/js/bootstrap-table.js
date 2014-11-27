@@ -712,9 +712,7 @@
                 '<span class="pagination-info">',
                     this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
                 '</span>');
-
         html.push('<span class="page-list">');
-
         var pageNumber = [
             '<span class="btn-group dropup">',
             '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
