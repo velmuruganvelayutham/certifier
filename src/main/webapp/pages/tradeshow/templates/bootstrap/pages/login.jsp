@@ -32,8 +32,8 @@ response.setDateHeader ("Expires", -1);
   <body>
  <div class="container">
 		<div id="loginbox">
-	 <a class="navbar-brand" href="#"><img align="middle"  class="" src="<c:url value="/resources/image/logo.png"/>"></a>
-      <form class="form-signin" role="form" method="post" action="<c:url value="/j_spring_security_check"/>">
+			 <a class="navbar-brand" href="#"><img align="middle"  class="" src="<c:url value="/resources/image/logo.png"/>"></a>
+      <form id="loginForm" class="form-signin" role="form" method="post" action="<c:url value="/j_spring_security_check"/>">
         <h2 class="form-signin-heading">sign in</h2>
          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#" data-toggle="modal" data-target="#forgotPasswordModal">Forgot password?</a></div>
          <c:if test="${not empty error}">
@@ -75,7 +75,7 @@ response.setDateHeader ("Expires", -1);
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form">
+                            <form id="signupform" class="form-horizontal" role="form" >
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -108,14 +108,7 @@ response.setDateHeader ("Expires", -1);
                                         <input type="password" class="form-control" name="passwd" placeholder="Password">
                                     </div>
                                 </div>
-                                    
-                                <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label">Invitation Code</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="icode" placeholder="">
-                                    </div>
-                                </div>
-
+                                
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
@@ -153,8 +146,11 @@ response.setDateHeader ("Expires", -1);
 						<h3 id="myModalLabel">Forgot Password </h3>
 				</div>
 				<div class="modal-body">
-				<form class="form-inline">
-			<input type="text" class="form-control input-sm" placeholder="Email">
+				<form id="forgotPasswordForm" class="form-inline">
+			<div class="form-group">
+        <label>Email address</label>
+        <input type="text" class="form-control" name="email" />
+    </div>
 			<button type="submit" class="btn btn-default">Submit</button></form>
 				</div>
 				<div class="modal-footer">
@@ -165,7 +161,7 @@ response.setDateHeader ("Expires", -1);
 			</div>
 </div>
         <jsp:include page="/pages/tradeshow/templates/bootstrap/sections/jsLinks.jsp" />
-
+        <script src="<c:url value="/resources/js/certifier-bootstrap-validator.js" />"></script>
      	<tiles:insertAttribute name="footer" ignore="true"/>
 </body>
 </html>    

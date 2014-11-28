@@ -24,7 +24,7 @@
     <script src="<c:url value="/resources/js/typeahead.bundle.js" />"></script>
     <script src="<c:url value="/resources/js/hogan.js" />"></script>
 <!--     form validator -->
-<%--     <script src="<c:url value="/resources/js/bootstrapValidator.js" />"></script> --%>
+    <script src="<c:url value="/resources/js/bootstrapValidator.js" />"></script>
      <link href="<c:url value="/resources/css/bootstrapValidator.css" />" rel="stylesheet">
 	<!--     lavish-bootstrap custom css  -->
 <%--     <link href="<c:url value="/resources/css/lavish-bootstrap.css" />" rel="stylesheet"> --%>
