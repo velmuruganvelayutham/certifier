@@ -24,7 +24,7 @@ display: inline-block;
 
 /* custom styles for the typeahead */
 
-.bloodhound {
+/* .bloodhound {
   max-width:500px;
   margin-top:15px;
   margin-left:10px;
@@ -103,9 +103,9 @@ display: inline-block;
   margin: 0;
 }
 
-/* styles for dropdown list: custom template */
+styles for dropdown list: custom template
 .repo-language {
-/*   float: right; */
+  float: right;
   font-style: italic;
   font-weight: bold;
   font-size: 14px;
@@ -117,7 +117,7 @@ display: inline-block;
 
 .repo-description {
   font-size: 14px;
-}
+} */
 
 
 /* css for auto complete - morcopolo 
