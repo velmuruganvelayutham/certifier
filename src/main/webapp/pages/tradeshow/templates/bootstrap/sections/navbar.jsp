@@ -36,7 +36,7 @@ response.setDateHeader ("Expires", -1);
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tests  <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Standard Tests  <span class="caret"></span></a>
          <ul class="dropdown-menu" role="menu">
             <li><a href="<c:url value="/tests"/>">List All </a></li>
             <li><a href="<c:url value="/exhibitors/import"/>">Import </a></li>
@@ -56,11 +56,15 @@ response.setDateHeader ("Expires", -1);
             </div>    
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="<c:url value="/notifications"/>">Alerts
+      
+        <li class="active"><a href="<c:url value="/notifications"/>">Users
+            <span class="glyphicon glyphicon-bell"></span> </a>
+        </li>
+        <li class="active"><a href="<c:url value="/notifications"/>">Study Materials
             <span class="glyphicon glyphicon-bell"></span> </a>
         </li>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-	         <li class="active"><a  href="<c:url value="/settings"/>">Settings
+	         <li class="active"><a  href="<c:url value="/settings"/>">Test Results
 	            <span class="glyphicon glyphicon-cog"></span> </a>
 	        </li>
         </sec:authorize>
