@@ -49,11 +49,11 @@ response.setDateHeader ("Expires", -1);
         <div class="form-group" id="bloodhound">
           <input id="search" type="text" class="typeahead" placeholder="Search for Question ">
         </div>
-<!--             <div class="form-group"> -->
-<!--         <button type="submit" class="btn btn-default">Search -->
-<%--                 <span class="glyphicon glyphicon-search"></span> --%>
-<!--         </button> -->
-<!--             </div>     -->
+            <div class="form-group">
+    <button type="submit" class="btn btn-default">Search
+                <span class="glyphicon glyphicon-search"></span>
+        </button> 
+            </div>    
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="<c:url value="/notifications"/>">Alerts
