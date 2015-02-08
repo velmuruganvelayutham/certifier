@@ -59,6 +59,14 @@ public class COption implements Serializable {
 		this.choices = choices;
 	}
 
+	public boolean isCorrect() {
+		return isCorrect;
+	}
+
+	public void setCorrect(boolean isCorrect) {
+		this.isCorrect = isCorrect;
+	}
+
 	public int getNo() {
 		return this.no;
 	}
