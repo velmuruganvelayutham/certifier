@@ -114,7 +114,7 @@ public class StandardExamController {
 			page.setTotalNoOfPages(count / size);
 		List<Vendor> allVendors = vendorService.findAll(page);
 		model.addAttribute("vendors", allVendors);
-		int current = page.getPageNo();
+		int current = page.getOffset();
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalNoOfPages() == null ? 0
 				: page.getTotalNoOfPages().intValue());

@@ -19,13 +19,13 @@ response.setDateHeader ("Expires", -1);
 </div>
 
 
-<table data-toggle="table" data-url="tests/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="400" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
+<table id="test-table" data-toggle="table" data-url="tests/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="400" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
     <thead>
     <tr>
-        <th data-field="state" data-checkbox="true"></th>
-        <th data-field="id" data-align="right" data-sortable="true">Test Name</th>
-        <th data-field="name" data-align="center" data-sortable="true">Category</th>
-        <th data-field="price" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
+        <th data-field="id" data-radio="true"></th>
+        <th data-field="name" data-align="right" data-sortable="true">Test Name</th>
+        <th data-field="category" data-align="center" data-sortable="true">Category</th>
+        <th data-field="action" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>
 </table> 
@@ -186,6 +186,7 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
                   //data: return data from server
               	 console.log(JSON.stringify(data));
             	 $('#addNewTestModal').modal('hide');
+            	 $('#test-table').bootstrapTable('append', data);
               	 $('#addNewSetting').modal('hide');
               	 $('#statusbar').append(' <div align="middle" > <strong> done successfully!. </strong> </div>').show();
               	 

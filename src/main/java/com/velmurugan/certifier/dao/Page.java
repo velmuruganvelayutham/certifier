@@ -2,32 +2,24 @@ package com.velmurugan.certifier.dao;
 
 public class Page {
 
-	private int pageNo;
-	private int pageSize;
+	private int offset;
+	private int limit;
 	private Long totalNoOfPages;
 
-	public Page() {
+	public int getOffset() {
+		return offset;
 	}
 
-	public Page(int page, int size) {
-		this.pageNo = page;
-		this.pageSize = size;
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
-	public int getPageNo() {
-		return pageNo;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	public Long getTotalNoOfPages() {
@@ -36,6 +28,14 @@ public class Page {
 
 	public void setTotalNoOfPages(Long totalNoOfPages) {
 		this.totalNoOfPages = totalNoOfPages;
+	}
+
+	public Page() {
+	}
+
+	public Page(int offset, int limit) {
+		this.offset = offset;
+		this.limit = limit;
 	}
 
 }

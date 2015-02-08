@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -74,17 +75,16 @@ public class StandardTestController {
 			@RequestParam(value = "offset", defaultValue = "0") int offset,
 			@RequestParam(value = "order", defaultValue = "asc") String order) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		JsonObject value = factory
-				.createObjectBuilder()
-				.add("total", "200")
-				.add("rows",
-						factory.createArrayBuilder()
-								.add(factory.createObjectBuilder()
-										.add("id", "home")
-										.add("name", "212 555-1234"))
-								.add(factory.createObjectBuilder()
-										.add("id", "fax")
-										.add("name", "646 555-4567"))).build();
+		Page page = new Page(offset, limit);
+		Long count = testService.count();
+		List<CTest> testList = testService.findAll(page);
+		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
+		for (CTest test : testList) {
+			arrayBuilder.add(factory.createObjectBuilder()
+					.add("id", test.getCTestsId()).add("name", test.getName()));
+		}
+		JsonObject value = factory.createObjectBuilder().add("total", count)
+				.add("rows", arrayBuilder).build();
 
 		return value.toString();
 	}
@@ -101,7 +101,7 @@ public class StandardTestController {
 			page.setTotalNoOfPages(count / size);
 		List<Vendor> allVendors = vendorService.findAll(page);
 		model.addAttribute("vendors", allVendors);
-		int current = page.getPageNo();
+		int current = page.getOffset();
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalNoOfPages() == null ? 0
 				: page.getTotalNoOfPages().intValue());
@@ -218,10 +218,16 @@ public class StandardTestController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json" })
 	public @ResponseBody String add(@ModelAttribute CTest test,
 			BindingResult result, Model model) {
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		testService.create(test);
 		System.out.println("test is " + test);
-		model.addAttribute("message", "add");
-		return "{\"status:\": \"success\"}";
+
+		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
+		JsonArray value = arrayBuilder.add(
+				factory.createObjectBuilder().add("id", test.getCTestsId())
+						.add("name", test.getName())).build();
+
+		return value.toString();
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)

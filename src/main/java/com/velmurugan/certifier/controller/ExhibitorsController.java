@@ -68,7 +68,7 @@ public class ExhibitorsController {
 			page.setTotalNoOfPages(count / size);
 		List<Vendor> allVendors = vendorService.findAll(page);
 		model.addAttribute("vendors", allVendors);
-		int current = page.getPageNo();
+		int current = page.getOffset();
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalNoOfPages() == null ? 0
 				: page.getTotalNoOfPages().intValue());
@@ -89,6 +89,7 @@ public class ExhibitorsController {
 		return "exhibitors.";
 
 	}
+
 	@RequestMapping(value = "/uploadDropbox", method = RequestMethod.GET)
 	public String uploadFilesToDropbox(Locale locale, Model model) {
 
@@ -97,49 +98,49 @@ public class ExhibitorsController {
 		return "exhibitors.";
 
 	}
-	
-    @RequestMapping(value="/uploadDropbox",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/uploadDropbox", method = RequestMethod.POST)
 	public String uploadFile(Locale locale,
-			@RequestParam("dropbox-file") MultipartFile file, Model model) throws DbxException {
-//		final String APP_KEY = "gw4w14qy8129lpi";
-//        final String APP_SECRET = "hpycgtegwghz183";
-//
-//        DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
-        DbxRequestConfig config = new DbxRequestConfig(
-                "JavaTutorial/1.0", Locale.getDefault().toString());
-        DbxClient client = new DbxClient(config, "vmWxWONh_7gAAAAAAAAAE3egnyeHlXJ3EEHBLo8rFv6FU3IGil1Ps9zwGpNlpE5Z");
-      //  System.out.println("Linked account: " + client.getAccountInfo().displayName);
-        
-//        File inputFile = new File("working-draft.txt");
-//        FileInputStream inputStream = new FileInputStream(inputFile);
-        InputStream inputStream =null;
-        try {
-             inputStream = file.getInputStream();
-			DbxEntry.File uploadedFile = client.uploadFile("/suppliers/"+file.getOriginalFilename(),
-                DbxWriteMode.add(), file.getSize(), inputStream);
-            System.out.println("Uploaded: " + uploadedFile.toString());
-        } catch (IOException e) {
+			@RequestParam("dropbox-file") MultipartFile file, Model model)
+			throws DbxException {
+		// final String APP_KEY = "gw4w14qy8129lpi";
+		// final String APP_SECRET = "hpycgtegwghz183";
+		//
+		// DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
+		DbxRequestConfig config = new DbxRequestConfig("JavaTutorial/1.0",
+				Locale.getDefault().toString());
+		DbxClient client = new DbxClient(config,
+				"vmWxWONh_7gAAAAAAAAAE3egnyeHlXJ3EEHBLo8rFv6FU3IGil1Ps9zwGpNlpE5Z");
+		// System.out.println("Linked account: " +
+		// client.getAccountInfo().displayName);
+
+		// File inputFile = new File("working-draft.txt");
+		// FileInputStream inputStream = new FileInputStream(inputFile);
+		InputStream inputStream = null;
+		try {
+			inputStream = file.getInputStream();
+			DbxEntry.File uploadedFile = client.uploadFile(
+					"/suppliers/" + file.getOriginalFilename(),
+					DbxWriteMode.add(), file.getSize(), inputStream);
+			System.out.println("Uploaded: " + uploadedFile.toString());
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-            try {
+			try {
 				inputStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }
-        
-        model.addAttribute("message", "uploadDropbox");
-        model.addAttribute("dropboxLink", "https://www.dropbox.com/home/suppliers/");
-        return "exhibitors.";
+		}
+
+		model.addAttribute("message", "uploadDropbox");
+		model.addAttribute("dropboxLink",
+				"https://www.dropbox.com/home/suppliers/");
+		return "exhibitors.";
 	}
 
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/import/csv", method = RequestMethod.POST)
 	public String importCSVPost(Locale locale,
 			@RequestParam("csv-file") MultipartFile file, Model model)
