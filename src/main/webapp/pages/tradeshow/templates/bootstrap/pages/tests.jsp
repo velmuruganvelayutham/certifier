@@ -15,7 +15,7 @@ response.setDateHeader ("Expires", -1);
 <%@page pageEncoding="UTF-8"%>
 
 <div id="custom-toolbar" class="btn-toolbar " role="toolbar">
-  <div  class="btn-group"><button id="addBtn"  class="btn btn-default " type="button" data-toggle="tooltip" data-placement="left" title="ADD" > <span class="glyphicon glyphicon-plus"></span> Add </button> </div>
+  <div  class="btn-group"><button id="addBtn"  class="btn btn-default " type="button" data-toggle="modal" data-target="#addNewTestModal" > <span class="glyphicon glyphicon-plus"></span> Add </button> </div>
 </div>
 
 
@@ -29,6 +29,68 @@ response.setDateHeader ("Expires", -1);
     </tr>
     </thead>
 </table> 
+
+
+
+
+   <!-- Modal  for adding new Settings -->
+<div class="modal fade" id="addNewTestModal" tabindex="-1" role="dialog" aria-labelledby="addNewTestLabel" aria-hidden="true" data-toggle="validator" >
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="addNewTestLabel">Add New Test </h4>
+      </div>
+<!--       <div class="modal-body" id="editModal"> </div> -->
+      <div class="modal-body" >
+				<form  id="ajaxform" role="form" method="post"  action="<c:url value="/tests/add" > </c:url>"
+				data-bv-message="This value is not valid"
+    			data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+   				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+    			data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+				<div class="row">
+					  <div class="col-xs-24 col-md-12"> 
+					  	  <div class="form-group">
+						    <input type="hidden" class="form-control" id="testid" name ="test_id" >
+						  </div>
+						  <div class="form-group">
+						    <label for="name">name</label>
+						    <input type="text" class="form-control" id="testName" name ="name" placeholder="Enter Test Name" 
+						    data-bv-notempty="true"
+                			data-bv-notempty-message="The test name is required and cannot be empty" >
+						  </div>
+						  <div class="form-group">
+						    <label for="category">Category</label>
+						    <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category" 
+						    data-bv-notempty="false">
+						  </div>
+						   <div class="form-group">
+						    <label for="file">csv file</label>
+						    <input type="file" class="form-control" id="file" name ="file" placeholder="browse file" 
+						    data-bv-notempty="true"
+                			data-bv-notempty-message="The file is required and cannot be empty" >
+						  </div>
+				  </div>
+					 
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group"  align="center">
+							     <button id="saveFormBtn" type=submit class="btn btn-primary btn-lg" >Save</button> 
+					    </div>
+					</div>
+					<div class="col-xs-12 col-md-6" align="center">
+						<div class="form-group">
+								 <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Cancel</button>
+					    </div>
+				   </div>
+      			     
+				</div>
+			</form>	
+      </div>
+    </div>
+  </div>
+</div>   
 
 <script>
     function operateFormatter(value, row, index) {

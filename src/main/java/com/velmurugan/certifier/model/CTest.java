@@ -29,13 +29,13 @@ public class CTest implements Serializable {
 	private int cTestsId;
 
 	@Lob
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private byte[] file;
 
 	@Column(nullable = false, length = 45)
 	private String name;
 
-	@Column(nullable = false, length = 45, name = "category")
+	@Column(nullable = true, length = 45, name = "category")
 	private String category;
 
 	// bi-directional many-to-one association to CQuestion

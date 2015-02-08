@@ -39,7 +39,9 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWriteMode;
 import com.velmurugan.certifier.dao.Page;
+import com.velmurugan.certifier.model.CTest;
 import com.velmurugan.certifier.model.Vendor;
+import com.velmurugan.certifier.service.TestService;
 import com.velmurugan.certifier.service.VendorService;
 
 /**
@@ -51,6 +53,10 @@ public class StandardTestController {
 
 	@Autowired
 	VendorService vendorService;
+
+	@Autowired
+	TestService testService;
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(StandardTestController.class);
 
@@ -209,13 +215,13 @@ public class StandardTestController {
 		return "exhibitors.";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@ModelAttribute Vendor vendor, BindingResult result,
+	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json" })
+	public String add(@ModelAttribute CTest test, BindingResult result,
 			Model model) {
-		vendorService.create(vendor);
-		System.out.println("vendor is " + vendor);
+		testService.create(test);
+		System.out.println("test is " + test);
 		model.addAttribute("message", "add");
-		return "exhibitors.";
+		return "tests.";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
