@@ -242,11 +242,10 @@ public class StandardTestController {
 
 		testService.update(find);
 		System.out.println("test is " + find);
-		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
-		JsonArray value = arrayBuilder.add(
-				factory.createObjectBuilder()
-						.add("cTestsId", test.getcTestsId())
-						.add("name", test.getName())).build();
+
+		JsonObject value = factory.createObjectBuilder()
+				.add("cTestsId", test.getcTestsId())
+				.add("name", test.getName()).build();
 
 		return value.toString();
 	}
