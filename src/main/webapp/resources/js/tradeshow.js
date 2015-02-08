@@ -264,44 +264,10 @@
             	deleteRecord();
             });
             
-          //callback handler for form submit
-//            $("#ajaxform").submit(function(e)
-//            {
-//                var postData = $(this).serializeArray();
-//                var formURL = $(this).attr("action");
-//                $.ajax(
-//                {
-//                    url : formURL,
-//                    type: "POST",
-//                    data : postData,
-//                    beforeSend:function(){
-//                    	
-//                    },
-//                    success:function(data, textStatus, jqXHR) 
-//                    {
-//                        //data: return data from server
-//                    	 console.log(textStatus);
-//                    	 $('#addNewVendor').modal('hide');
-//                    },
-//                    error: function(jqXHR, textStatus, errorThrown) 
-//                    {
-//                    	alert(errorThrown);     
-//                    }
-//                });
-//                e.preventDefault(); //STOP default action
-//              //  e.unbind(); //unbind. to stop multiple form submit.
-//            });
-//            
-//            // click of save button on the modal.
-//            
-//            $('#saveFormBtn').click(function(e){
-//            	alert(e);
-//            	$('#ajaxform').submit();            	
-//            });
-            
+                 
             
 //            Bootstrap validator for add vendor modal form.
-            $('form').bootstrapValidator().on('success.form.bv', function(e) {
+            $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
                 // Prevent form submission
                 e.preventDefault();
               

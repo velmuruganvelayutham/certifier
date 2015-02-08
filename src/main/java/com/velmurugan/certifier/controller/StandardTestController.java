@@ -216,12 +216,12 @@ public class StandardTestController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json" })
-	public String add(@ModelAttribute CTest test, BindingResult result,
-			Model model) {
+	public @ResponseBody String add(@ModelAttribute CTest test,
+			BindingResult result, Model model) {
 		testService.create(test);
 		System.out.println("test is " + test);
 		model.addAttribute("message", "add");
-		return "tests.";
+		return "{\"status:\": \"success\"}";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)

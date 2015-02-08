@@ -121,6 +121,82 @@ response.setDateHeader ("Expires", -1);
             console.log(value, row, index);
         }
     };
+    
+ /*    
+    //callback handler for form submit
+    $("#ajaxform").submit(function(e)
+    {
+         var postData = $(this).serializeArray();
+         var formURL = $(this).attr("action");
+         $.ajax(
+         {
+            url : formURL,
+             type: "POST",
+            data : postData,
+            beforeSend:function(){
+            	
+            },
+            success:function(data, textStatus, jqXHR) 
+            {
+                //data: return data from server
+             	 console.log(JSON.stringify(data));
+            	 $('#addNewTestModal').modal('hide');
+            },
+            error: function(jqXHR, textStatus, errorThrown) 
+            {
+            	alert(errorThrown);     
+            }
+        });
+        e.preventDefault(); //STOP default action
+      //  e.unbind(); //unbind. to stop multiple form submit.
+    });
+     
+    // click of save button on the modal.
+     
+  $('#saveFormBtn').click(function(e){
+  	console.log(e);
+  	$('#ajaxform').submit();            	
+}); */
+
+
+$('#addNewTestModal').on('hide.bs.modal', function() {
+    $('#ajaxform').bootstrapValidator('resetForm', true);
+});
+//Bootstrap validator for add vendor modal form.
+$('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
+    // Prevent form submission
+    e.preventDefault();
+  
+    // Get the form instance
+    var $form = $(e.target);
+
+    // Get the BootstrapValidator instance
+    var bv = $form.data('bootstrapValidator');
+
+    $.ajax({
+              url : $form.attr('action'),
+              type: "POST",
+              data :  $form.serialize(),
+              beforeSend:function(){
+            	  $('#statusbar').empty();
+            	  $("#addNewVendorLabel").html("<font color='black'>"+ "Adding Vendor . Please wait!. "  +"</font>");
+              },
+              success:function(data, textStatus, jqXHR) 
+              {
+                  //data: return data from server
+              	 console.log(JSON.stringify(data));
+            	 $('#addNewTestModal').modal('hide');
+              	 $('#addNewSetting').modal('hide');
+              	 $('#statusbar').append(' <div align="middle" > <strong> done successfully!. </strong> </div>').show();
+              	 
+              },
+              error: function(jqXHR, textStatus, errorThrown) 
+              {
+              	alert(errorThrown);     
+              }
+          });
+});
+
 </script>
 
  <link href="<c:url value="/resources/css/bootstrap-table.css" />" rel="stylesheet">
