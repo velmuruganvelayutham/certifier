@@ -22,10 +22,11 @@ response.setDateHeader ("Expires", -1);
 <table id="test-table" data-toggle="table" data-url="tests/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="400" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
     <thead>
     <tr>
-        <th data-field="id" data-radio="true"></th>
-        <th data-field="name" data-align="right" data-sortable="true">Test Name</th>
+        <th data-field="radio" data-radio="true"></th>
+        <th data-field="test_id"  data-visible="false" >ID </th>
+        <th data-field="name" data-align="center" data-sortable="true">Test Name</th>
         <th data-field="category" data-align="center" data-sortable="true">Category</th>
-        <th data-field="action" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
+        <th data-field="action" data-align="center" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>
 </table> 
@@ -51,7 +52,7 @@ response.setDateHeader ("Expires", -1);
 				<div class="row">
 					  <div class="col-xs-24 col-md-12"> 
 					  	  <div class="form-group">
-						    <input type="hidden" class="form-control" id="testid" name ="test_id" >
+						    <input type="hidden" class="form-control" id="testid" name ="cTestsId" >
 						  </div>
 						  <div class="form-group">
 						    <label for="name">name</label>
@@ -113,8 +114,17 @@ response.setDateHeader ("Expires", -1);
             console.log(value, row, index);
         },
         'click .edit': function (e, value, row, index) {
-            alert('You click edit icon, row: ' + JSON.stringify(row));
-            console.log(value, row, index);
+            console.log('You click edit icon, row: ' + JSON.stringify(row));
+            $('#addNewTestModal').on('show.bs.modal', function (e) {
+            	 console.log('You click edit icon, row: inside show.bs.modal ' + JSON.stringify(row));
+            	 $.each($('#addNewTestModal').find('input'),function(i,v){
+                     console.log(row[$(v).attr('name')])
+                     $(v).val(row[$(v).attr('name')]);
+          })
+            })
+            $('#addNewTestModal').find('form').attr('action',ctx+"/tests/edit")
+            $('#addNewTestModal').modal('show');
+            
         },
         'click .remove': function (e, value, row, index) {
             alert('You click remove icon, row: ' + JSON.stringify(row));

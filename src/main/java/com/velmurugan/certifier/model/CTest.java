@@ -25,8 +25,24 @@ public class CTest implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "c_tests_id", unique = true, nullable = false)
-	private int cTestsId;
+	@Column(name = "tests_id", unique = true, nullable = false)
+	private Long cTestsId;
+
+	public Long getcTestsId() {
+		return cTestsId;
+	}
+
+	public void setcTestsId(Long cTestsId) {
+		this.cTestsId = cTestsId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	@Lob
 	@Column(nullable = true)
@@ -43,14 +59,6 @@ public class CTest implements Serializable {
 	private List<CQuestion> CQuestions;
 
 	public CTest() {
-	}
-
-	public int getCTestsId() {
-		return this.cTestsId;
-	}
-
-	public void setCTestsId(int cTestsId) {
-		this.cTestsId = cTestsId;
 	}
 
 	public Object getFile() {

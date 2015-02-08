@@ -81,7 +81,8 @@ public class StandardTestController {
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		for (CTest test : testList) {
 			arrayBuilder.add(factory.createObjectBuilder()
-					.add("id", test.getCTestsId()).add("name", test.getName()));
+					.add("cTestsId", test.getcTestsId())
+					.add("name", test.getName()));
 		}
 		JsonObject value = factory.createObjectBuilder().add("total", count)
 				.add("rows", arrayBuilder).build();
@@ -224,20 +225,30 @@ public class StandardTestController {
 
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		JsonArray value = arrayBuilder.add(
-				factory.createObjectBuilder().add("id", test.getCTestsId())
+				factory.createObjectBuilder()
+						.add("cTestsId", test.getcTestsId())
 						.add("name", test.getName())).build();
 
 		return value.toString();
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String edit(@ModelAttribute Vendor vendor, BindingResult result,
-			Model model) {
-		Vendor find = vendorService.find(vendor.getVendor_id());
-		vendorService.update(find);
-		System.out.println("vendor is " + find);
-		model.addAttribute("message", "edit");
-		return "exhibitors.";
+	public @ResponseBody String edit(@ModelAttribute CTest test,
+			BindingResult result, Model model) {
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		CTest find = testService.find(test.getcTestsId());
+		find.setName(test.getName());
+		find.setCategory(test.getCategory());
+
+		testService.update(find);
+		System.out.println("test is " + find);
+		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
+		JsonArray value = arrayBuilder.add(
+				factory.createObjectBuilder()
+						.add("cTestsId", test.getcTestsId())
+						.add("name", test.getName())).build();
+
+		return value.toString();
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = {
