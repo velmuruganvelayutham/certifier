@@ -12,6 +12,15 @@ function operateFormatter(value, row, index) {
         ].join('');
     }
 
+function linkFormatter(value, row, index) {
+    return [
+        '<a class="like" href="tests/'+ row.cTestsId+'" title="Like">',
+            '<i class="glyphicon glyphicon-share-alt"></i>'+ ' ' +value+' ',
+        '</a>'        
+    ].join('');
+}
+
+
     window.operateEvents = {
         'click .like': function (e, value, row, index) {
             alert('You click like icon, row: ' + JSON.stringify(row));
