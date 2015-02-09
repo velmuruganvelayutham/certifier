@@ -107,18 +107,18 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
                   //data: return data from server
               	 console.log(JSON.stringify(data));
             	 $('#addNewTestModal').modal('hide');
+            	 console.log(this.url);
             	 if(this.url=="/certifier/tests/add"){
             		 $('#test-table').bootstrapTable('append', data);
             		 $("#addNewTestLabel").html("<font color='black'>"+ "Add new Test "  +"</font>");
+            		 $('#statusbar').append(' <div align="middle" > <strong> Record saved successfully!. </strong> </div>').show();
             	 }
             	 else{
             		 $("#addNewTestLabel").html("<font color='black'>"+ "Edit Test"  +"</font>");
             		 $('#test-table').bootstrapTable('updateRow', {"index":$form.data('index'),"row":JSON.parse(data)});
+            		 $('#statusbar').append(' <div align="middle" > <strong> Record updated successfully!. </strong> </div>').show();
             	 }
             	 
-            	 console.log(this.url);
-              	 $('#statusbar').append(' <div align="middle" > <strong> saved successfully!. </strong> </div>').show();
-              	 
               },
               error: function(jqXHR, textStatus, errorThrown) 
               {
