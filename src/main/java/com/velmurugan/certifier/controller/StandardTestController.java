@@ -70,6 +70,31 @@ public class StandardTestController {
 		return "tests.";
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String getTest(@PathVariable Long id, Model model) {
+		model.addAttribute("id", id);
+		return "testDetail.";
+	}
+
+	@RequestMapping(value = "/{id}/data", method = RequestMethod.GET)
+	public @ResponseBody String getQuestionById(@PathVariable Long id,
+			Model model) {
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		Page page = new Page(0, 10);
+		Long count = testService.count();
+		List<CTest> testList = testService.findAll(page);
+		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
+		for (CTest test : testList) {
+			arrayBuilder.add(factory.createObjectBuilder()
+					.add("cTestsId", test.getcTestsId())
+					.add("name", test.getName()));
+		}
+		JsonObject value = factory.createObjectBuilder().add("total", count)
+				.add("rows", arrayBuilder).build();
+
+		return value.toString();
+	}
+
 	@RequestMapping(value = "/data", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody String data(Locale locale, Model model,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
@@ -89,49 +114,6 @@ public class StandardTestController {
 				.add("rows", arrayBuilder).build();
 
 		return value.toString();
-	}
-
-	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public String list(Locale locale, Model model,
-			@RequestParam(value = "page", defaultValue = "1") int pageNo,
-			@RequestParam(value = "size", defaultValue = "8") int size) {
-
-		logger.info("Exibitors list is called ", locale);
-		Page page = new Page(pageNo, size);
-		Long count = vendorService.count();
-		if (count != null && count != 0)
-			page.setTotalNoOfPages(count / size);
-		List<Vendor> allVendors = vendorService.findAll(page);
-		model.addAttribute("vendors", allVendors);
-		int current = page.getOffset();
-		int begin = Math.max(1, current - 5);
-		int end = Math.min(begin + 10, page.getTotalNoOfPages() == null ? 0
-				: page.getTotalNoOfPages().intValue());
-
-		model.addAttribute("page", page);
-		model.addAttribute("beginIndex", begin);
-		model.addAttribute("endIndex", end);
-		model.addAttribute("currentIndex", current);
-		model.addAttribute("message", "list");
-		return "exhibitors.";
-	}
-
-	@RequestMapping(value = "/import", method = RequestMethod.GET)
-	public String importCSV(Locale locale, Model model) {
-
-		logger.info("ImportCSV  is called ", locale);
-		model.addAttribute("message", "import");
-		return "exhibitors.";
-
-	}
-
-	@RequestMapping(value = "/uploadDropbox", method = RequestMethod.GET)
-	public String uploadFilesToDropbox(Locale locale, Model model) {
-
-		logger.info("ImportCSV  is called ", locale);
-		model.addAttribute("message", "uploadDropbox");
-		return "exhibitors.";
-
 	}
 
 	@RequestMapping(value = "/uploadDropbox", method = RequestMethod.POST)

@@ -92,4 +92,10 @@
   		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/standardExam.jsp" />
   		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
   	</definition>
+  		<definition name="testDetail.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
+  		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/testDetail.jsp" />
+  		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
+  	</definition>
 </tiles-definitions>
