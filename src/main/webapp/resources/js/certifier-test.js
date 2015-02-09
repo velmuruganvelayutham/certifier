@@ -33,7 +33,27 @@ function operateFormatter(value, row, index) {
         'click .remove': function (e, value, row, index) {
             if(confirm('Are you really want to delete this record: ' + JSON.stringify(row))){
             	 console.log(value, row, index);          	
-            	 $('#test-table').bootstrapTable('remove',{field:"cTestsId",values:[row.cTestsId]})
+            	 $.ajax(
+            	         {
+            	            url : ctx+"/tests/delete/"+row.cTestsId ,
+            	            type: "DELETE",
+            	            contentType:"application/json",
+            	            beforeSend:function(){
+            	            	 $('#statusbar').empty();
+            	            },
+            	            success:function(data, textStatus, jqXHR) 
+            	            {
+            	                //data: return data from server
+            	             	 console.log(JSON.stringify(data));
+            	             	 $('#statusbar').append(' <div align="middle" > <strong> Record deleted successfully!. </strong> </div>').show();
+            	            	 $('#test-table').bootstrapTable('remove',{field:"cTestsId",values:[row.cTestsId]});
+            	            },
+            	            error: function(jqXHR, textStatus, errorThrown) 
+            	            {
+            	            	alert(errorThrown);     
+            	            }
+            	        });
+            	 
             }
         }
     };

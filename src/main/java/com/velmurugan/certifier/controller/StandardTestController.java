@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -267,19 +268,12 @@ public class StandardTestController {
 		return "exhibitors.";
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = {
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, consumes = {
 			"application/json", "application/xml" })
-	public @ResponseBody String deleteById(@RequestBody String json, Model model) {
-		JsonReader jsonReader = Json.createReader(new StringReader(json));
-		JsonArray jsonArray = jsonReader.readArray();
-		int size = jsonArray.size();
-		System.out.println("Json input is " + jsonArray);
-		for (int i = 0; i < size; i++) {
-			String id = ((JsonObject) jsonArray.get(i)).getString("id");
-			Vendor vendor = vendorService.find(Long.valueOf(id));
-			vendorService.delete(vendor);
-			System.out.println("deleted successfully " + id);
-		}
+	public @ResponseBody String deleteById(@PathVariable Long id) {
+		CTest vendor = testService.find(id);
+		testService.delete(vendor);
+		System.out.println("deleted successfully " + id);
 		return "exhibitors.";
 	}
 }
