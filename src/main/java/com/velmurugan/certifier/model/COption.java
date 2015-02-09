@@ -27,13 +27,14 @@ public class COption implements Serializable {
 	@Column(name = "c_options_id", unique = true, nullable = false)
 	private int cOptionsId;
 
-	@Column(length = 45, name = "description")
+	@Column(length = 45, name = "choice")
 	private String choices;
+
+	@Column(length = 45, name = "explanation")
+	private String explanation;
 
 	@Column
 	private boolean isCorrect;
-
-	private int no;
 
 	// bi-directional many-to-one association to CQuestion
 	@ManyToOne
@@ -67,16 +68,24 @@ public class COption implements Serializable {
 		this.isCorrect = isCorrect;
 	}
 
-	public int getNo() {
-		return this.no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
-	}
-
 	public CQuestion getCQuestion() {
 		return this.CQuestion;
+	}
+
+	public int getcOptionsId() {
+		return cOptionsId;
+	}
+
+	public void setcOptionsId(int cOptionsId) {
+		this.cOptionsId = cOptionsId;
+	}
+
+	public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 
 	public void setCQuestion(CQuestion CQuestion) {

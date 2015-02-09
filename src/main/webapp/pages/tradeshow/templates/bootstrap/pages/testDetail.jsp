@@ -15,19 +15,19 @@ response.setDateHeader ("Expires", -1);
 <%@page pageEncoding="UTF-8"%>
 
 <div id="custom-toolbar" class="btn-toolbar " role="toolbar">
-  <div  class="btn-group"><button id="addBtn"  class="btn btn-default " type="button" data-toggle="modal" data-target="#addNewTestModal" > <span class="glyphicon glyphicon-plus"></span> Add </button> </div>
+  <div  class="btn-group"><button id="addBtnDetail"  class="btn btn-default " type="button" data-toggle="modal" data-target="#addNewTestModal" > <span class="glyphicon glyphicon-plus"></span> Add </button> </div>
 </div>
  <div id="statusbar" class="alert alert-success alert-dismissible" role="alert" style="display:none">
 	  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
  </div>
 
-<table id="test-table" data-toggle="table" data-url="${id}/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="400" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
+<table data-testId="${id}" id="test-table" data-toggle="table" data-url="${id}/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="400" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
     <thead>
     <tr>
         <th data-field="radio" data-radio="true"></th>
         <th data-field="cTestsId"  data-visible="true" >ID </th>
-        <th data-field="name" data-align="center" data-sortable="true" data-formatter="linkFormatter">Test Name</th>
-        <th data-field="category" data-align="center" data-sortable="true">Category</th>
+        <th data-field="name" data-align="center" data-sortable="true" >Question Name</th>
+        <th data-field="category" data-align="center" data-sortable="true">Options</th>
         <th data-field="action" data-align="center" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>
@@ -38,7 +38,7 @@ response.setDateHeader ("Expires", -1);
 
    <!-- Modal  for adding new Settings -->
 <div class="modal fade" id="addNewTestModal" tabindex="-1" role="dialog" aria-labelledby="addNewTestLabel" aria-hidden="true" data-toggle="validator" >
-  <div class="modal-dialog ">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -58,25 +58,32 @@ response.setDateHeader ("Expires", -1);
 						    <input type="hidden" class="form-control" id="testid" name ="cTestsId" >
 						  </div>
 						  <div class="form-group">
-						    <label for="name">name</label>
-						    <input type="text" class="form-control" id="testName" name ="name" placeholder="Enter Test Name" 
+						    <label for="name">Question</label>
+						    <input type="text" class="form-control" id="testName" name ="name" placeholder="Question" 
 						    data-bv-notempty="true"
                 			data-bv-notempty-message="The test name is required and cannot be empty" 
                 			data-bv-excluded=":disabled" >
 						  </div>
+						  <div class='dynamicOption'>
 						  <div class="form-group">
-						    <label for="category">Category</label>
-						    <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category" 
+						    <label for="category">Option</label>
+						    <input type="text" class="form-control" id="category" name="category" placeholder="Option" 
 						    data-bv-notempty="false"
 						    data-bv-excluded=":disabled">
 						  </div>
-						   <div class="form-group">
-						    <label for="file">csv file</label>
-						    <input type="file" class="form-control" id="file" name ="file" placeholder="browse file" 
-						    data-bv-notempty="true"
-                			data-bv-notempty-message="The file is required and cannot be empty" 
-                			data-bv-excluded=":disabled">
+						  <div class="checkbox">
+						    <label>
+						      <input type="checkbox"> isCorrect ?
+						    </label>
 						  </div>
+						   <div class="form-group">
+						    <label for="explanation">Explanation</label>
+						    <input type="text" class="form-control" id="category" name="explanation" placeholder="brief explanation" 
+						    data-bv-notempty="false"
+						    data-bv-excluded=":disabled">
+						  </div>
+						  </div>
+						  
 				  </div>
 					 
 				</div>

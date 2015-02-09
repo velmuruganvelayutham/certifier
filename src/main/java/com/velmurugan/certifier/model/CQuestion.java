@@ -32,7 +32,7 @@ public class CQuestion implements Serializable {
 	@Column(length = 45)
 	private String category;
 
-	@Column(nullable = false, length = 45)
+	@Column(nullable = false, length = 1000)
 	private String question;
 
 	@Column(length = 45)

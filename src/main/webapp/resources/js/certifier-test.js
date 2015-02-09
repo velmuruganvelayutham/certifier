@@ -67,47 +67,15 @@ function linkFormatter(value, row, index) {
         }
     };
     
- /*    
-    //callback handler for form submit
-    $("#ajaxform").submit(function(e)
-    {
-         var postData = $(this).serializeArray();
-         var formURL = $(this).attr("action");
-         $.ajax(
-         {
-            url : formURL,
-             type: "POST",
-            data : postData,
-            beforeSend:function(){
-            	
-            },
-            success:function(data, textStatus, jqXHR) 
-            {
-                //data: return data from server
-             	 console.log(JSON.stringify(data));
-            	 $('#addNewTestModal').modal('hide');
-            },
-            error: function(jqXHR, textStatus, errorThrown) 
-            {
-            	alert(errorThrown);     
-            }
-        });
-        e.preventDefault(); //STOP default action
-      //  e.unbind(); //unbind. to stop multiple form submit.
-    });
-     
-    // click of save button on the modal.
-     
-  $('#saveFormBtnk').click(function(e){
-  	console.log(e);
-  	$('#ajaxform').submit();            	
-}); */
-    
-    $('#addBtn').click(function(e){
+ $('#addBtn').click(function(e){
     	console.log('action is changed to tests/add: ');
-      	$('#ajaxform').attr('action',ctx+"/tests/add");          	
+      	$('#ajaxform').attr('action',ctx+"/tests/add"); 
     });
-
+ $('#addBtnDetail').click(function(e){
+ 	console.log('action is changed to tests/add: ');
+   	$('#ajaxform').attr('action',ctx+"/tests/"+ $('#test-table').data('testId')+ "/add");  
+ });
+ 
 $('#addNewTestModal').on('hidden.bs.modal', function() {
 	console.log('Form is reset: ');
 	$('#ajaxform').bootstrapValidator('resetForm',true);
@@ -137,7 +105,7 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
               	 console.log(JSON.stringify(data));
             	 $('#addNewTestModal').modal('hide');
             	 console.log(this.url);
-            	 if(this.url=="/certifier/tests/add"){
+            	 if(this.url=="/certifier/tests/3/add"){
             		 $('#test-table').bootstrapTable('append', data);
             		 $("#addNewTestLabel").html("<font color='black'>"+ "Add new Test "  +"</font>");
             		 $('#statusbar').append(' <div align="middle" > <strong> Record saved successfully!. </strong> </div>').show();

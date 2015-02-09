@@ -41,6 +41,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWriteMode;
 import com.velmurugan.certifier.dao.Page;
+import com.velmurugan.certifier.model.CQuestion;
 import com.velmurugan.certifier.model.CTest;
 import com.velmurugan.certifier.model.Vendor;
 import com.velmurugan.certifier.service.TestService;
@@ -74,6 +75,25 @@ public class StandardTestController {
 	public String getTest(@PathVariable Long id, Model model) {
 		model.addAttribute("id", id);
 		return "testDetail.";
+	}
+
+	@RequestMapping(value = "/{id}/add", method = RequestMethod.POST, produces = { "application/json" })
+	public @ResponseBody String addQuestion(@PathVariable Long id,
+			@ModelAttribute CQuestion question, BindingResult result,
+			Model model) {
+		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		CTest find = testService.find(id);
+		find.addCQuestion(question);
+		testService.update(find);
+		System.out.println("question is " + question);
+
+		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
+		JsonArray value = arrayBuilder.add(
+				factory.createObjectBuilder()
+						.add("cTestsId", question.getCQuestionsId())
+						.add("name", question.getQuestion())).build();
+
+		return value.toString();
 	}
 
 	@RequestMapping(value = "/{id}/data", method = RequestMethod.GET)
