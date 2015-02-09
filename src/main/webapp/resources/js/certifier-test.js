@@ -33,9 +33,8 @@ function operateFormatter(value, row, index) {
         'click .remove': function (e, value, row, index) {
             if(confirm('Are you really want to delete this record: ' + JSON.stringify(row))){
             	 console.log(value, row, index);          	
-            	
+            	 $('#test-table').bootstrapTable('remove',{field:"cTestsId",values:[row.cTestsId]})
             }
-           
         }
     };
     

@@ -25,7 +25,7 @@ response.setDateHeader ("Expires", -1);
     <thead>
     <tr>
         <th data-field="radio" data-radio="true"></th>
-        <th data-field="test_id"  data-visible="false" >ID </th>
+        <th data-field="cTestsId"  data-visible="true" >ID </th>
         <th data-field="name" data-align="center" data-sortable="true">Test Name</th>
         <th data-field="category" data-align="center" data-sortable="true">Category</th>
         <th data-field="action" data-align="center" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>

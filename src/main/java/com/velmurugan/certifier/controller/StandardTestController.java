@@ -266,4 +266,20 @@ public class StandardTestController {
 		}
 		return "exhibitors.";
 	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = {
+			"application/json", "application/xml" })
+	public @ResponseBody String deleteById(@RequestBody String json, Model model) {
+		JsonReader jsonReader = Json.createReader(new StringReader(json));
+		JsonArray jsonArray = jsonReader.readArray();
+		int size = jsonArray.size();
+		System.out.println("Json input is " + jsonArray);
+		for (int i = 0; i < size; i++) {
+			String id = ((JsonObject) jsonArray.get(i)).getString("id");
+			Vendor vendor = vendorService.find(Long.valueOf(id));
+			vendorService.delete(vendor);
+			System.out.println("deleted successfully " + id);
+		}
+		return "exhibitors.";
+	}
 }
