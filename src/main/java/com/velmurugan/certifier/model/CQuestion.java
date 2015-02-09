@@ -3,6 +3,7 @@ package com.velmurugan.certifier.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class CQuestion implements Serializable {
 	private String questionno;
 
 	// bi-directional many-to-one association to COption
-	@OneToMany(mappedBy = "CQuestion")
+	@OneToMany(mappedBy = "CQuestion", cascade = CascadeType.ALL)
 	private List<COption> COptions;
 
 	// bi-directional many-to-one association to CTest

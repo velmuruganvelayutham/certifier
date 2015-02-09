@@ -3,6 +3,7 @@ package com.velmurugan.certifier.service;
 import java.util.List;
 
 import com.velmurugan.certifier.dao.Page;
+import com.velmurugan.certifier.model.CQuestion;
 import com.velmurugan.certifier.model.CTest;
 
 public interface TestService {
@@ -20,4 +21,6 @@ public interface TestService {
 	public void delete(CTest CTest);
 
 	public Long count();
+
+	public void addQuestionToTest(CQuestion question, Long testId);
 }

@@ -59,7 +59,7 @@ response.setDateHeader ("Expires", -1);
 						  </div>
 						  <div class="form-group">
 						    <label for="name">Question</label>
-						    <input type="text" class="form-control" id="testName" name ="name" placeholder="Question" 
+						    <input type="text" class="form-control" id="testName" name ="question" placeholder="Question" 
 						    data-bv-notempty="true"
                 			data-bv-notempty-message="The test name is required and cannot be empty" 
                 			data-bv-excluded=":disabled" >

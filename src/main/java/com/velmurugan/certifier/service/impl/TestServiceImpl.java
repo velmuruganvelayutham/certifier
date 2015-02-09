@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.velmurugan.certifier.dao.Page;
 import com.velmurugan.certifier.dao.TestDao;
+import com.velmurugan.certifier.model.CQuestion;
 import com.velmurugan.certifier.model.CTest;
 import com.velmurugan.certifier.service.TestService;
 
@@ -55,5 +56,13 @@ public class TestServiceImpl implements TestService {
 	@Override
 	public void update(CTest CTest) {
 		testDao.update(CTest);
+	}
+
+	@Override
+	public void addQuestionToTest(CQuestion question, Long testId) {
+		CTest find = find(testId);
+		question.setCTest(find);
+		find.getCQuestions().add(question);
+		update(find);
 	}
 }

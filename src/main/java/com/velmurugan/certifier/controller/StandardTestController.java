@@ -82,9 +82,9 @@ public class StandardTestController {
 			@ModelAttribute CQuestion question, BindingResult result,
 			Model model) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		CTest find = testService.find(id);
-		find.addCQuestion(question);
-		testService.update(find);
+
+		testService.addQuestionToTest(question, id);
+
 		System.out.println("question is " + question);
 
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
