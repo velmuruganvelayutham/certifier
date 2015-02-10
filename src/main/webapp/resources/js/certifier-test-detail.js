@@ -1,3 +1,4 @@
+$(document).ready(function() {
 function operateFormatter(value, row, index) {
         return [
             '<a class="like" href="javascript:void(0)" title="Like">',
@@ -78,7 +79,37 @@ $('#addNewTestModal').on('hidden.bs.modal', function() {
 	$('#ajaxform').bootstrapValidator('resetForm',true);
 });
 //Bootstrap validator for add vendor modal form.
-$('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
+$('#ajaxform').bootstrapValidator({
+    feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        question: {
+            validators: {
+                notEmpty: {
+                    message: 'The question is required and can not be left empty'
+                }
+            }
+        },
+        'option[]': {
+            validators: {
+                notEmpty: {
+                    message: 'The option is required and can not be left empty'
+                }
+            }
+        },
+        explanation: {
+            validators: {
+                notEmpty: {
+                    message: 'The explanation is required and can not be left empty'
+                }
+            }
+        }
+        
+    }
+}).on('success.form.bv', function(e) {
     // Prevent form submission
     e.preventDefault();
   
@@ -119,4 +150,51 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
               	alert(errorThrown);     
               }
           });
+})//Add button click handler
+        .on('click', '.addButton', function() {
+            var $template = $('#optionTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .insertBefore($template),
+                $option   = $clone.find('[name="option[]"]');
+
+            // Add new field
+            $('#ajaxform').bootstrapValidator('addField', $option);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row    = $(this).parents('.form-group'),
+                $option = $row.find('[name="option[]"]');
+
+            // Remove element containing the option
+            $row.remove();
+
+            // Remove field
+            $('#ajaxform').bootstrapValidator('removeField', $option);
+        })
+
+        // Called after adding new field
+        .on('added.field.fv', function(e, data) {
+            // data.field   --> The field name
+            // data.element --> The new field element
+            // data.options --> The new field options
+
+            if (data.field === 'option[]') {
+                if ($('#ajaxform').find(':visible[name="option[]"]').length >= MAX_OPTIONS) {
+                    $('#ajaxform').find('.addButton').attr('disabled', 'disabled');
+                }
+            }
+        })
+
+        // Called after removing the field
+        .on('removed.field.fv', function(e, data) {
+           if (data.field === 'option[]') {
+                if ($('#ajaxform').find(':visible[name="option[]"]').length < MAX_OPTIONS) {
+                    $('#ajaxform').find('.addButton').removeAttr('disabled');
+                }
+            }
+        });
 });

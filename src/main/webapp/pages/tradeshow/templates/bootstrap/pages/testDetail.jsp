@@ -60,39 +60,50 @@ response.setDateHeader ("Expires", -1);
 						  <div class="form-group">
 						    <label class="col-xs-1 control-label" for="name">Question</label>
 						    <div class="col-xs-11">
-						    <input type="text" class="form-control" id="testName" name ="question" placeholder="Question" 
-						    data-bv-notempty="true"
-                			data-bv-notempty-message="The test name is required and cannot be empty" 
-                			data-bv-excluded=":disabled" >
+						    <input type="text" class="form-control" id="testName" name ="question" placeholder="Question" >
                 			</div>
 						  </div>
-						  <div class='dynamicOption'>
+
 						  <div class="form-group">
 						    <label class="col-xs-1 control-label" for="option">Option</label>
 						    <div class="col-xs-3">
-						    <input type="text" class="form-control" id="category" name="category" placeholder="Option" 
-						    data-bv-notempty="false"
-						    data-bv-excluded=":disabled">
+						    <input type="text" class="form-control" id="option" name="option[]" placeholder="Option">
 						    </div>
 						  
 						  <div class="checkbox col-xs-1">
 						    <label>
-						      <input type="checkbox"> isCorrect ?
+						      <input type="checkbox" name="isCorrect" > isCorrect ?
 						    </label>
 						  </div>
 						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
 						   <div class="col-xs-4">
-						    <input type="text" class="form-control" id="category" name="explanation" placeholder="brief explanation" 
-						    data-bv-notempty="false"
-						    data-bv-excluded=":disabled">
+						    <input type="text" class="form-control" id="explanation" name="explanation" placeholder="brief explanation">
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
 					        </div>
 						  </div>
 						  
+						   <div id="optionTemplate" class="form-group hide">
+						    <label class="col-xs-1 control-label" for="option">Option</label>
+						    <div class="col-xs-3">
+						    <input type="text" class="form-control" id="option" name="option[]" placeholder="Option">
+						    </div>
 						  
+						  <div class="checkbox col-xs-1">
+						    <label>
+						      <input type="checkbox" name="isCorrect"> isCorrect ?
+						    </label>
 						  </div>
+						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
+						   <div class="col-xs-4">
+						    <input type="text" class="form-control" id="explanation" name="explanation" placeholder="brief explanation">
+						    </div>
+						    <div class="col-xs-1">
+					            <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
+					        </div>
+						  </div>
+						  
 						  
 				  </div>
 					 
@@ -119,7 +130,7 @@ response.setDateHeader ("Expires", -1);
 
  <link href="<c:url value="/resources/css/bootstrap-table.css" />" rel="stylesheet">
  <script src="<c:url value="/resources/js/bootstrap-table.js" />"></script>
- <script src="<c:url value="/resources/js/certifier-test.js" />"></script>
+ <script src="<c:url value="/resources/js/certifier-test-detail.js" />"></script>
  
  
  
