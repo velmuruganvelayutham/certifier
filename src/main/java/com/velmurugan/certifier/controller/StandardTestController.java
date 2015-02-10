@@ -84,9 +84,7 @@ public class StandardTestController {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 
 		testService.addQuestionToTest(question, id);
-
 		System.out.println("question is " + question);
-
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		JsonArray value = arrayBuilder.add(
 				factory.createObjectBuilder()

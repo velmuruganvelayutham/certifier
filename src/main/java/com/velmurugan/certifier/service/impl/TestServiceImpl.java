@@ -10,6 +10,7 @@ import com.velmurugan.certifier.dao.Page;
 import com.velmurugan.certifier.dao.TestDao;
 import com.velmurugan.certifier.model.CQuestion;
 import com.velmurugan.certifier.model.CTest;
+import com.velmurugan.certifier.service.QuestionService;
 import com.velmurugan.certifier.service.TestService;
 
 @Service
@@ -18,6 +19,9 @@ public class TestServiceImpl implements TestService {
 
 	@Autowired
 	private TestDao testDao;
+
+	@Autowired
+	private QuestionService questionService;
 
 	@Override
 	public List<CTest> findAll() {
@@ -62,7 +66,6 @@ public class TestServiceImpl implements TestService {
 	public void addQuestionToTest(CQuestion question, Long testId) {
 		CTest find = find(testId);
 		question.setCTest(find);
-		find.getCQuestions().add(question);
-		update(find);
+		questionService.create(question);
 	}
 }
