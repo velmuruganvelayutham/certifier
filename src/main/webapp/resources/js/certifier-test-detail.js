@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	 var MAX_OPTIONS = 5;
 function operateFormatter(value, row, index) {
         return [
             '<a class="like" href="javascript:void(0)" title="Like">',
@@ -80,6 +81,7 @@ $('#addNewTestModal').on('hidden.bs.modal', function() {
 });
 //Bootstrap validator for add vendor modal form.
 $('#ajaxform').bootstrapValidator({
+	excluded:[':disabled', ':hidden', ':not(:visible)'],
     feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
@@ -99,15 +101,7 @@ $('#ajaxform').bootstrapValidator({
                     message: 'The option is required and can not be left empty'
                 }
             }
-        },
-        explanation: {
-            validators: {
-                notEmpty: {
-                    message: 'The explanation is required and can not be left empty'
-                }
-            }
-        }
-        
+        }        
     }
 }).on('success.form.bv', function(e) {
     // Prevent form submission
@@ -157,9 +151,10 @@ $('#ajaxform').bootstrapValidator({
                                 .clone()
                                 .removeClass('hide')
                                 .removeAttr('id')
+                                .removeAttr('style')
                                 .insertBefore($template),
                 $option   = $clone.find('[name="option[]"]');
-
+                $option.removeAttr('disabled');
             // Add new field
             $('#ajaxform').bootstrapValidator('addField', $option);
         })
@@ -177,7 +172,7 @@ $('#ajaxform').bootstrapValidator({
         })
 
         // Called after adding new field
-        .on('added.field.fv', function(e, data) {
+        .on('added.field.bv', function(e, data) {
             // data.field   --> The field name
             // data.element --> The new field element
             // data.options --> The new field options
@@ -190,7 +185,7 @@ $('#ajaxform').bootstrapValidator({
         })
 
         // Called after removing the field
-        .on('removed.field.fv', function(e, data) {
+        .on('removed.field.bv', function(e, data) {
            if (data.field === 'option[]') {
                 if ($('#ajaxform').find(':visible[name="option[]"]').length < MAX_OPTIONS) {
                     $('#ajaxform').find('.addButton').removeAttr('disabled');

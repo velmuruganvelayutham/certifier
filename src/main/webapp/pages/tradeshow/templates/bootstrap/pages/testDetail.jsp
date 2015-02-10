@@ -77,17 +77,17 @@ response.setDateHeader ("Expires", -1);
 						  </div>
 						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
 						   <div class="col-xs-4">
-						    <input type="text" class="form-control" id="explanation" name="explanation" placeholder="brief explanation">
+						    <textarea class="form-control" name="description" rows="4"></textarea>
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
 					        </div>
 						  </div>
 						  
-						   <div id="optionTemplate" class="form-group hide">
+						   <div id="optionTemplate" class="form-group hide" style="display: none; width: 0px; height: 0px;">
 						    <label class="col-xs-1 control-label" for="option">Option</label>
 						    <div class="col-xs-3">
-						    <input type="text" class="form-control" id="option" name="option[]" placeholder="Option">
+						    <input type="text" class="form-control" id="option" name="option[]" placeholder="Option" disabled="disabled">
 						    </div>
 						  
 						  <div class="checkbox col-xs-1">
@@ -97,7 +97,7 @@ response.setDateHeader ("Expires", -1);
 						  </div>
 						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
 						   <div class="col-xs-4">
-						    <input type="text" class="form-control" id="explanation" name="explanation" placeholder="brief explanation">
+						    <textarea class="form-control" name="description" rows="4"></textarea>
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
