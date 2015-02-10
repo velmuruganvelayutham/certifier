@@ -46,7 +46,7 @@ response.setDateHeader ("Expires", -1);
       </div>
 <!--       <div class="modal-body" id="editModal"> </div> -->
       <div class="modal-body" >
-				<form  id="ajaxform" role="form" method="post"  action="<c:url value="/tests/add" > </c:url>"
+				<form  id="ajaxform" role="form" method="post" class="form-horizontal"  action="<c:url value="/tests/add" > </c:url>"
 				data-bv-message="This value is not valid"
     			data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
    				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
@@ -58,30 +58,40 @@ response.setDateHeader ("Expires", -1);
 						    <input type="hidden" class="form-control" id="testid" name ="cTestsId" >
 						  </div>
 						  <div class="form-group">
-						    <label for="name">Question</label>
+						    <label class="col-xs-1 control-label" for="name">Question</label>
+						    <div class="col-xs-11">
 						    <input type="text" class="form-control" id="testName" name ="question" placeholder="Question" 
 						    data-bv-notempty="true"
                 			data-bv-notempty-message="The test name is required and cannot be empty" 
                 			data-bv-excluded=":disabled" >
+                			</div>
 						  </div>
 						  <div class='dynamicOption'>
 						  <div class="form-group">
-						    <label for="category">Option</label>
+						    <label class="col-xs-1 control-label" for="option">Option</label>
+						    <div class="col-xs-3">
 						    <input type="text" class="form-control" id="category" name="category" placeholder="Option" 
 						    data-bv-notempty="false"
 						    data-bv-excluded=":disabled">
-						  </div>
-						  <div class="checkbox">
+						    </div>
+						  
+						  <div class="checkbox col-xs-1">
 						    <label>
 						      <input type="checkbox"> isCorrect ?
 						    </label>
 						  </div>
-						   <div class="form-group">
-						    <label for="explanation">Explanation</label>
+						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
+						   <div class="col-xs-4">
 						    <input type="text" class="form-control" id="category" name="explanation" placeholder="brief explanation" 
 						    data-bv-notempty="false"
 						    data-bv-excluded=":disabled">
+						    </div>
+						    <div class="col-xs-1">
+					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
+					        </div>
 						  </div>
+						  
+						  
 						  </div>
 						  
 				  </div>
