@@ -97,7 +97,7 @@ response.setDateHeader ("Expires", -1);
 						  </div>
 						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
 						   <div class="col-xs-4">
-						    <textarea class="form-control" name="description" rows="4"></textarea>
+						    <textarea class="form-control" name="description" rows="4" disabled="disabled" ></textarea>
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>

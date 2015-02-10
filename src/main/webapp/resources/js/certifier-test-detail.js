@@ -154,7 +154,9 @@ $('#ajaxform').bootstrapValidator({
                                 .removeAttr('style')
                                 .insertBefore($template),
                 $option   = $clone.find('[name="option[]"]');
+                $description = $clone.find('[name="description"]');
                 $option.removeAttr('disabled');
+                $description.removeAttr('disabled');
             // Add new field
             $('#ajaxform').bootstrapValidator('addField', $option);
         })
