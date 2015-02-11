@@ -14,6 +14,7 @@
 3. Load questions of a particular tests in a another bootstrap table
 4. Have popover for options for viewing and modal for editing and adding new questions.
 5. Adding dynamic options while adding as well as editing a particular question.
+6. Need to setup the Amazon Free Tier with java, mysql, apache tomcat.
 
 
 
