@@ -28,14 +28,16 @@ function linkFormatter(value, row, index) {
         },
         'click .edit': function (e, value, row, index) {
             console.log('You click edit icon, row: ' + JSON.stringify(row) + "index: "+ index);
-            $('#addNewTestModal').on('show.bs.modal', function (e) {
+            $('#addNewTestModal').on('shown.bs.modal', function (e) {
+            	if(	$('#addNewTestModal').data('action')=="edit"){
             	 console.log('You click edit icon, row: inside show.bs.modal ' + JSON.stringify(row));
             	 $.each($('#addNewTestModal').find('input'),function(i,v){
                      console.log(row[$(v).attr('name')])
                      $(v).val(row[$(v).attr('name')]);
-          })
+          })}
             })
             $('#addNewTestModal').find('form').attr('action',ctx+"/tests/edit").data('index',index);
+            $('#addNewTestModal').data('action','edit')
             $('#addNewTestModal').modal('show');
             
         },
@@ -70,15 +72,17 @@ function linkFormatter(value, row, index) {
  $('#addBtn').click(function(e){
     	console.log('action is changed to tests/add: ');
       	$('#ajaxform').attr('action',ctx+"/tests/add"); 
+      	$('#addNewTestModal').data('action','add')
     });
- $('#addBtnDetail').click(function(e){
- 	console.log('action is changed to tests/add: ');
-   	$('#ajaxform').attr('action',ctx+"/tests/"+ $('#test-table').data('testid')+ "/add");  
- });
+
  
-$('#addNewTestModal').on('hidden.bs.modal', function() {
-	console.log('Form is reset: ');
-	$('#ajaxform').bootstrapValidator('resetForm',true);
+$('#addNewTestModal').on('shown.bs.modal', function(event) {
+	
+	if(	$('#addNewTestModal').data('action')=="add"){
+		$('#ajaxform').bootstrapValidator('resetForm',true);
+		console.log('Form is reset: ');
+	}
+	
 });
 //Bootstrap validator for add vendor modal form.
 $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
@@ -97,7 +101,7 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
               data :  $form.serialize(),
               beforeSend:function(){
             	  $('#statusbar').empty();
-            	  $("#addNewTestLabel").html("<font color='black'>"+ "Saving Test . Please wait!. "  +"</font>");
+            	 // $("#addNewTestLabel").html("<font color='black'>"+ "Saving Test . Please wait!. "  +"</font>");
               },
               success:function(data, textStatus, jqXHR) 
               {
@@ -105,13 +109,13 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
               	 console.log(JSON.stringify(data));
             	 $('#addNewTestModal').modal('hide');
             	 console.log(this.url);
-            	 if(this.url=="/certifier/tests/3/add"){
+            	 if(this.url=="/certifier/tests/add"){
             		 $('#test-table').bootstrapTable('append', data);
-            		 $("#addNewTestLabel").html("<font color='black'>"+ "Add new Test "  +"</font>");
+            		// $("#addNewTestLabel").html("<font color='black'>"+ "Add new Test "  +"</font>");
             		 $('#statusbar').append(' <div align="middle" > <strong> Record saved successfully!. </strong> </div>').show();
             	 }
             	 else{
-            		 $("#addNewTestLabel").html("<font color='black'>"+ "Edit Test"  +"</font>");
+            		// $("#addNewTestLabel").html("<font color='black'>"+ "Edit Test"  +"</font>");
             		 $('#test-table').bootstrapTable('updateRow', {"index":$form.data('index'),"row":JSON.parse(data)});
             		 $('#statusbar').append(' <div align="middle" > <strong> Record updated successfully!. </strong> </div>').show();
             	 }
