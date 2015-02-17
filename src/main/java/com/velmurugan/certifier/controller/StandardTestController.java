@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,10 +80,10 @@ public class StandardTestController {
 
 	@RequestMapping(value = "/{id}/add", method = RequestMethod.POST, produces = { "application/json" })
 	public @ResponseBody String addQuestion(@PathVariable Long id,
-			@ModelAttribute CQuestion question, BindingResult result,
-			Model model) {
+			@ModelAttribute MultiValueMap<String, String> options,
+			BindingResult result, Model model) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-
+		CQuestion question = new CQuestion();
 		testService.addQuestionToTest(question, id);
 		System.out.println("question is " + question);
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
@@ -96,9 +97,12 @@ public class StandardTestController {
 
 	@RequestMapping(value = "/{id}/data", method = RequestMethod.GET)
 	public @ResponseBody String getQuestionById(@PathVariable Long id,
-			Model model) {
+			Locale locale, Model model,
+			@RequestParam(value = "limit", defaultValue = "10") int limit,
+			@RequestParam(value = "offset", defaultValue = "0") int offset,
+			@RequestParam(value = "order", defaultValue = "asc") String order) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		Page page = new Page(0, 10);
+		Page page = new Page(offset, limit);
 		Long count = testService.count();
 		List<CTest> testList = testService.findAll(page);
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
