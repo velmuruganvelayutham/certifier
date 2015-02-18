@@ -15,13 +15,14 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWriteMode;
 import com.velmurugan.certifier.dao.Page;
+import com.velmurugan.certifier.model.COption;
 import com.velmurugan.certifier.model.CQuestion;
 import com.velmurugan.certifier.model.CTest;
 import com.velmurugan.certifier.model.Vendor;
@@ -80,10 +82,27 @@ public class StandardTestController {
 
 	@RequestMapping(value = "/{id}/add", method = RequestMethod.POST, produces = { "application/json" })
 	public @ResponseBody String addQuestion(@PathVariable Long id,
-			@ModelAttribute MultiValueMap<String, String> options,
-			BindingResult result, Model model) {
+			HttpServletRequest request) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		CQuestion question = new CQuestion();
+		Integer totalOptions = Integer.valueOf(request
+				.getParameter("totalOptions"));
+		for (int i = 1; i <= totalOptions; i++) {
+			COption option = new COption();
+			option.setChoices(request.getParameter("option" + i));
+			String isCorrect = request.getParameter("isCorrect" + i);
+			if (StringUtils.equals("on", isCorrect)) {
+				option.setCorrect(Boolean.TRUE);
+			}
+
+			else {
+				option.setCorrect(Boolean.FALSE);
+			}
+			option.setExplanation(request.getParameter("description" + i));
+			question.addCOption(option);
+
+		}
+		question.setQuestion(request.getParameter("question"));
 		testService.addQuestionToTest(question, id);
 		System.out.println("question is " + question);
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();

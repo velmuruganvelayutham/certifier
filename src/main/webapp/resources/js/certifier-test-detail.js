@@ -79,6 +79,7 @@ $('#addNewTestModal').on('hidden.bs.modal', function() {
 	console.log('Form is reset: ');
 	$('#ajaxform').bootstrapValidator('resetForm',true);
 });
+
 //Bootstrap validator for add vendor modal form.
 $('#ajaxform').bootstrapValidator({
 	excluded:[':disabled', ':hidden', ':not(:visible)'],
@@ -95,13 +96,14 @@ $('#ajaxform').bootstrapValidator({
                 }
             }
         },
-        'option[]': {
+        'option1': {
             validators: {
                 notEmpty: {
                     message: 'The option is required and can not be left empty'
                 }
             }
-        }        
+        } 
+        
     }
 }).on('success.form.bv', function(e) {
     // Prevent form submission
@@ -112,7 +114,7 @@ $('#ajaxform').bootstrapValidator({
 
     // Get the BootstrapValidator instance
     var bv = $form.data('bootstrapValidator');
-
+   
     $.ajax({
               url : $form.attr('action'),
               type: "POST",
@@ -144,7 +146,7 @@ $('#ajaxform').bootstrapValidator({
               	alert(errorThrown);     
               }
           });
-})//Add button click handler
+})      //Add button click handler
         .on('click', '.addButton', function() {
             var $template = $('#optionTemplate'),
                 $clone    = $template
@@ -152,23 +154,30 @@ $('#ajaxform').bootstrapValidator({
                                 .removeClass('hide')
                                 .removeAttr('id')
                                 .removeAttr('style')
-                                .insertBefore($template),
-                $option   = $clone.find('[name="option[]"]');
-                $description = $clone.find('[name="description"]');
-                $option.removeAttr('disabled');
-                $description.removeAttr('disabled');
+                                .insertBefore($template);
+          var length=$('#ajaxform').find(':visible[name^="option"]').length
+              $clone.find('[name="option"]').removeAttr('name').attr('name','option'+ (length));
+	          $clone.find('[name="isCorrect"]').removeAttr('name').attr('name','isCorrect'+ (length));
+	          $clone.find('[name="description"]').removeAttr('name').attr('name','description'+ (length));
+            $option=$clone.find('[name="option'+(length)+'"]');
+            $clone.find('[name="isCorrect'+(length)+'"]').removeAttr('disabled');
+            $clone.find('[name="description'+(length)+'"]').removeAttr('disabled');
+            $option.removeAttr('disabled ');
+               
             // Add new field
+                var option='option'+ (length);
+          
             $('#ajaxform').bootstrapValidator('addField', $option);
         })
 
         // Remove button click handler
         .on('click', '.removeButton', function() {
             var $row    = $(this).parents('.form-group'),
-                $option = $row.find('[name="option[]"]');
-
+                $option = $row.find('[name^="option"]');
+            
             // Remove element containing the option
             $row.remove();
-
+             
             // Remove field
             $('#ajaxform').bootstrapValidator('removeField', $option);
         })
@@ -177,21 +186,23 @@ $('#ajaxform').bootstrapValidator({
         .on('added.field.bv', function(e, data) {
             // data.field   --> The field name
             // data.element --> The new field element
-            // data.options --> The new field options
-
-            if (data.field === 'option[]') {
-                if ($('#ajaxform').find(':visible[name="option[]"]').length >= MAX_OPTIONS) {
+            // data.options --> The new field options  
+        	 var length=$('#ajaxform').find(':visible[name^="option"]').length;
+        	  $('#totalOptions').val(length);
+                if (length >= MAX_OPTIONS) {
                     $('#ajaxform').find('.addButton').attr('disabled', 'disabled');
                 }
-            }
+            
         })
 
         // Called after removing the field
         .on('removed.field.bv', function(e, data) {
-           if (data.field === 'option[]') {
-                if ($('#ajaxform').find(':visible[name="option[]"]').length < MAX_OPTIONS) {
+          
+        	 var length=$('#ajaxform').find(':visible[name^="option"]').length;
+        	 $('#totalOptions').val(length);
+                if (length < MAX_OPTIONS) {
                     $('#ajaxform').find('.addButton').removeAttr('disabled');
                 }
-            }
+            
         });
 });

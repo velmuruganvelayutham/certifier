@@ -1,6 +1,7 @@
 package com.velmurugan.certifier.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,7 +42,7 @@ public class CQuestion implements Serializable {
 
 	// bi-directional many-to-one association to COption
 	@OneToMany(mappedBy = "CQuestion", cascade = CascadeType.ALL)
-	private List<COption> COptions;
+	private List<COption> COptions= new LinkedList<COption>();
 
 	// bi-directional many-to-one association to CTest
 	@ManyToOne

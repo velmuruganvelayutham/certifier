@@ -57,6 +57,9 @@ response.setDateHeader ("Expires", -1);
 					  	  <div class="form-group">
 						    <input type="hidden" class="form-control" id="testid" name ="cTestsId" >
 						  </div>
+						   <div class="form-group">
+						    <input type="hidden" class="form-control" id="totalOptions" name ="totalOptions" >
+						  </div>
 						  <div class="form-group">
 						    <label class="col-xs-1 control-label" for="name">Question</label>
 						    <div class="col-xs-11">
@@ -67,17 +70,17 @@ response.setDateHeader ("Expires", -1);
 						  <div class="form-group">
 						    <label class="col-xs-1 control-label" for="option">Option</label>
 						    <div class="col-xs-3">
-						    <input type="text" class="form-control" id="option" name="option[]" placeholder="Option">
+						    <input type="text" class="form-control" id="option" name="option1" placeholder="Option">
 						    </div>
 						  
 						  <div class="checkbox col-xs-1">
 						    <label>
-						      <input type="checkbox" name="isCorrect" > isCorrect ?
+						      <input type="checkbox" name="isCorrect1" > isCorrect ?
 						    </label>
 						  </div>
 						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
 						   <div class="col-xs-4">
-						    <textarea class="form-control" name="description" rows="4"></textarea>
+						    <textarea class="form-control" name="description1" rows="4"></textarea>
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
@@ -87,17 +90,17 @@ response.setDateHeader ("Expires", -1);
 						   <div id="optionTemplate" class="form-group hide" style="display: none; width: 0px; height: 0px;">
 						    <label class="col-xs-1 control-label" for="option">Option</label>
 						    <div class="col-xs-3">
-						    <input type="text" class="form-control" id="option" name="option[]" placeholder="Option" disabled="disabled">
+						    <input type="text" class="form-control" id="option" name="option" placeholder="Option" disabled="disabled" data-bv-notempty data-bv-notempty-message="This option is required and can not be left empty">
 						    </div>
 						  
 						  <div class="checkbox col-xs-1">
 						    <label>
-						      <input type="checkbox" name="isCorrect"> isCorrect ?
+						      <input type="checkbox" name="isCorrect" disabled="disabled" > isCorrect ?
 						    </label>
 						  </div>
 						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
 						   <div class="col-xs-4">
-						    <textarea class="form-control" name="description" rows="4" disabled="disabled" ></textarea>
+						    <textarea class="form-control" name="description" disabled="disabled" rows="4" ></textarea>
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
