@@ -1,12 +1,13 @@
 package com.velmurugan.certifier.model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,8 +42,8 @@ public class CQuestion implements Serializable {
 	private String questionno;
 
 	// bi-directional many-to-one association to COption
-	@OneToMany(mappedBy = "CQuestion", cascade = CascadeType.ALL)
-	private List<COption> COptions= new LinkedList<COption>();
+	@OneToMany(mappedBy = "CQuestion", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<COption> COptions = new LinkedHashSet<COption>();
 
 	// bi-directional many-to-one association to CTest
 	@ManyToOne
@@ -84,11 +85,11 @@ public class CQuestion implements Serializable {
 		this.questionno = questionno;
 	}
 
-	public List<COption> getCOptions() {
+	public Set<COption> getCOptions() {
 		return this.COptions;
 	}
 
-	public void setCOptions(List<COption> COptions) {
+	public void setCOptions(Set<COption> COptions) {
 		this.COptions = COptions;
 	}
 

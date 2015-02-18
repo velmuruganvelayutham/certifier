@@ -1,11 +1,12 @@
 package com.velmurugan.certifier.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,8 +57,8 @@ public class CTest implements Serializable {
 	private String category;
 
 	// bi-directional many-to-one association to CQuestion
-	@OneToMany(mappedBy = "CTest", cascade = CascadeType.ALL)
-	private List<CQuestion> CQuestions;
+	@OneToMany(mappedBy = "CTest", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<CQuestion> CQuestions;
 
 	public CTest() {
 	}
@@ -86,11 +87,11 @@ public class CTest implements Serializable {
 		this.category = no;
 	}
 
-	public List<CQuestion> getCQuestions() {
+	public Set<CQuestion> getCQuestions() {
 		return this.CQuestions;
 	}
 
-	public void setCQuestions(List<CQuestion> CQuestions) {
+	public void setCQuestions(Set<CQuestion> CQuestions) {
 		this.CQuestions = CQuestions;
 	}
 

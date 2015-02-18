@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -121,17 +122,18 @@ public class StandardTestController {
 			@RequestParam(value = "offset", defaultValue = "0") int offset,
 			@RequestParam(value = "order", defaultValue = "asc") String order) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		Page page = new Page(offset, limit);
-		Long count = testService.count();
-		List<CTest> testList = testService.findAll(page);
+
+		Set<CQuestion> questionList = testService.find(Long.valueOf(19))
+				.getCQuestions();
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
-		for (CTest test : testList) {
+		for (CQuestion question : questionList) {
 			arrayBuilder.add(factory.createObjectBuilder()
-					.add("cTestsId", test.getcTestsId())
-					.add("name", test.getName()));
+					.add("cTestsId", question.getCQuestionsId())
+					.add("name", question.getQuestion()));
 		}
-		JsonObject value = factory.createObjectBuilder().add("total", count)
-				.add("rows", arrayBuilder).build();
+		JsonObject value = factory.createObjectBuilder()
+				.add("total", questionList.size()).add("rows", arrayBuilder)
+				.build();
 
 		return value.toString();
 	}
