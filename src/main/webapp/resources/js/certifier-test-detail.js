@@ -19,7 +19,7 @@ $(document).ready(function() {
 
  $('#addBtnDetail').click(function(e){
  	console.log('action is changed to tests/add: ');
-   	$('#ajaxform').attr('action',ctx+"/tests/"+ $('#test-table').data('testid')+ "/add");  
+   	$('#ajaxform').attr('action',ctx+"/tests/"+ $('#question-table').data('testid')+ "/add");  
  });
  
 $('#addNewTestModal').on('hidden.bs.modal', function() {
