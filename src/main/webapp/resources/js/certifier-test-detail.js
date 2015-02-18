@@ -1,74 +1,21 @@
 $(document).ready(function() {
 	 var MAX_OPTIONS = 5;
-function operateFormatter(value, row, index) {
-        return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
-                '<i class="glyphicon glyphicon-export"></i>',
-            '</a>',
-            '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
-                '<i class="glyphicon glyphicon-edit"></i>',
-            '</a>',
-            '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
-                '<i class="glyphicon glyphicon-remove"></i>',
-            '</a>'
-        ].join('');
-    }
 
-function linkFormatter(value, row, index) {
-    return [
-        '<a class="like" href="tests/'+ row.cTestsId+'" title="Like">',
-            '<i class="glyphicon glyphicon-share-alt"></i>'+ ' ' +value+' ',
-        '</a>'        
-    ].join('');
-}
-
-
-    window.operateEvents = {
-        'click .like': function (e, value, row, index) {
-            alert('You click like icon, row: ' + JSON.stringify(row));
-            console.log(value, row, index);
-        },
-        'click .edit': function (e, value, row, index) {
-            console.log('You click edit icon, row: ' + JSON.stringify(row) + "index: "+ index);
-            $('#addNewTestModal').on('show.bs.modal', function (e) {
-            	 console.log('You click edit icon, row: inside show.bs.modal ' + JSON.stringify(row));
-            	 $.each($('#addNewTestModal').find('input'),function(i,v){
-                     console.log(row[$(v).attr('name')])
-                     $(v).val(row[$(v).attr('name')]);
-          })
-            })
-            $('#addNewTestModal').find('form').attr('action',ctx+"/tests/edit").data('index',index);
-            $('#addNewTestModal').modal('show');
-            
-        },
-        'click .remove': function (e, value, row, index) {
-            if(confirm('Are you really want to delete this record: ' + JSON.stringify(row))){
-            	 console.log(value, row, index);          	
-            	 $.ajax(
-            	         {
-            	            url : ctx+"/tests/delete/"+row.cTestsId ,
-            	            type: "DELETE",
-            	            contentType:"application/json",
-            	            beforeSend:function(){
-            	            	 $('#statusbar').empty();
-            	            },
-            	            success:function(data, textStatus, jqXHR) 
-            	            {
-            	                //data: return data from server
-            	             	 console.log(JSON.stringify(data));
-            	             	 $('#statusbar').append(' <div align="middle" > <strong> Record deleted successfully!. </strong> </div>').show();
-            	            	 $('#test-table').bootstrapTable('remove',{field:"cTestsId",values:[row.cTestsId]});
-            	            },
-            	            error: function(jqXHR, textStatus, errorThrown) 
-            	            {
-            	            	alert(errorThrown);     
-            	            }
-            	        });
-            	 
-            }
-        }
-    };
-    
+	 
+	 window.operateEvents = {
+		        'click .like': function (e, value, row, index) {
+		            alert('You click like icon, row: ' + JSON.stringify(row));
+		            console.log(value, row, index);
+		        },
+		        'click .edit': function (e, value, row, index) {
+		            alert('You click edit icon, row: ' + JSON.stringify(row));
+		            console.log(value, row, index);
+		        },
+		        'click .remove': function (e, value, row, index) {
+		            alert('You click remove icon, row: ' + JSON.stringify(row));
+		            console.log(value, row, index);
+		        }
+		    };
 
  $('#addBtnDetail').click(function(e){
  	console.log('action is changed to tests/add: ');

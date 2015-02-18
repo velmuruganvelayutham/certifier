@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -123,13 +124,19 @@ public class StandardTestController {
 			@RequestParam(value = "order", defaultValue = "asc") String order) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 
-		Set<CQuestion> questionList = testService.find(Long.valueOf(19))
-				.getCQuestions();
+		Set<CQuestion> questionList = testService.find(id).getCQuestions();
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		for (CQuestion question : questionList) {
-			arrayBuilder.add(factory.createObjectBuilder()
-					.add("cTestsId", question.getCQuestionsId())
-					.add("name", question.getQuestion()));
+			Iterator<COption> iterator = question.getCOptions().iterator();
+			String option = "";
+			while (iterator.hasNext()) {
+				option = option + iterator.next().getChoices();
+			}
+			arrayBuilder
+					.add(factory.createObjectBuilder()
+							.add("cQuestionsId", question.getCQuestionsId())
+							.add("name", question.getQuestion())
+							.add("options", option));
 		}
 		JsonObject value = factory.createObjectBuilder()
 				.add("total", questionList.size()).add("rows", arrayBuilder)

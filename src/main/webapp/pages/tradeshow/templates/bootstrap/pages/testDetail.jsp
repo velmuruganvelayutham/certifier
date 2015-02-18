@@ -21,13 +21,13 @@ response.setDateHeader ("Expires", -1);
 	  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
  </div>
 
-<table data-testId="${id}" id="test-table" data-toggle="table" data-url="${id}/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="400" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
+<table data-testId="${id}" id="question-table" data-toggle="table" data-url="${id}/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="525" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
     <thead>
     <tr>
         <th data-field="radio" data-radio="true"></th>
         <th data-field="cQuestionsId"  data-visible="true" >ID </th>
         <th data-field="name" data-align="center" data-sortable="true" >Question Name</th>
-        <th data-field="category" data-align="center" data-sortable="true">Options</th>
+        <th data-field="options" data-align="center" data-sortable="true">Options</th>
         <th data-field="action" data-align="center" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>
@@ -130,6 +130,23 @@ response.setDateHeader ("Expires", -1);
   </div>
 </div>   
 
+<script>
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="like" href="javascript:void(0)" title="Like">',
+                '<i class="glyphicon glyphicon-heart"></i>',
+            '</a>',
+            '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+                '<i class="glyphicon glyphicon-edit"></i>',
+            '</a>',
+            '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
+                '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>'
+        ].join('');
+    }
+
+    
+</script>
 
  <link href="<c:url value="/resources/css/bootstrap-table.css" />" rel="stylesheet">
  <script src="<c:url value="/resources/js/bootstrap-table.js" />"></script>
