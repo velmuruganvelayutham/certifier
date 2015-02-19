@@ -39,6 +39,7 @@ function linkFormatter(value, row, index) {
             $('#addNewTestModal').find('form').attr('action',ctx+"/tests/edit").data('index',index);
             $('#addNewTestModal').data('action','edit')
             $('#addNewTestModal').modal('show');
+            $('#ajaxform').bootstrapValidator('resetForm',true);
             
         },
         'click .remove': function (e, value, row, index) {
