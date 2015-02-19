@@ -175,16 +175,19 @@
 		</dependency>
 				
 		<!-- Servlet -->
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -291,17 +294,6 @@
 				<version>3.0</version>
 			</dependency>
 			
-			<dependency>
-				<groupId>net.sourceforge.htmlunit</groupId>
-				<artifactId>htmlunit</artifactId>
-				<version>2.15</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>com.itextpdf</groupId>
-				<artifactId>itextpdf</artifactId>
-				<version>5.5.2</version>
-			</dependency>
 			
 			<dependency>
 				<groupId>commons-validator</groupId>
@@ -336,7 +328,30 @@
 		       
 	</dependencies>
     <build>
-        <plugins>
+        <plugins>        
+        
+        <plugin>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-maven-plugin</artifactId>
+		  <configuration>
+		    <scanIntervalSeconds>10</scanIntervalSeconds>
+		    <webApp>
+		      <contextPath>/certifier</contextPath>
+		    </webApp>
+		  </configuration>
+		</plugin>
+			
+       <!--  <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat6-maven-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+        </plugin> -->
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
@@ -373,6 +388,7 @@
             </plugin>
         </plugins>
     </build>
+    
     
     <repositories>
     <!--other repositories if any-->
