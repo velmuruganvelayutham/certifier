@@ -35,27 +35,39 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'The email is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
                     }
                 }
             },
-            firstname: {
+            password: {
                 validators: {
                     notEmpty: {
-                        message: 'The firstname is required'
+                        message: 'The password is required'
+                    },
+                    identical: {
+                        field: 'confirmPassword',
+                        message: 'The password and its confirm are not the same'
+                    },
+                    stringLength: {
+                        max: 25,
+                        message: 'The password length must be less than 25 characters'
                     }
                 }
             },
-            lastname: {
+            confirmPassword: {
                 validators: {
                     notEmpty: {
-                        message: 'The firstname is required'
-                    }
-                }
-            },
-            passwd: {
-                validators: {
-                    notEmpty: {
-                        message: 'The firstname is required'
+                        message: 'The confirm Password is required'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    },
+                    stringLength: {
+                        max: 25,
+                        message: 'The password length must be less than 25 characters'
                     }
                 }
             }

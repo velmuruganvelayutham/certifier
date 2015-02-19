@@ -8,13 +8,14 @@
 8. Add google analytics and Google Adsense.
 
 //  By tomorrow morning, I need to complete this work.
-1. Replace in-memory authentication with database authentication
-2. New user registration 
+1. Need to find a way to execute sql scripts via maven. 
+   Talk to Natraj regarding , Connecting MySql instance via client
+2. New user registration and validation using bootstrap validator.
 3. forgot password functionality implementation.
 4. User Table and CRUD operations only can be executed by the Role_Admin.
-5. Profile 
+5. Profile Management.
 4. Have popover for options for viewing and modal for editing and adding new questions.
-5. Adding dynamic options while adding as well as editing a particular question.
+5. Adding dynamic options while editing a particular question.
 
 
 
