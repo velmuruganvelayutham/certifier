@@ -110,8 +110,8 @@ public class StandardTestController {
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		JsonArray value = arrayBuilder.add(
 				factory.createObjectBuilder()
-						.add("cTestsId", question.getCQuestionsId())
-						.add("name", question.getQuestion())).build();
+						.add("cQuestionsId", question.getCQuestionsId())
+						.add("question", question.getQuestion())).build();
 
 		return value.toString();
 	}
@@ -132,11 +132,10 @@ public class StandardTestController {
 			while (iterator.hasNext()) {
 				option = option + iterator.next().getChoices();
 			}
-			arrayBuilder
-					.add(factory.createObjectBuilder()
-							.add("cQuestionsId", question.getCQuestionsId())
-							.add("name", question.getQuestion())
-							.add("options", option));
+			arrayBuilder.add(factory.createObjectBuilder()
+					.add("cQuestionsId", question.getCQuestionsId())
+					.add("question", question.getQuestion())
+					.add("options", option));
 		}
 		JsonObject value = factory.createObjectBuilder()
 				.add("total", questionList.size()).add("rows", arrayBuilder)

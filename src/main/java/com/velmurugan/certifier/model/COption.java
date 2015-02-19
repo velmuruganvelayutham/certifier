@@ -27,10 +27,10 @@ public class COption implements Serializable {
 	@Column(name = "c_options_id", unique = true, nullable = false)
 	private int cOptionsId;
 
-	@Column(length = 45, name = "choice")
+	@Column(length = 10000, name = "choice")
 	private String choices;
 
-	@Column(length = 45, name = "explanation")
+	@Column(length = 10000, name = "explanation")
 	private String explanation;
 
 	@Column
