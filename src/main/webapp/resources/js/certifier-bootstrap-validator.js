@@ -89,6 +89,9 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'The email is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
                     }
                 }
             }
