@@ -222,7 +222,7 @@
 		   <groupId>mysql</groupId>
 		   <artifactId>mysql-connector-java</artifactId>
 		   <version>5.1.30</version>
-		   <scope>runtime</scope>
+		   <scope>compile</scope>
 		</dependency>
 		
 		<dependency>
@@ -270,13 +270,7 @@
 			<version>2.3</version>
 		</dependency>
 		
-<!-- 		scraping jar for toc -->
 
-		<dependency>
-		    <groupId>com.tocgroup</groupId>
-		    <artifactId>scraper</artifactId>
-		    <version>1.7.4-SNAPSHOT</version>
-		</dependency>
 		
 		<!-- apache solr dependencies -->
 		<dependency>

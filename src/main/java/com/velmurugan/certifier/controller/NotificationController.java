@@ -28,4 +28,11 @@ public class NotificationController {
 		return "notifications.";
 	}
 
+	@RequestMapping(value = "/settings", method = RequestMethod.GET)
+	public String settings(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		model.addAttribute("message", "settings are coming soon !.");
+		return "settings.";
+	}
+
 }

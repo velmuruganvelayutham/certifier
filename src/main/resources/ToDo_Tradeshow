@@ -8,13 +8,14 @@
 8. Add google analytics and Google Adsense.
 
 //  By tomorrow morning, I need to complete this work.
-
-1. add status bar, loading icon while doing crud operations.
-2. Edit and Delete for Test table.
-3. Load questions of a particular tests in a another bootstrap table
+1. Replace in-memory authentication with database authentication
+2. New user registration 
+3. forgot password functionality implementation.
+4. User Table and CRUD operations only can be executed by the Role_Admin.
+5. Profile 
 4. Have popover for options for viewing and modal for editing and adding new questions.
 5. Adding dynamic options while adding as well as editing a particular question.
-6. Need to setup the Amazon Free Tier with java, mysql, apache tomcat.
+
 
 
 
