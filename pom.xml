@@ -330,6 +330,8 @@
     <build>
         <plugins>        
         
+        
+        <!-- Jetty server plugin -->
         <plugin>
 		  <groupId>org.eclipse.jetty</groupId>
 		  <artifactId>jetty-maven-plugin</artifactId>
@@ -340,6 +342,76 @@
 		    </webApp>
 		  </configuration>
 		</plugin>
+			
+			<!-- maven sql execute script plugin -->
+			
+			<plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sql-maven-plugin</artifactId>
+        <version>1.5</version>
+
+        <dependencies>
+          <!-- specify the dependent jdbc driver here -->
+         <dependency>
+		   <groupId>mysql</groupId>
+		   <artifactId>mysql-connector-java</artifactId>
+		   <version>5.1.30</version>
+		   <scope>compile</scope>
+		</dependency>
+        </dependencies>
+
+        <!-- common configuration shared by all executions -->
+        <configuration>
+          <driver>com.mysql.jdbc.Driver</driver>
+          <url>jdbc:mysql://localhost:3306/tradeshow?createDatabaseIfNotExist=true</url>
+          <username>root</username>
+          <password>root</password>
+          <!-- You can comment out username/password configurations and
+               have maven to look them up in your settings.xml using ${settingsKey}
+          -->
+          <settingsKey>sensibleKey</settingsKey>
+          <!--all executions are ignored if -Dmaven.test.skip=true-->
+          <skip>${maven.test.skip}</skip>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>create-db</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <url>jdbc:mysql://localhost:3306/tradeshow?createDatabaseIfNotExist=true</url>
+              <!-- no transaction -->
+              <autocommit>true</autocommit>
+              <sqlCommand>create database tradeshow</sqlCommand>
+               <!-- ignore error when database is not avaiable -->
+              <onError>continue</onError>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>create-schema</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <autocommit>true</autocommit>
+              <srcFiles>
+                <srcFile>src/main/resources/sql/tradeshow_users.sql</srcFile>
+                <srcFile>src/main/resources/sql/tradeshow_user_roles.sql</srcFile>
+              </srcFiles>
+            </configuration>
+          </execution>  
+        </executions>
+      </plugin>
+			
+			
+			
+			
+			
 			
        <!--  <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
