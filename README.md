@@ -40,9 +40,13 @@ edit the persistence-mysql.properties file inside certifier/src/main/resources/ 
 
 `cd certifier` <br/>
 `mvn clean`<br/>
-`mvn package`<br/> war file will be generated inside the target folder.
+`mvn package`<br/> 
 
-** mvn jetty:run - for making the application up and running inside embedded jetty server. **
+*war file will be generated inside the target folder.*
+
+**mvn jetty:run - for making the application up and running inside embedded jetty server.**
+
+__access the application at (localhost:8080/certifier)__
 
 
 
