@@ -20,6 +20,7 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
 ## Setup and Installation
 
 ### Installation from source files
+
 This option let you download source files, configure, build and deploy the application to any servlet container or JEE application server. This option let you configure the software to the target database and other required sub systems. This approach should be used to run in a production environment. 
 
 - Make sure you meet [software requirements](#software_requirements).
@@ -29,11 +30,13 @@ This option let you download source files, configure, build and deploy the appli
 
 
 ### Software_Requirements
+
 - Java version 6 or 7
 - A JEE servlet container or any JEE application server. 
 - [Maven](http://maven.apache.org/) for building source files.
 
 ### Build_the_application
+
 With a shell or dos command cd to you unzip source directory.Run the following command requires [Apache Maven](http://maven.apache.org/) installed.
 
 edit the persistence-mysql.properties file inside certifier/src/main/resources/   folder to point to the correct mysql port, username, password.
@@ -44,9 +47,9 @@ edit the persistence-mysql.properties file inside certifier/src/main/resources/ 
 
 *war file will be generated inside the target folder.*
 
-**mvn jetty:run - for making the application up and running inside embedded jetty server.**
+**mvn jetty:run** *- for making the application up and running inside embedded jetty server.*
 
-__access the application at (localhost:8080/certifier)__
+_access the application at_ __(localhost:8080/certifier)__
 
 
 
