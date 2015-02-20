@@ -19,6 +19,7 @@
 		<javassist.version>3.18.1-GA</javassist.version>
 		<solr.version>4.10.1</solr.version>
 		<mysql.version>5.1.30</mysql.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -288,7 +289,8 @@
 			<version>${solr.version}</version>
 		</dependency>
 		
-<!-- 		tocgroup Scraper dependencies -->
+<!-- 		String Utilities     -->
+
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
@@ -355,6 +357,7 @@
         <plugin>
 		  <groupId>org.eclipse.jetty</groupId>
 		  <artifactId>jetty-maven-plugin</artifactId>
+		  <version>9.2.7.v20150116</version>
 		  <configuration>
 		    <scanIntervalSeconds>10</scanIntervalSeconds>
 		    <webApp>
