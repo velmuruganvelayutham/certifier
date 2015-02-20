@@ -49,7 +49,7 @@ edit the persistence-mysql.properties file inside certifier/src/main/resources/ 
 
 **mvn jetty:run** *- for making the application up and running inside embedded jetty server.*
 
-_access the application at_ __(localhost:8080/certifier)__
+_access the application at_ __[localhost:8080/certifier]__
 
 
 
