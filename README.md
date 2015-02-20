@@ -22,50 +22,29 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
 ## Installation from source files
 This option let you download source files, configure, build and deploy the application to any servlet container or JEE application server. This option let you configure the software to the target database and other required sub systems. This approach should be used to run in a production environment. 
 
-- Make sure you meet [software requirements](#Software Requirements)
-- [Download certifier](https://github.com/velmuruganvelayutham/certifier/zipball/master)
-- [Configure](#Configure) your database (mandatory)
-- [Build][#Build] the application
-- Copy the war file to your Java application server (optional)
+- Make sure you meet [software requirements](#Software_Requirements).
+- [Download certifier](https://github.com/velmuruganvelayutham/certifier/zipball/master).
+- [Build][#Build_the_application] the application.
+- Copy the war file to your Java application server (optional).
 
 
-## Software Requirements
+### Software_Requirements
 - Java version 6 or 7
-- A [JEE servlet container](#Application server / servlet container) or any JEE application server (see the instructions for [Apache Tomcat](#Apache Tomcat))
-- [Maven](#Apache Maven installation) for building source files.
+- A JEE servlet container or any JEE application server. 
+- [Maven](http://maven.apache.org/) for building source files.
+- 
+### Build_the_application
+With a shell or dos command cd to you unzip source directory.Run the following command requires [Apache Maven](http://maven.apache.org/) installed.
 
-## Java version
-Check if java is installed, for this open a shell or batch window.
-To check if you have java installed by typing type following command <br/>
-`java -version`.
-<br/><br/>
-
-## Apache Maven installation
-Download Maven from **[Maven website](http://maven.apache.org/download.cgi).Follow the installation instructions on the Apache Maven download page 
-
-## Application server / servlet container
- Certifer was tested on these servlet containers and application servers
--  Apache Tomcat
-- Jetty
-
-## Apache Tomcat
-Shopizer was tested with Tomcat 6 and Tomcat 7.To run Shopizer on tomcat, please follow these instructions
-- [Download Apache Tomcat](http://maven.apache.org/download.cgi)
-- Follow tomcat installation instructions.
-- Copy `certifier-1.0.0.BUILD-SNAPSHOT.war` to tomcat webapps folder.
-- Start tomcat with following command
-
-###### Mac or Linux: `/bin/startup.sh`
-###### Window : `/bin/startup.bat `
-
-Check application logs in `/logs/catalina.out`
-
-## Build the application
-With a shell or dos command cd to you unzip source directory.Run the following command (requires [Apache Maven](#Apache Maven installation) installed)
+edit the persistence-mysql.properties file inside certifier/src/main/resources/   folder to point to the correct mysql port, username, password.
 
 `cd certifier` <br/>
 `mvn clean`<br/>
-`mvn package`<br/>
+`mvn package`<br/> war file will be generated inside the target folder.
+
+** mvn jetty:run - for making the application up and running inside embedded jetty server. **
+
+
 
 
 
