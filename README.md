@@ -1,4 +1,4 @@
-#certifier
+# Certifier
 
 Spring MVC application for Online assessment test, Candidate Screening, aptitude assessment tests.
 
@@ -17,14 +17,14 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
    4. get great hires!
    5. Download the exam report
 
-# Setup and Installation
+## Setup and Installation
 
-## Installation from source files
+### Installation from source files
 This option let you download source files, configure, build and deploy the application to any servlet container or JEE application server. This option let you configure the software to the target database and other required sub systems. This approach should be used to run in a production environment. 
 
-- Make sure you meet [software requirements](#Software_Requirements).
+- Make sure you meet [software requirements](#software_requirements).
 - [Download certifier](https://github.com/velmuruganvelayutham/certifier/zipball/master).
-- [Build][#Build_the_application] the application.
+- [Build](#build_the_application) the application.
 - Copy the war file to your Java application server (optional).
 
 
@@ -32,7 +32,7 @@ This option let you download source files, configure, build and deploy the appli
 - Java version 6 or 7
 - A JEE servlet container or any JEE application server. 
 - [Maven](http://maven.apache.org/) for building source files.
-- 
+
 ### Build_the_application
 With a shell or dos command cd to you unzip source directory.Run the following command requires [Apache Maven](http://maven.apache.org/) installed.
 
