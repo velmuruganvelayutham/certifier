@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.velmurugan.certifier.entity.UserRoles;
+import com.velmurugan.certifier.entity.Users;
 import com.velmurugan.certifier.model.UserFormBean;
+import com.velmurugan.certifier.service.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -24,6 +28,9 @@ public class LoginController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(LoginController.class);
+
+	@Autowired
+	UserService userService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -66,9 +73,18 @@ public class LoginController {
 	public String register(Model model, @ModelAttribute UserFormBean userBean) {
 		System.out.println("user form values are: " + userBean);
 
+		Users user = new Users();
+		user.setIsEnabled(true);
+		user.setUsername(userBean.getEmail());
+		user.setPassword(userBean.getPassword());
+		UserRoles role = new UserRoles();
+		role.setRole("ROLE_USER");
+		user.addUserRole(role);
+		userService.create(user);
+
 		model.addAttribute("error",
 				"Registration Successful!.. Login with your credentials ");
-		return "tests.";
+		return "login.";
 
 	}
 
