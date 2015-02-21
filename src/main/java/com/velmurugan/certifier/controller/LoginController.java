@@ -9,18 +9,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.velmurugan.certifier.model.UserFormBean;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class LoginController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+			.getLogger(LoginController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -59,11 +62,28 @@ public class HomeController {
 
 	}
 
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String register(Model model, @ModelAttribute UserFormBean userBean) {
+		System.out.println("user form values are: " + userBean);
+
+		model.addAttribute("error",
+				"Registration Successful!.. Login with your credentials ");
+		return "tests.";
+
+	}
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model) {
 
 		model.addAttribute("error", "signed out successfully");
 		return "login.";
+
+	}
+
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public String accessDenied(Model model) {
+
+		return "403.";
 
 	}
 

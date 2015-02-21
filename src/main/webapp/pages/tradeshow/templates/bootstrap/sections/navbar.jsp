@@ -71,7 +71,7 @@ response.setDateHeader ("Expires", -1);
               <li class="active"><a  href="<c:url value="/profile"/>">Report
             <span class="glyphicon glyphicon-user"></span> </a>
         </li>
-              <li class="active"><a  href="<c:url value="/logout"/>">Log Out
+              <li class="active"><a  href="<c:url value="/j_spring_security_logout"/>">Log Out
             <span class="glyphicon glyphicon-off"></span> </a>
         </li>
         </ul>

@@ -98,4 +98,7 @@
   		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/testDetail.jsp" />
   		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
   	</definition>
+  	<definition name="403.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/403.jsp" />
+  	</definition>
 </tiles-definitions>
