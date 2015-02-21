@@ -30,12 +30,12 @@ response.setDateHeader ("Expires", -1);
     <thead>
     <tr>
         <th data-field="radio" data-radio="true"></th>
-        <th data-field="cQuestionsId"  data-visible="true" >ID </th>
-        <th data-field="question" data-align="center" data-sortable="true" >Email Address</th>
+        <th data-field="cQuestionsId"  data-visible="false" >ID </th>
+        <th data-field="question" data-align="center" data-sortable="false" >Email Address</th>
         <th data-field="question" data-align="center" data-sortable="true" >Password</th>
-        <th data-field="question" data-align="center" data-sortable="true" >Enabled</th>
-        <th data-field="options" data-align="center" data-sortable="true">ROLES</th>
-        <th data-field="action" data-align="center" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
+        <th data-field="question" data-align="center" data-sortable="false" >Enabled</th>
+        <th data-field="options" data-align="center" data-sortable="false">ROLES</th>
+        <th data-field="action" data-align="center" data-sortable="false" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>
 </table> 
