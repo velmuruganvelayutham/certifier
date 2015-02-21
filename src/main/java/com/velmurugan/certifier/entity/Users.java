@@ -13,10 +13,37 @@ public class Users implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(nullable = false, length = 1000)
+	@Column(nullable = false)
 	private String username;
-	@Column(nullable = false, length = 1000)
+
+	@Column(nullable = false)
 	private String password;
-	@Column
+
+	@Column(name = "enabled")
 	private Boolean isEnabled;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
 }
