@@ -25,8 +25,6 @@ response.setDateHeader ("Expires", -1);
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#"><img style="max-width:100px; margin-top: -7px;" src="<c:url value="/resources/image/logo.png"/>"></a>
     </div>
@@ -56,20 +54,21 @@ response.setDateHeader ("Expires", -1);
             </div>    
       </form>
       <ul class="nav navbar-nav navbar-right">
-      
-        <li class="active"><a href="<c:url value="/notifications"/>">Users
+       <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+        <li class="active"><a href="<c:url value="/users"/>">Users
             <span class="glyphicon glyphicon-bell"></span> </a>
         </li>
+        </sec:authorize>
         <li class="active"><a href="<c:url value="/notifications"/>">Study Materials
-            <span class="glyphicon glyphicon-bell"></span> </a>
+            <span class="glyphicon glyphicon-book"></span> </a>
         </li>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-	         <li class="active"><a  href="<c:url value="/settings"/>">Test Results
+	         <li class="active"><a  href="<c:url value="/settings"/>">Settings
 	            <span class="glyphicon glyphicon-cog"></span> </a>
 	        </li>
         </sec:authorize>
              
-              <li class="active"><a  href="<c:url value="/profile"/>">Profile
+              <li class="active"><a  href="<c:url value="/profile"/>">Report
             <span class="glyphicon glyphicon-user"></span> </a>
         </li>
               <li class="active"><a  href="<c:url value="/logout"/>">Log Out

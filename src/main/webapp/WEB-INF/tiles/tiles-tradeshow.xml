@@ -38,10 +38,10 @@
   		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" />
   	</definition>
   	
-  	<definition name="exhibitors.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  	<definition name="users.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
   		 <put-attribute name="header" value="/pages/tradeshow/templates/bootstrap/sections/header.jsp" />
   		<put-attribute name="navbar" value="/pages/tradeshow/templates/bootstrap/sections/navbar.jsp" /> 
-  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/exhibitors.jsp" />
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/users.jsp" />
   		<put-attribute name="footer" value="/pages/tradeshow/templates/bootstrap/sections/footer.jsp" /> 
   	</definition>
   	
