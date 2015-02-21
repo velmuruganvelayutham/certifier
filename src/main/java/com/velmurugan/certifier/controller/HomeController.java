@@ -40,7 +40,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String invalidUsername(Model model) {
-		return "exhibitors.";
+		return "tests.";
 	}
 
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
