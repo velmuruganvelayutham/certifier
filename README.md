@@ -16,6 +16,11 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
    3. use this feature combined with scoring and questionnaires to ensure you never lose out on the right candidates.
    4. get great hires!
    5. Download the exam report
+   
+## Demo Instance:
+
+The demo  of this project is deployed [Click Here ] (http://52.10.55.149:8080/certifier-1.0.0-BUILD-SNAPSHOT/login)
+
 
 ## Setup and Installation
 
