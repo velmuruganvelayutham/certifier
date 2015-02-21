@@ -91,15 +91,7 @@ public class LoginController {
 		role.setRole("ROLE_USER");
 		user.addUserRole(role);
 
-		// mail sending
-		SimpleMailMessage msg = new SimpleMailMessage(templateMessage);
-		templateMessage.setTo(userBean.getEmail());
-
-		Map<String, Object> props = new HashMap<String, Object>();
-		props.put("email", userBean.getEmail());
-		// props.put("lastName", "Smith");
-
-		velocityEmailSender.send(msg, props);
+		sendMail(userBean.getEmail());
 		userService.create(user);
 		model.addAttribute("error",
 				"Registration Successful!.. Login with your credentials ");
@@ -107,10 +99,31 @@ public class LoginController {
 
 	}
 
+	private void sendMail(String mail) {
+		// mail sending
+		SimpleMailMessage msg = new SimpleMailMessage(templateMessage);
+		templateMessage.setTo(mail);
+
+		Map<String, Object> props = new HashMap<String, Object>();
+		props.put("email", mail);
+		// props.put("lastName", "Smith");
+
+		velocityEmailSender.send(msg, props);
+	}
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model) {
 
 		model.addAttribute("error", "signed out successfully");
+		return "login.";
+
+	}
+
+	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
+	public String forgotPassword(Model model,
+			@RequestParam("email") String email) {
+		sendMail(email);
+		model.addAttribute("error", "password has been sent to your mail.");
 		return "login.";
 
 	}

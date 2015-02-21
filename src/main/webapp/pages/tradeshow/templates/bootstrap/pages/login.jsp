@@ -140,7 +140,7 @@ response.setDateHeader ("Expires", -1);
 						<h3 id="myModalLabel">Forgot Password </h3>
 				</div>
 				<div class="modal-body">
-				<form id="forgotPasswordForm" class="form-inline">
+				<form id="forgotPasswordForm" class="form-inline" method="post" action='<c:url value="/forgotPassword" />'>
 			<div class="form-group">
         <label>Email address</label>
         <input type="text" class="form-control" name="email" />
