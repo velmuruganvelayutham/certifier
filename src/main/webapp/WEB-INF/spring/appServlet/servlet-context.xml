@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans 
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -76,9 +76,34 @@
 <!--       class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> -->
 
 
- <context:property-placeholder location="classpath:persistence-mysql.properties" />
+ 
+ <context:property-placeholder location="classpath:/mail.properties,
+ 										 classpath:persistence-mysql.properties"/>
 
+<beans:bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean" 
+          p:resourceLoaderPath="classpath:/com/velmurugan/certifier/email/velocity" 
+          p:preferFileSystemAccess="false"/>
 
+    <!-- Mail sender configured for using Gmail -->
+    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+          p:host="${mail.host}"
+          p:username="${mail.username}"
+          p:password="${mail.password}">
+        <beans:property name="javaMailProperties">
+            <beans:props>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+                <beans:prop key="mail.smtp.host">${mail.host}</beans:prop>
+                <beans:prop key="mail.smtp.port">${mail.port}</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+    
+    <beans:bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage"
+          p:from="${mail.username}"
+          p:to="${mail.recipient}"
+          p:subject="Greetings from Certifier" />
+          
  <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <beans:property name="dataSource" ref="dataSource" />
         <beans:property name="packagesToScan" value="com.velmurugan.certifier.entity" />

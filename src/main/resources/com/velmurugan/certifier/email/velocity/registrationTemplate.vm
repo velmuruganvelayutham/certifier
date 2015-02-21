@@ -1,0 +1,7 @@
+<html>
+<body>
+<h1>Welcome to Certifier </h1>
+<p>Welcome ${email}. </p>
+<p>Thank you for joining the site. Happy Learning !.</p>
+</body>
+</html>

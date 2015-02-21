@@ -1,12 +1,15 @@
 package com.velmurugan.certifier.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.velmurugan.certifier.component.VelocityEmailSender;
 import com.velmurugan.certifier.entity.UserRoles;
 import com.velmurugan.certifier.entity.Users;
 import com.velmurugan.certifier.model.UserFormBean;
@@ -31,6 +35,12 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	VelocityEmailSender velocityEmailSender;
+
+	@Autowired
+	SimpleMailMessage templateMessage;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -80,8 +90,17 @@ public class LoginController {
 		UserRoles role = new UserRoles();
 		role.setRole("ROLE_USER");
 		user.addUserRole(role);
-		userService.create(user);
 
+		// mail sending
+		SimpleMailMessage msg = new SimpleMailMessage(templateMessage);
+		templateMessage.setTo(userBean.getEmail());
+
+		Map<String, Object> props = new HashMap<String, Object>();
+		props.put("email", userBean.getEmail());
+		// props.put("lastName", "Smith");
+
+		velocityEmailSender.send(msg, props);
+		userService.create(user);
 		model.addAttribute("error",
 				"Registration Successful!.. Login with your credentials ");
 		return "login.";
