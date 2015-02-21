@@ -3,7 +3,7 @@ package com.velmurugan.certifier.service;
 import java.util.List;
 
 import com.velmurugan.certifier.dao.Page;
-import com.velmurugan.certifier.model.CQuestion;
+import com.velmurugan.certifier.entity.CQuestion;
 
 public interface QuestionService {
 

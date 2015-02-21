@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.velmurugan.certifier.dao.Page;
 import com.velmurugan.certifier.dao.VendorDao;
-import com.velmurugan.certifier.model.Vendor;
+import com.velmurugan.certifier.entity.Vendor;
 import com.velmurugan.certifier.service.VendorService;
 
 @Service

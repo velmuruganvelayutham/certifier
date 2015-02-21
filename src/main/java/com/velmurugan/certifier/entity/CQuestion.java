@@ -1,4 +1,4 @@
-package com.velmurugan.certifier.model;
+package com.velmurugan.certifier.entity;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;

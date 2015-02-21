@@ -3,7 +3,7 @@ package com.velmurugan.certifier.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.velmurugan.certifier.dao.QuestionDao;
-import com.velmurugan.certifier.model.CQuestion;
+import com.velmurugan.certifier.entity.CQuestion;
 
 @Repository
 public class QuestionDaoImpl extends HibernateGenericDaoImpl<CQuestion>

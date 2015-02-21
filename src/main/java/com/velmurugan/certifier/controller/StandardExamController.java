@@ -39,7 +39,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWriteMode;
 import com.velmurugan.certifier.dao.Page;
-import com.velmurugan.certifier.model.Vendor;
+import com.velmurugan.certifier.entity.Vendor;
 import com.velmurugan.certifier.service.VendorService;
 
 /**

@@ -45,10 +45,10 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWriteMode;
 import com.velmurugan.certifier.dao.Page;
-import com.velmurugan.certifier.model.COption;
-import com.velmurugan.certifier.model.CQuestion;
-import com.velmurugan.certifier.model.CTest;
-import com.velmurugan.certifier.model.Vendor;
+import com.velmurugan.certifier.entity.COption;
+import com.velmurugan.certifier.entity.CQuestion;
+import com.velmurugan.certifier.entity.CTest;
+import com.velmurugan.certifier.entity.Vendor;
 import com.velmurugan.certifier.service.TestService;
 import com.velmurugan.certifier.service.VendorService;
 

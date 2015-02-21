@@ -3,8 +3,8 @@ package com.velmurugan.certifier.service;
 import java.util.List;
 
 import com.velmurugan.certifier.dao.Page;
-import com.velmurugan.certifier.model.CQuestion;
-import com.velmurugan.certifier.model.CTest;
+import com.velmurugan.certifier.entity.CQuestion;
+import com.velmurugan.certifier.entity.CTest;
 
 public interface TestService {
 

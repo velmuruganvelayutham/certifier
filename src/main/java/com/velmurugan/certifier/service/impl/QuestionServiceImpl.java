@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.velmurugan.certifier.dao.Page;
 import com.velmurugan.certifier.dao.QuestionDao;
-import com.velmurugan.certifier.model.CQuestion;
+import com.velmurugan.certifier.entity.CQuestion;
 import com.velmurugan.certifier.service.QuestionService;
 
 @Service

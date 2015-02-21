@@ -3,7 +3,7 @@ package com.velmurugan.certifier.service;
 import java.util.List;
 
 import com.velmurugan.certifier.dao.Page;
-import com.velmurugan.certifier.model.Vendor;
+import com.velmurugan.certifier.entity.Vendor;
 
 public interface VendorService {
 

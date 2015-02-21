@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.velmurugan.certifier.dao.Page;
 import com.velmurugan.certifier.dao.SettingsDao;
-import com.velmurugan.certifier.model.Settings;
+import com.velmurugan.certifier.entity.Settings;
 import com.velmurugan.certifier.service.SettingsService;
 
 @Service
