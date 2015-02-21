@@ -26,12 +26,12 @@ This option let you download source files, configure, build and deploy the appli
 - Make sure you meet [software requirements](#software_requirements).
 - [Download certifier](https://github.com/velmuruganvelayutham/certifier/zipball/master).
 - [Build](#build_the_application) the application.
-- Copy the war file to your Java application server (optional).
+- Copy the war file to your Java application server.
 
 
 ### Software_Requirements
 
-- Java version 6 or 7
+- Java version 7 or greater.
 - A JEE servlet container or any JEE application server. 
 - [Maven](http://maven.apache.org/) for building source files.
 
