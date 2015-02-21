@@ -14,6 +14,11 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
+<ol class="breadcrumb">
+  <li><a href="#"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+  <li class="active">tests</li>
+</ol>
+
 <div id="custom-toolbar" class="btn-toolbar " role="toolbar">
   <div  class="btn-group"><button id="addBtn"  class="btn btn-default " type="button" data-toggle="modal" data-target="#addNewTestModal" > <span class="glyphicon glyphicon-plus"></span> Add </button> </div>
 </div>

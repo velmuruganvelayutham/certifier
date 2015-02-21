@@ -149,7 +149,7 @@
 	<security:http pattern="/resources/**" security="none" />
 	<security:http pattern="/login" security="none"/>
     <security:http auto-config='true' authentication-manager-ref="userAuthenticationManager" use-expressions="true">
-    <security:form-login login-page="/login" authentication-failure-url="/login?login_error" default-target-url="/exhibitors"  />
+    <security:form-login login-page="/login" authentication-failure-url="/login?login_error" default-target-url="/tests"  />
     <security:logout logout-success-url="/logout" invalidate-session="true"/>
     <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_GUEST')" />
     </security:http>

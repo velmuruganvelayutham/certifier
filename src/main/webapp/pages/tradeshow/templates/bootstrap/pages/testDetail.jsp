@@ -14,6 +14,12 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
+<ol class="breadcrumb">
+  <li><a href="#"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+  <li> <a href="<c:url value="/tests" />">tests</a></li>
+  <li class="active"><c:out value="${id}"/> </li> 
+</ol>
+
 <div id="custom-toolbar" class="btn-toolbar " role="toolbar">
   <div  class="btn-group"><button id="addBtnDetail"  class="btn btn-default " type="button" data-toggle="modal" data-target="#addNewTestModal" > <span class="glyphicon glyphicon-plus"></span> Add </button> </div>
 </div>
