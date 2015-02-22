@@ -44,7 +44,7 @@ This option let you download source files, configure, build and deploy the appli
 
 With a shell or dos command cd to you unzip source directory.Run the following command requires [Apache Maven](http://maven.apache.org/) installed.
 
-edit the persistence-mysql.properties file inside certifier/src/main/resources/   folder to point to the correct mysql port, username, password.
+edit the **persistence-mysql.properties** file inside **certifier/src/main/resources/**   folder to point to the correct mysql port, username, password.
 
 `cd certifier` <br/>
 `mvn clean`<br/>
