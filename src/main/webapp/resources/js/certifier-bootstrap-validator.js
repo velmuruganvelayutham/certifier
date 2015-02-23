@@ -9,7 +9,10 @@ $(document).ready(function() {
         	j_username: {
                 validators: {
                     notEmpty: {
-                        message: 'The username is required'
+                        message: 'The email is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
                     }
                 }
             },

@@ -44,8 +44,8 @@ response.setDateHeader ("Expires", -1);
 		 </c:if>
 		 
 		   <div  class="form-group">
-				    <label for="username">Username:</label>
-				    <input name ="j_username" type="text" class="form-control" placeholder="Username" required autofocus>
+				    <label for="username">Email:</label>
+				    <input name ="j_username" type="text" class="form-control" placeholder="Email" required autofocus>
 		   </div>
 		    <div class="form-group">
 				    <label for="password">Password:</label>
