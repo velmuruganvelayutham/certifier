@@ -16,6 +16,9 @@
 6. Have popover for options for viewing and modal for editing and adding new questions.
 7. Adding dynamic options while editing a particular question.
 8. Need to implement method level security using Spring ACL.
+9. Add 404 page 
+10. Add exception page.
+11. The theme will be selected by user from the dropdown.
 
 
 ###############  Standard Mock Test  #################

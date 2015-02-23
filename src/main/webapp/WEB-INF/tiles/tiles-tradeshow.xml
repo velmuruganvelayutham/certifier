@@ -101,4 +101,7 @@
   	<definition name="403.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
   		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/403.jsp" />
   	</definition>
+  	<definition name="error.*" template="/pages/tradeshow/templates/bootstrap/mainLayout.jsp">
+  		<put-attribute name="body" value="/pages/tradeshow/templates/bootstrap/pages/error.jsp" />
+  	</definition>
 </tiles-definitions>
