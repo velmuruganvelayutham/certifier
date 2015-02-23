@@ -10,6 +10,8 @@ public interface UserService {
 	public List<Users> findAll();
 
 	public Users find(Long id);
+	
+	public Users findByEmail(String email);
 
 	public List<Users> findAll(Page page);
 

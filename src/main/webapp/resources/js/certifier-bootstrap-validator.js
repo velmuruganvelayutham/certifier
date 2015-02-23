@@ -92,6 +92,10 @@ $(document).ready(function() {
                     },
                     emailAddress: {
                         message: 'The input is not a valid email address'
+                    },
+                    remote: {
+                        message: 'The email is not available',
+                        url: ctx+'/login/validate'
                     }
                 }
             }

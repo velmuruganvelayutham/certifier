@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.json.Json;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.velmurugan.certifier.component.VelocityEmailSender;
 import com.velmurugan.certifier.entity.UserRoles;
@@ -57,6 +61,19 @@ public class LoginController {
 			model.addAttribute("error", "Invalid username or password");
 		return "login.";
 	}
+	
+	@RequestMapping(value = { "/login/validate" }, method = RequestMethod.GET ,produces = {"application/json"}) 
+	public  @ResponseBody String validateEmail(
+			@RequestParam("email") String email,
+			Model model) {
+		// fetch the user by email { "valid": true }
+		 Users findByEmail = userService.findByEmail(email);
+		 if(findByEmail==null) {
+			 return Json.createObjectBuilder().add("valid", Boolean.FALSE).build().toString();
+		 }
+		return Json.createObjectBuilder().add("valid", Boolean.TRUE).build().toString();
+	}
+
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String invalidUsername(Model model) {

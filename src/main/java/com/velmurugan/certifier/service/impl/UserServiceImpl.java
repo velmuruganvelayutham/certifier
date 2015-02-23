@@ -16,44 +16,49 @@ import com.velmurugan.certifier.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UsersDao UsersDao;
+	private UsersDao userDao;
 
 	@Override
 	public List<Users> findAll() {
-		List<Users> findAll = UsersDao.findAll();
+		List<Users> findAll = userDao.findAll();
 		return findAll;
 	}
 
 	@Override
 	public Users find(Long id) {
-		Users Users = UsersDao.findOne(Long.valueOf(id));
+		Users Users = userDao.findOne(Long.valueOf(id));
 		return Users;
 	}
 
 	@Override
 	public void create(Users Users) {
-		UsersDao.save(Users);
+		userDao.save(Users);
 	}
 
 	@Override
 	public void delete(Users Users) {
-		UsersDao.delete(Users);
+		userDao.delete(Users);
 	}
 
 	@Override
 	public List<Users> findAll(Page page) {
-		return UsersDao.findAll(page);
+		return userDao.findAll(page);
 
 	}
 
 	@Override
 	public Long count() {
 
-		return UsersDao.count();
+		return userDao.count();
 	}
 
 	@Override
 	public void update(Users Users) {
-		UsersDao.update(Users);
+		userDao.update(Users);
+	}
+
+	@Override
+	public Users findByEmail(String email) {
+		return userDao.findByEmail(email);
 	}
 }
