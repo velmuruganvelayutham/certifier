@@ -41,7 +41,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (2,'admin','ROLE_ADMIN'),(1,'admin','ROLE_USER'),(5,'user','ROLE_USER');
+INSERT INTO `user_roles` VALUES (2,'admin@admin.com','ROLE_ADMIN'),(1,'admin@admin.com','ROLE_USER'),(5,'user','ROLE_USER');
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
