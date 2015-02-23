@@ -5,6 +5,7 @@ $(document).ready(function() {
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
+        threshold: 3,
         fields: {
         	j_username: {
                 validators: {
@@ -33,6 +34,7 @@ $(document).ready(function() {
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
+        threshold: 3,
         fields: {
             email: {
                 validators: {
@@ -41,6 +43,10 @@ $(document).ready(function() {
                     },
                     emailAddress: {
                         message: 'The input is not a valid email address'
+                    },
+                    remote: {
+                        message: 'The email is exists already',
+                        url: ctx+'/signup/validate'
                     }
                 }
             },
@@ -87,6 +93,7 @@ $(document).ready(function() {
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
+        threshold: 3,
         fields: {
             email: {
                 validators: {

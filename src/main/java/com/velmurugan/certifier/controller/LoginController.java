@@ -73,6 +73,17 @@ public class LoginController {
 		 }
 		return Json.createObjectBuilder().add("valid", Boolean.TRUE).build().toString();
 	}
+	@RequestMapping(value = { "/signup/validate" }, method = RequestMethod.GET ,produces = {"application/json"}) 
+	public  @ResponseBody String isEmailExists(
+			@RequestParam("email") String email,
+			Model model) {
+		// fetch the user by email { "valid": true }
+		 Users findByEmail = userService.findByEmail(email);
+		 if(findByEmail==null) {
+			 return Json.createObjectBuilder().add("valid", Boolean.TRUE).build().toString();
+		 }
+		return Json.createObjectBuilder().add("valid", Boolean.FALSE).build().toString();
+	}
 
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
