@@ -26,15 +26,13 @@ response.setDateHeader ("Expires", -1);
 	  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
  </div>
 
-<table data-testId="${id}" id="question-table" data-toggle="table" data-url="${id}/data" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="525" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
+<table id="user-table" data-toggle="table" data-url="<c:url value="/users/data" />" data-toolbar="#custom-toolbar" data-click-to-select="true" data-height="525" data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200]" data-search="true">
     <thead>
     <tr>
         <th data-field="radio" data-radio="true"></th>
-        <th data-field="cQuestionsId"  data-visible="false" >ID </th>
-        <th data-field="question" data-align="center" data-sortable="false" >Email Address</th>
-        <th data-field="question" data-align="center" data-sortable="true" >Password</th>
-        <th data-field="question" data-align="center" data-sortable="false" >Enabled</th>
-        <th data-field="options" data-align="center" data-sortable="false">ROLES</th>
+        <th data-field="username" data-align="center" data-sortable="false" >Email Address</th>
+        <th data-field="password" data-align="center" data-sortable="false" >Password</th>
+        <th data-field="enabled" data-align="center" data-sortable="false" >Enabled</th>
         <th data-field="action" data-align="center" data-sortable="false" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>
