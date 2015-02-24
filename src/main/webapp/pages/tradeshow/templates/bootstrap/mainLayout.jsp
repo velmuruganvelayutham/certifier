@@ -34,6 +34,7 @@ response.setDateHeader ("Expires", -1);
     			 
 			    <!-- Favicon icon -->
 			    <link href="<c:url value="/resources/image/blue-butterfly-152-181696.png" />" rel="shortcut icon">
+			    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
 
  	</head>
  	<body>
