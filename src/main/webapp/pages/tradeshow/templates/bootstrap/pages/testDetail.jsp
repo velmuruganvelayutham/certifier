@@ -130,7 +130,7 @@ response.setDateHeader ("Expires", -1);
 						  
 						  <div class="form-group">
 						   <!--  <label class="col-xs-6 control-label" for="name">Problem Statement</label> -->
-						    <div id="editor" class="editor col-xs-11"> 
+						    <div id="editor" class="editor  col-xs-12"> 
 						     Problem Statement
 						    <input type="hidden" class="form-control" id="testName" name ="question" placeholder="Question" >
                 			</div>
