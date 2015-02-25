@@ -72,7 +72,7 @@ response.setDateHeader ("Expires", -1);
 						  </div>
 						  
 						  <!--  wysiwyg editor toolbar button -->
-						  <div>
+						  <!-- <div>
 <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -125,19 +125,21 @@ response.setDateHeader ("Expires", -1);
       </div>
       <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" style="display: none;">
     </div>
-    </div>
+    </div> -->
 						  
 						  
 						  <div class="form-group">
 						   <!--  <label class="col-xs-6 control-label" for="name">Problem Statement</label> -->
-						    <div id="editor" class="col-xs-11">
+						    <div id="editor" class="editor col-xs-11"> 
+						     Problem Statement
 						    <input type="hidden" class="form-control" id="testName" name ="question" placeholder="Question" >
                 			</div>
 						  </div>
 
 						  <div class="form-group">
-						    <label class="col-xs-1 control-label" for="option">Option</label>
-						    <div class="col-xs-3" id="option" >
+						    <!-- <label class="col-xs-1 control-label" for="option">Option</label> -->
+						    <div class="editor col-xs-6" id="option" >
+						     Option
 						    <input type="hidden" class="form-control" id="option" name="option1" placeholder="Option">
 						    </div>
 						  
@@ -146,9 +148,9 @@ response.setDateHeader ("Expires", -1);
 						      <input type="checkbox" name="isCorrect1" > isCorrect ?
 						    </label>
 						  </div>
-						   <label class="col-xs-2 control-label" for="explanation">Explanation</label>
+						   <!-- <label class="col-xs-2 control-label" for="explanation">Explanation</label> -->
 						   <div class="col-xs-4">
-						    <textarea class="form-control" name="description1" rows="4"></textarea>
+						    <textarea class="form-control" name="description1" rows="4" placeholder="Explanation"></textarea>
 						    </div>
 						    <div class="col-xs-1">
 					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
@@ -214,8 +216,7 @@ $(document).ready(function() {
 	            '</a>'
 	        ].join('');
 	    }
-	  $('#editor').wysiwyg();
-	  $('#option').wysiwyg();
+	  $('.editor').wysiwyg();
 });
 
 
@@ -235,7 +236,7 @@ $(document).ready(function() {
 </script>
 
  <script src="<c:url value="/resources/js/bootstrap-wysiwyg.js" />"></script>
-  <script src="<c:url value="/resources/js/jquery.hotkeys.js" />"></script>
+ <script src="<c:url value="/resources/js/jquery.hotkeys.js" />"></script>
  <link href="<c:url value="/resources/css/bootstrap-table.css" />" rel="stylesheet">
  <script src="<c:url value="/resources/js/bootstrap-table.js" />"></script>
  <script src="<c:url value="/resources/js/certifier-test-detail.js" />"></script>

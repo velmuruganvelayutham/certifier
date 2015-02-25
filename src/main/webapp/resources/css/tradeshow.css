@@ -21,11 +21,8 @@ body { padding-top: 70px; }
 .label {
 display: inline-block;
 }
-
-
- #editor {overflow:scroll; max-height:300px}
  
- #editor {
+ .editor {
 	max-height: 250px;
 	height: 150px;
 	background-color: white;
