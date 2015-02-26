@@ -112,7 +112,6 @@ public class StandardTestController {
 				factory.createObjectBuilder()
 						.add("cQuestionsId", question.getCQuestionsId())
 						.add("question", question.getQuestion())).build();
-
 		return value.toString();
 	}
 

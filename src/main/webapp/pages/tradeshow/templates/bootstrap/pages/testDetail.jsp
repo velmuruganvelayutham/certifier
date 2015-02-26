@@ -219,10 +219,6 @@ $(document).ready(function() {
 	  $('.editor').wysiwyg();
 });
 
-
-
-  
-
     
     function codeFormatter(value, row, index) {
         return [
