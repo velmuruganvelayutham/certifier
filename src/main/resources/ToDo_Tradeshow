@@ -10,6 +10,15 @@
 10. The theme will be selected by user from the dropdown.
 11. Use bootstrap-wysiwyg for question and option input box.
 
+
+// today's task
+
+1. add questions with multiple options using bootstrap-wysiwyg.
+2. List the added questions in the bootstrap table.
+3. Exam should be taken from the added questions.
+
+
+
 ###############  Standard Mock Test  #################
 
 1.mark for review.
