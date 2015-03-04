@@ -54,6 +54,12 @@ import com.velmurugan.certifier.service.VendorService;
 
 /**
  * Handles requests for the application home page.
+ * 
+ * {
+ *   enabled:true
+ * }
+ * 
+ *
  */
 @Controller
 @RequestMapping("/tests")

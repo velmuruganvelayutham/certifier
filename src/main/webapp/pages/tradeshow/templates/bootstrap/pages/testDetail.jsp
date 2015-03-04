@@ -132,7 +132,7 @@ response.setDateHeader ("Expires", -1);
 						   <!--  <label class="col-xs-6 control-label" for="name">Problem Statement</label> -->
 						    <div id="editor" class="editor  col-xs-12"> 
 						     Problem Statement
-						    <input type="hidden" class="form-control" id="testName" name ="question" placeholder="Question" >
+						    <input type="hidden" class="form-control" id="testName" name ="question" placeholder="Question"  value="value">
                 			</div>
 						  </div>
 
@@ -140,7 +140,7 @@ response.setDateHeader ("Expires", -1);
 						    <!-- <label class="col-xs-1 control-label" for="option">Option</label> -->
 						    <div class="editor col-xs-6" id="option" >
 						     Option
-						    <input type="hidden" class="form-control" id="option" name="option1" placeholder="Option">
+						    <input type="hidden" class="form-control" id="option" name="option1" placeholder="Option" value="value">
 						    </div>
 						  
 						  <div class="checkbox col-xs-1">

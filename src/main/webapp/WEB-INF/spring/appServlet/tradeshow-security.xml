@@ -150,6 +150,7 @@
     <security:form-login login-page="/login" authentication-failure-url="/login?login_error" default-target-url="/tests"  />
     <security:logout logout-success-url="/logout" delete-cookies="JSESSIONID" />
     <security:intercept-url pattern="/resources/**" access="permitAll"/>
+     <security:intercept-url pattern="/UpdateStatus/**" access="permitAll"/>
     <security:intercept-url pattern="/login/**" access="permitAll"/>
     <security:intercept-url pattern="/logout" access="permitAll"/>
     <security:intercept-url pattern="/403" access="permitAll"/>

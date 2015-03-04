@@ -19,6 +19,7 @@
 		<javassist.version>3.18.1-GA</javassist.version>
 		<solr.version>4.10.1</solr.version>
 		<mysql.version>5.1.30</mysql.version>
+		<jackson.version>1.9.10</jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -343,6 +344,13 @@
 			  <groupId>com.dropbox.core</groupId>
 			  <artifactId>dropbox-core-sdk</artifactId>
 			  <version>1.7</version>
+		</dependency>
+		
+		<!-- JSON mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 		
 		<!-- Test -->

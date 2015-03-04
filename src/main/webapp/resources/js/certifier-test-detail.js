@@ -53,18 +53,10 @@ $('#ajaxform').bootstrapValidator({
     },
     fields: {
         question: {
-            validators: {
-                notEmpty: {
-                    message: 'The question is required and can not be left empty'
-                }
-            }
+            validators: {}
         },
         'option1': {
-            validators: {
-                notEmpty: {
-                    message: 'The option is required and can not be left empty'
-                }
-            }
+            validators: {}
         } 
         
     }
