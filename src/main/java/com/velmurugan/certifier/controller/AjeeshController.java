@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -27,10 +28,10 @@ public class AjeeshController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, produces= {"application/json"},consumes= {"application/json"})
-	public @ResponseBody String update(@RequestBody Map<String, String> input) {
+	public @ResponseBody String update(@RequestParam( value="enabled", required=false,defaultValue="true")Boolean status, @RequestBody (required=false) Map<String, String> input) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 	 JsonObjectBuilder jsonObjectBuilder = factory.createObjectBuilder();
-	 db.put("enabled", Boolean.valueOf(input.get("enabled")));
+	 db.put("enabled", status);
 	 jsonObjectBuilder.add("message", "status changed successfully");
 		return jsonObjectBuilder.build().toString();
 	}
