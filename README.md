@@ -1,4 +1,4 @@
-# Certifier
+# CERTIFIER
 
 Spring MVC application for Online assessment test, Candidate Screening, aptitude assessment tests.
 
