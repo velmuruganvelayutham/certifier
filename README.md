@@ -11,6 +11,7 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
    3. you can create exam questions in spreadsheets and then simply upload
    4. you have an exam ready to administer.
 5. Administering Exams -
+6. 
    1. Using this feature provides a great way to narrow down on promising candidates.
    2. Dont get overwhelmed with the number of applicants 
    3. use this feature combined with scoring and questionnaires to ensure you never lose out on the right candidates.
