@@ -14,10 +14,7 @@
 
 // today's task
 
-1. add questions with multiple options using bootstrap-wysiwyg.
-2. List the added questions in the bootstrap table.
-3. Exam should be taken from the added questions.
-
+1. Upload questions from XML file. 
 
 
 ###############  Standard Mock Test  #################
