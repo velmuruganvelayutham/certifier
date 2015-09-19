@@ -255,10 +255,11 @@ public class StandardTestController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json" })
 	public @ResponseBody String add(@ModelAttribute CTest test,
-			BindingResult result, Model model) {
+			@RequestParam("xml-file") MultipartFile file,	BindingResult result, Model model) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
+		System.out.println("test is " + test.getName());
 		testService.create(test);
-		System.out.println("test is " + test);
+		
 
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		JsonArray value = arrayBuilder.add(

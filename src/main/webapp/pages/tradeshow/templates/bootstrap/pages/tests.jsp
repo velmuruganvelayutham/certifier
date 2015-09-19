@@ -51,7 +51,7 @@ response.setDateHeader ("Expires", -1);
       </div>
 <!--       <div class="modal-body" id="editModal"> </div> -->
       <div class="modal-body" >
-				<form  id="ajaxform" role="form" method="post"  action="<c:url value="/tests/add" > </c:url>"
+				<form  id="ajaxform" role="form" method="post"  enctype="multipart/form-data" action="<c:url value="/tests/add" > </c:url>"
 				data-bv-message="This value is not valid"
     			data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
    				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
@@ -76,8 +76,8 @@ response.setDateHeader ("Expires", -1);
 						    data-bv-excluded=":disabled">
 						  </div>
 						   <div class="form-group">
-						    <label for="file">csv file</label>
-						    <input type="file" class="form-control" id="file" name ="file" placeholder="browse file" 
+						    <label for="file">xml file</label>
+						    <input type="file" name="xml-file" class="form-control" id="file" name ="file" placeholder="browse file" 
 						    data-bv-notempty="true"
                 			data-bv-notempty-message="The file is required and cannot be empty" 
                 			data-bv-excluded=":disabled">
