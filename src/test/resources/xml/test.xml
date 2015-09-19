@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<test>
+    <name>SCJP-1.6</name>
+    <description>A sample SCJP 1.6 Test </description>
+    <question>
+        <title>
+        A Java bean component has the following field:
+private boolean done;
+Which method declarations follow the JavaBean standards for getting/settings this field? (Choose 3)
+ </title>
+        <ismultioption>true </ismultioption>
+        <explanation>The option1 is correct because it has few impotant answers </explanation>
+        <option>
+            <title> A) public void setDone(boolean done) </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>B) public boolean setDone(boolean done) </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>C) private boolean setDone(boolean done) </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>D) public void setDone() </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>E) public boolean getDone() </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>F) public boolean isDone() </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>G) public boolean getDone(boolean done) </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>H) public void isDone() </title>
+            <iscorrect>true</iscorrect>
+        </option>
+    </question>
+    <question>
+        <title>
+        Given the code. What is the result?
+public class Cruiser implements Runnable {
+
+    public void run() {
+        System.out.print("go");
+    }
+
+    public static void main(String arg[]) {
+        Thread t = new Thread(new Cruiser());
+        t.run();
+        t.run();
+        t.start();
+    }
+}
+ </title>
+        <ismultioption>false </ismultioption>
+        <explanation>The option1 is correct because it has few impotant answers </explanation>
+        <option>
+            <title>  A) Compilation fails. </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>B) An exception is thrown at runtime.</title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>C) "go" is printed </title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>D) "gogogo" is printed</title>
+            <iscorrect>true</iscorrect>
+        </option>
+        <option>
+            <title>E) "gogo" is printed </title>
+            <iscorrect>true</iscorrect>
+        </option>
+    </question>
+</test>
