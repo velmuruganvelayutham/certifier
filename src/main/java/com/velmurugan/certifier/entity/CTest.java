@@ -1,6 +1,7 @@
 package com.velmurugan.certifier.entity;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -58,7 +59,7 @@ public class CTest implements Serializable {
 
 	// bi-directional many-to-one association to CQuestion
 	@OneToMany(mappedBy = "CTest", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<CQuestion> CQuestions;
+	private Set<CQuestion> CQuestions =new LinkedHashSet<CQuestion>();
 
 	public CTest() {
 	}
