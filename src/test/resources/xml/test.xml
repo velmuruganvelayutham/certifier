@@ -1,86 +1,461 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <test>
-    <name>SCJP-1.6</name>
-    <description>A sample SCJP 1.6 Test </description>
-    <question>
-        <title>
-        A Java bean component has the following field:
-private boolean done;
-Which method declarations follow the JavaBean standards for getting/settings this field? (Choose 3)
- </title>
-        <ismultioption>true </ismultioption>
-        <explanation>The option1 is correct because it has few impotant answers </explanation>
-        <option>
-            <title> A) public void setDone(boolean done) </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>B) public boolean setDone(boolean done) </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>C) private boolean setDone(boolean done) </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>D) public void setDone() </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>E) public boolean getDone() </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>F) public boolean isDone() </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>G) public boolean getDone(boolean done) </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>H) public void isDone() </title>
-            <iscorrect>true</iscorrect>
-        </option>
-    </question>
-    <question>
-        <title>
-        Given the code. What is the result?
-public class Cruiser implements Runnable {
+	<name>SCJP-1.6</name>
+	<description>A sample SCJP 1.6 Test </description>
+	<question>
+		<title>
+			A Java bean component has the following field:
+			private boolean
+			done;
+			Which method declarations follow the JavaBean standards for
+			getting/settings this field? (Choose 3)
+		</title>
+		<ismultioption>true </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) public void setDone(boolean done) </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) public boolean setDone(boolean done) </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>C) private boolean setDone(boolean done) </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>D) public void setDone() </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>E) public boolean getDone() </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>F) public boolean isDone() </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>G) public boolean getDone(boolean done) </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>H) public void isDone() </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+	<question>
+		<title>
+			Given the code. What is the result?
+			public class Cruiser
+			implements Runnable {
 
-    public void run() {
-        System.out.print("go");
-    }
+			public void run() {
+			System.out.print("go");
+			}
 
-    public static void main(String arg[]) {
-        Thread t = new Thread(new Cruiser());
-        t.run();
-        t.run();
-        t.start();
+			public static void main(String arg[]) {
+			Thread t = new Thread(new
+			Cruiser());
+			t.run();
+			t.run();
+			t.start();
+			}
+			}
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) Compilation fails. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) An exception is thrown at runtime.</title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>C) "go" is printed </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>D) "gogogo" is printed</title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>E) "gogo" is printed </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+	<question>
+		<title>
+			What can directly access and change the value of the variable
+			roomNr?
+			package com.mycompany;
+
+			public class Hotel {
+			private int roomNr =
+			100;
+			}
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) Only the Hotel class. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) Any class.   </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) Any class in com.mycompany package. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) Any class that extends Hotel. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+
+	<question>
+		<title>
+			Give the code. What is the result?
+			class Hotel {
+			public int
+			bookings;
+			public void book() {
+			bookings++;
+			}
+			}
+
+			public class SuperHotel
+			extends Hotel {
+			public void book() {
+			bookings--;
+			}
+
+			public void book(int
+			size) {
+			book();
+			super.book();
+			bookings += size;
+			}
+
+			public static void
+			main(String args[]) {
+			SuperHotel hotel = new SuperHotel();
+			hotel.book(2);
+			System.out.print(hotel.bookings);
+			}
+			}
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title>A) Compilation fails. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) An exception is thrown at runtime. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) 0 </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) 1 </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> E) 2 </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> F) -1 </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+
+
+	<question>
+		<title><![CDATA[
+			Given the code. What is the result?
+			1. int i = 10;
+			2. while (i++ <= 10) {
+			3. i++;
+			4. }
+			5. System.out.print(i);
+			]]>
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) 10  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) 11   </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) 12 </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) 13 </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> E) Line 5 will be never reached. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+	<question>
+		<title><![CDATA[
+			Given the code. What is true?
+public class Room {
+    public int roomNr;
+    private Date beginDtm;
+    private Date endDttm;
+    
+    public void book(int roomNr, Date beginDttm, Date endDttm) {
+        this.roomNr = roomNr;
+        this.beginDtm = beginDttm;
+        this.endDttm = endDttm;
     }
 }
- </title>
-        <ismultioption>false </ismultioption>
-        <explanation>The option1 is correct because it has few impotant answers </explanation>
-        <option>
-            <title>  A) Compilation fails. </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>B) An exception is thrown at runtime.</title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>C) "go" is printed </title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>D) "gogogo" is printed</title>
-            <iscorrect>true</iscorrect>
-        </option>
-        <option>
-            <title>E) "gogo" is printed </title>
-            <iscorrect>true</iscorrect>
-        </option>
-    </question>
+			]]>
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) The code demonstrates polymorphism. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) The class is fully encapsulated.  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) The variable roomNr breaks encapsulation. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) Variables beginDttm and endDttm break polymorphism.
+			</title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> E) The method book breaks encapsulation </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+
+	<question>
+		<title><![CDATA[
+			Given the code. What is the result?
+1   public class TryMe {
+2       Integer A;
+3       int a;
+4       public TryMe(int a) {
+5           this.a = A + a;
+6           System.out.print(this.a);
+7       }
+8       public static void main(String args[]) {        
+9           Integer A = new Integer(1);
+10          TryMe t = new TryMe(A);
+11      }
+12  }
+			]]>
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) The value "1" is printed </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> B) Compilation fails because of an error in line 5   </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) A NullPointerException occurs at runtime </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) A NumberFormatException occurs at runtime  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> E) An IllegalStateExcepition occurs at runtime </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+	<question>
+		<title><![CDATA[
+			Given the code. What is the result?
+public class Test { 
+    private static void doStuff(String str) {
+        int var = 4;
+        if (var == str.length()) {
+            System.out.print(str.charAt(var--) + " ");
+        }
+        else {
+            System.out.print(str.charAt(0) + " ");
+        }
+    }
+    public static void main(String args[]) {
+        doStuff("abcd");
+        doStuff("efg");
+        doStuff("hi");
+    }
+}
+			]]>
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) Compilation fails.  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) An exception is thrown at runtime.  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) d e h </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) d f i </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> E) c f i  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> F) c e h  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+
+	<question>
+		<title><![CDATA[
+			Given the code. What is the result?
+    public static void main(String args[]) {
+        String str = null;
+        if (str == null) {
+            System.out.print("1");
+        } else (str.length() == 0) {
+            System.out.print("2");
+        } else {
+            System.out.print("3");
+        }
+    }
+			]]>
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) Compilation fails. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title>B) "1" is printed.  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C)"2" is printed. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) "3" is printed. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> E) An exception is thrown at runtime. </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
+
+
+
+	<question>
+		<title><![CDATA[
+			Given the code. What is the result?
+public class SomeClass {
+    private Integer value = 1;
+    
+    public Integer getValue() {
+        return value;
+    }
+    
+    public void changeVal(Integer value) {
+        value = new Integer(3);
+    }
+
+    public static void main(String args[]) {
+        Integer a = new Integer(2);
+        SomeClass c = new SomeClass();
+        c.changeVal(a);
+        System.out.print(a);
+    }
+}
+			]]>
+		</title>
+		<ismultioption>false </ismultioption>
+		<explanation>The option1 is correct because it has few impotant
+			answers
+		</explanation>
+		<option>
+			<title> A) "1" is printed  </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> B) "2" is printed   </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> C) Compilation fails </title>
+			<iscorrect>true</iscorrect>
+		</option>
+		<option>
+			<title> D) An exception is thrown at runtime </title>
+			<iscorrect>true</iscorrect>
+		</option>
+	</question>
 </test>

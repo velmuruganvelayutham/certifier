@@ -35,8 +35,8 @@ response.setDateHeader ("Expires", -1);
     <tr>
         <th data-field="radio" data-radio="true"></th>
         <th data-field="cQuestionsId"  data-visible="true" >ID </th>
-        <th data-field="question" data-align="center" data-sortable="true" data-formatter="codeFormatter"   >Question Name</th>
-        <th data-field="options" data-align="center" data-sortable="true">Options</th>
+        <th data-field="question" data-sortable="true" data-formatter="codeFormatter"   >Question Name</th>
+        <th data-field="options"  data-sortable="true" data-formatter="codeFormatter" >Options</th>
         <th data-field="action" data-align="center" data-sortable="true" data-formatter="operateFormatter" data-events="operateEvents" >Action</th>
     </tr>
     </thead>

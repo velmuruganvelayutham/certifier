@@ -1,5 +1,6 @@
 package com.velmurugan.certifier.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class QuestionBean {
@@ -8,7 +9,7 @@ public class QuestionBean {
 	private String title;
 	private Boolean isMultiOption;
 	private String explanation;
-	private List<OptionBean> options;
+	private List<OptionBean> options= new LinkedList<OptionBean>();
 	/**
 	 * @return the title
 	 */

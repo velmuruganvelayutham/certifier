@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -35,10 +36,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.bean.CsvToBean;
-import au.com.bytecode.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
-
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;
 import com.dropbox.core.DbxException;
@@ -49,15 +46,20 @@ import com.velmurugan.certifier.entity.COption;
 import com.velmurugan.certifier.entity.CQuestion;
 import com.velmurugan.certifier.entity.CTest;
 import com.velmurugan.certifier.entity.Vendor;
+import com.velmurugan.certifier.model.OptionBean;
+import com.velmurugan.certifier.model.QuestionBean;
+import com.velmurugan.certifier.sax.parser.SaxHandler;
 import com.velmurugan.certifier.service.TestService;
 import com.velmurugan.certifier.service.VendorService;
+
+import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.bean.CsvToBean;
+import au.com.bytecode.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 
 /**
  * Handles requests for the application home page.
  * 
- * {
- *   enabled:true
- * }
+ * { enabled:true }
  * 
  *
  */
@@ -71,8 +73,7 @@ public class StandardTestController {
 	@Autowired
 	TestService testService;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(StandardTestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(StandardTestController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -89,12 +90,10 @@ public class StandardTestController {
 	}
 
 	@RequestMapping(value = "/{id}/add", method = RequestMethod.POST, produces = { "application/json" })
-	public @ResponseBody String addQuestion(@PathVariable Long id,
-			HttpServletRequest request) {
+	public @ResponseBody String addQuestion(@PathVariable Long id, HttpServletRequest request) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		CQuestion question = new CQuestion();
-		Integer totalOptions = Integer.valueOf(request
-				.getParameter("totalOptions"));
+		Integer totalOptions = Integer.valueOf(request.getParameter("totalOptions"));
 		for (int i = 1; i <= totalOptions; i++) {
 			COption option = new COption();
 			option.setChoices(request.getParameter("option" + i));
@@ -114,16 +113,13 @@ public class StandardTestController {
 		testService.addQuestionToTest(question, id);
 		System.out.println("question is " + question);
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
-		JsonArray value = arrayBuilder.add(
-				factory.createObjectBuilder()
-						.add("cQuestionsId", question.getCQuestionsId())
-						.add("question", question.getQuestion())).build();
+		JsonArray value = arrayBuilder.add(factory.createObjectBuilder().add("cQuestionsId", question.getCQuestionsId())
+				.add("question", question.getQuestion())).build();
 		return value.toString();
 	}
 
 	@RequestMapping(value = "/{id}/data", method = RequestMethod.GET)
-	public @ResponseBody String getQuestionById(@PathVariable Long id,
-			Locale locale, Model model,
+	public @ResponseBody String getQuestionById(@PathVariable Long id, Locale locale, Model model,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "offset", defaultValue = "0") int offset,
 			@RequestParam(value = "order", defaultValue = "asc") String order) {
@@ -137,13 +133,10 @@ public class StandardTestController {
 			while (iterator.hasNext()) {
 				option = option + iterator.next().getChoices();
 			}
-			arrayBuilder.add(factory.createObjectBuilder()
-					.add("cQuestionsId", question.getCQuestionsId())
-					.add("question", question.getQuestion())
-					.add("options", option));
+			arrayBuilder.add(factory.createObjectBuilder().add("cQuestionsId", question.getCQuestionsId())
+					.add("question", question.getQuestion()).add("options", option));
 		}
-		JsonObject value = factory.createObjectBuilder()
-				.add("total", questionList.size()).add("rows", arrayBuilder)
+		JsonObject value = factory.createObjectBuilder().add("total", questionList.size()).add("rows", arrayBuilder)
 				.build();
 
 		return value.toString();
@@ -160,28 +153,23 @@ public class StandardTestController {
 		List<CTest> testList = testService.findAll(page);
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
 		for (CTest test : testList) {
-			arrayBuilder.add(factory.createObjectBuilder()
-					.add("cTestsId", test.getcTestsId())
-					.add("name", test.getName()));
+			arrayBuilder
+					.add(factory.createObjectBuilder().add("cTestsId", test.getcTestsId()).add("name", test.getName()));
 		}
-		JsonObject value = factory.createObjectBuilder().add("total", count)
-				.add("rows", arrayBuilder).build();
+		JsonObject value = factory.createObjectBuilder().add("total", count).add("rows", arrayBuilder).build();
 
 		return value.toString();
 	}
 
 	@RequestMapping(value = "/uploadDropbox", method = RequestMethod.POST)
-	public String uploadFile(Locale locale,
-			@RequestParam("dropbox-file") MultipartFile file, Model model)
+	public String uploadFile(Locale locale, @RequestParam("dropbox-file") MultipartFile file, Model model)
 			throws DbxException {
 		// final String APP_KEY = "gw4w14qy8129lpi";
 		// final String APP_SECRET = "hpycgtegwghz183";
 		//
 		// DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
-		DbxRequestConfig config = new DbxRequestConfig("JavaTutorial/1.0",
-				Locale.getDefault().toString());
-		DbxClient client = new DbxClient(config,
-				"vmWxWONh_7gAAAAAAAAAE3egnyeHlXJ3EEHBLo8rFv6FU3IGil1Ps9zwGpNlpE5Z");
+		DbxRequestConfig config = new DbxRequestConfig("JavaTutorial/1.0", Locale.getDefault().toString());
+		DbxClient client = new DbxClient(config, "vmWxWONh_7gAAAAAAAAAE3egnyeHlXJ3EEHBLo8rFv6FU3IGil1Ps9zwGpNlpE5Z");
 		// System.out.println("Linked account: " +
 		// client.getAccountInfo().displayName);
 
@@ -190,8 +178,7 @@ public class StandardTestController {
 		InputStream inputStream = null;
 		try {
 			inputStream = file.getInputStream();
-			DbxEntry.File uploadedFile = client.uploadFile(
-					"/suppliers/" + file.getOriginalFilename(),
+			DbxEntry.File uploadedFile = client.uploadFile("/suppliers/" + file.getOriginalFilename(),
 					DbxWriteMode.add(), file.getSize(), inputStream);
 			System.out.println("Uploaded: " + uploadedFile.toString());
 		} catch (IOException e) {
@@ -207,14 +194,12 @@ public class StandardTestController {
 		}
 
 		model.addAttribute("message", "uploadDropbox");
-		model.addAttribute("dropboxLink",
-				"https://www.dropbox.com/home/suppliers/");
+		model.addAttribute("dropboxLink", "https://www.dropbox.com/home/suppliers/");
 		return "exhibitors.";
 	}
 
 	@RequestMapping(value = "/import/csv", method = RequestMethod.POST)
-	public String importCSVPost(Locale locale,
-			@RequestParam("csv-file") MultipartFile file, Model model)
+	public String importCSVPost(Locale locale, @RequestParam("csv-file") MultipartFile file, Model model)
 			throws IOException {
 
 		logger.info("-- CSV imporing is started --   " + file.getName());
@@ -233,8 +218,7 @@ public class StandardTestController {
 		beanStrategy.setColumnMapping(columnMapping);
 
 		CsvToBean<Vendor> csvToBean = new CsvToBean<Vendor>();
-		InputStreamReader inputStreamReader = new InputStreamReader(
-				file.getInputStream());
+		InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream());
 		CSVReader reader = new CSVReader(inputStreamReader);
 		List<Vendor> vendors = csvToBean.parse(beanStrategy, reader);
 		for (Vendor vendor : vendors) {
@@ -254,25 +238,41 @@ public class StandardTestController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json" })
-	public @ResponseBody String add(@ModelAttribute CTest test,
-			@RequestParam("xml-file") MultipartFile file,	BindingResult result, Model model) {
+	public @ResponseBody String add(@ModelAttribute CTest test, @RequestParam("xml-file") MultipartFile file,
+			BindingResult result, Model model) throws IOException {
+		SaxHandler saxHandler = new SaxHandler();
+		saxHandler.parse(file.getInputStream());
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		System.out.println("test is " + test.getName());
+		logger.info("test is " + test.getName());
+		logger.info("questions are : "+ saxHandler.getTestBean().getQuestions());
+		//List<CQuestion> questionList= new LinkedList<CQuestion>();
+		for(QuestionBean qBean: saxHandler.getTestBean().getQuestions()){
+			CQuestion cQuestion= new CQuestion();
+			cQuestion.setCTest(test);
+			cQuestion.setQuestion(qBean.getTitle());
+			test.addCQuestion(cQuestion);
+			//questionList.add(cQuestion);
+			//List<COption> optionList= new LinkedList<COption>();
+			for(OptionBean  oBean:qBean.getOptions()){
+				COption cOption= new COption();
+				cOption.setChoices(oBean.getTitle());
+				cQuestion.addCOption(cOption);
+				cOption.setCQuestion(cQuestion);
+				//optionList.add(cOption);
+			}
+		}
 		testService.create(test);
-		
 
 		JsonArrayBuilder arrayBuilder = factory.createArrayBuilder();
-		JsonArray value = arrayBuilder.add(
-				factory.createObjectBuilder()
-						.add("cTestsId", test.getcTestsId())
-						.add("name", test.getName())).build();
+		JsonArray value = arrayBuilder
+				.add(factory.createObjectBuilder().add("cTestsId", test.getcTestsId()).add("name", test.getName()))
+				.build();
 
 		return value.toString();
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public @ResponseBody String edit(@ModelAttribute CTest test,
-			BindingResult result, Model model) {
+	public @ResponseBody String edit(@ModelAttribute CTest test, BindingResult result, Model model) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
 		CTest find = testService.find(test.getcTestsId());
 		find.setName(test.getName());
@@ -281,15 +281,13 @@ public class StandardTestController {
 		testService.update(find);
 		System.out.println("test is " + find);
 
-		JsonObject value = factory.createObjectBuilder()
-				.add("cTestsId", test.getcTestsId())
-				.add("name", test.getName()).build();
+		JsonObject value = factory.createObjectBuilder().add("cTestsId", test.getcTestsId()).add("name", test.getName())
+				.build();
 
 		return value.toString();
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = {
-			"application/json", "application/xml",
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = { "application/json", "application/xml",
 			"application/x-www-form-urlencoded" })
 	public String delete(@RequestBody String json, Model model) {
 		JsonReader jsonReader = Json.createReader(new StringReader(json));
@@ -305,8 +303,8 @@ public class StandardTestController {
 		return "exhibitors.";
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, consumes = {
-			"application/json", "application/xml" })
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, consumes = { "application/json",
+			"application/xml" })
 	public @ResponseBody String deleteById(@PathVariable Long id) {
 		CTest vendor = testService.find(id);
 		testService.delete(vendor);

@@ -1,6 +1,7 @@
 package com.velmurugan.certifier.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,7 +14,7 @@ class GlobalCertifierExceptionHandler {
 	public static final String DEFAULT_ERROR_VIEW = "error.";
 
 	@ExceptionHandler(value = Exception.class)
-	public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e)
+	public ModelAndView defaultErrorHandler(HttpServletRequest req,HttpServletResponse res, Exception e)
 			throws Exception {
 		// If the exception is annotated with @ResponseStatus rethrow it and let
 		// the framework handle it - like the OrderNotFoundException example
@@ -27,6 +28,7 @@ class GlobalCertifierExceptionHandler {
 		mav.addObject("exception", e);
 		mav.addObject("url", req.getRequestURL());
 		mav.setViewName(DEFAULT_ERROR_VIEW);
+		res.setStatus(500);
 		return mav;
 	}
 }

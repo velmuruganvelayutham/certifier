@@ -92,14 +92,20 @@ $('#ajaxform').bootstrapValidator().on('success.form.bv', function(e) {
   
     // Get the form instance
     var $form = $(e.target);
-
+var     formdata=false;
+    if(window.FormData){
+        formdata = new FormData($form[0]);
+    }
+    console.log(formdata);
     // Get the BootstrapValidator instance
     var bv = $form.data('bootstrapValidator');
 
     $.ajax({
               url : $form.attr('action'),
               type: "POST",
-              data :  $form.serialize(),
+              data :  formdata,
+              processData: false,
+              contentType: false,
               beforeSend:function(){
             	  $('#statusbar').empty();
             	 // $("#addNewTestLabel").html("<font color='black'>"+ "Saving Test . Please wait!. "  +"</font>");
