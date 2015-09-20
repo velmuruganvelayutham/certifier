@@ -59,7 +59,7 @@ public class CTest implements Serializable {
 
 	// bi-directional many-to-one association to CQuestion
 	@OneToMany(mappedBy = "CTest", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<CQuestion> CQuestions =new LinkedHashSet<CQuestion>();
+	private Set<CQuestion> CQuestions = new LinkedHashSet<CQuestion>();
 
 	public CTest() {
 	}

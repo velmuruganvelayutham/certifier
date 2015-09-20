@@ -22,6 +22,7 @@ public class VelocityEmailSender {
 			.getLogger(VelocityEmailSender.class);
 
 	private final VelocityEngine velocityEngine;
+
 	private final JavaMailSender mailSender;
 
 	/**
@@ -38,10 +39,8 @@ public class VelocityEmailSender {
 	 * Sends e-mail using Velocity template for the body and the properties
 	 * passed in as Velocity variables.
 	 *
-	 * @param msg
-	 *            The e-mail message to be sent, except for the body.
-	 * @param hTemplateVariables
-	 *            Variables to use when processing the template.
+	 * @param msg The e-mail message to be sent, except for the body.
+	 * @param hTemplateVariables Variables to use when processing the template.
 	 */
 	public void send(final SimpleMailMessage msg,
 			final Map<String, Object> hTemplateVariables) {

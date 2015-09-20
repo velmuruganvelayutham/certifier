@@ -6,8 +6,8 @@ import com.velmurugan.certifier.dao.TestDao;
 import com.velmurugan.certifier.entity.CTest;
 
 @Repository
-public class TestDaoImpl extends HibernateGenericDaoImpl<CTest> implements
-		TestDao {
+public class TestDaoImpl extends HibernateGenericDaoImpl<CTest>
+		implements TestDao {
 	public TestDaoImpl() {
 		setClazz(CTest.class);
 	}

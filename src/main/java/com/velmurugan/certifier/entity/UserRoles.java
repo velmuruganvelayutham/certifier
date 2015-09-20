@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "user_roles", uniqueConstraints = { @UniqueConstraint(columnNames = {
-		"username", "ROLE" }) })
+@Table(name = "user_roles", uniqueConstraints = {
+		@UniqueConstraint(columnNames = { "username", "ROLE" }) })
 public class UserRoles implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +27,7 @@ public class UserRoles implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "username", nullable = false)
 	private Users username;
+
 	@Column(name = "ROLE")
 	private String role;
 

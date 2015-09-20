@@ -6,8 +6,8 @@ import com.velmurugan.certifier.dao.VendorDao;
 import com.velmurugan.certifier.entity.Vendor;
 
 @Repository
-public class VendorDaoImpl extends HibernateGenericDaoImpl<Vendor> implements
-		VendorDao {
+public class VendorDaoImpl extends HibernateGenericDaoImpl<Vendor>
+		implements VendorDao {
 
 	public VendorDaoImpl() {
 		setClazz(Vendor.class);

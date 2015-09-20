@@ -8,8 +8,8 @@ import javax.persistence.PersistenceContext;
 
 import com.velmurugan.certifier.dao.GenericDao;
 
-public abstract class GenericJpaDaoImpl<T extends Serializable> implements
-		GenericDao<T> {
+public abstract class GenericJpaDaoImpl<T extends Serializable>
+		implements GenericDao<T> {
 
 	private Class<T> clazz;
 

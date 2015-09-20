@@ -6,7 +6,9 @@ import java.util.List;
 public class TestBean {
 
 	private String name;
+
 	private String description;
+
 	private String category;
 
 	/**
@@ -17,8 +19,7 @@ public class TestBean {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -32,8 +33,7 @@ public class TestBean {
 	}
 
 	/**
-	 * @param description
-	 *            the description to set
+	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -47,8 +47,7 @@ public class TestBean {
 	}
 
 	/**
-	 * @param category
-	 *            the category to set
+	 * @param category the category to set
 	 */
 	public void setCategory(String category) {
 		this.category = category;
@@ -62,8 +61,7 @@ public class TestBean {
 	}
 
 	/**
-	 * @param questions
-	 *            the questions to set
+	 * @param questions the questions to set
 	 */
 	public void setQuestions(List<QuestionBean> questions) {
 		this.questions = questions;
@@ -76,8 +74,8 @@ public class TestBean {
 	 */
 	@Override
 	public String toString() {
-		return "TestBean [name=" + name + ", description=" + description + ", category=" + category + ", questions="
-				+ questions + "]";
+		return "TestBean [name=" + name + ", description=" + description
+				+ ", category=" + category + ", questions=" + questions + "]";
 	}
 
 	private List<QuestionBean> questions = new LinkedList<QuestionBean>();

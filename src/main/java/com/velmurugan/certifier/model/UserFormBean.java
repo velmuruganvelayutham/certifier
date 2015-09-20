@@ -3,7 +3,9 @@ package com.velmurugan.certifier.model;
 public class UserFormBean {
 
 	private String email;
+
 	private String password;
+
 	private boolean isAdmin;
 
 	public UserFormBean(String email, String password, boolean isAdmin) {
