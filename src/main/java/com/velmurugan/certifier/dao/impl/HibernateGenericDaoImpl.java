@@ -58,15 +58,15 @@ public abstract class HibernateGenericDaoImpl<T extends Serializable>
 	@Override
 	public List<T> findAll(Page page) {
 		return getCurrentSession().createQuery("from " + clazz.getName())
-				.setMaxResults(page.getLimit())
-				.setFirstResult(page.getOffset()).list();
+				.setMaxResults(page.getLimit()).setFirstResult(page.getOffset())
+				.list();
 
 	}
 
 	@Override
 	public Long count() {
-		Query createQuery = getCurrentSession().createQuery(
-				"select count(*) from " + clazz.getName());
+		Query createQuery = getCurrentSession()
+				.createQuery("select count(*) from " + clazz.getName());
 		Object uniqueResult = createQuery.uniqueResult();
 		return ((Long) uniqueResult).longValue();
 	}

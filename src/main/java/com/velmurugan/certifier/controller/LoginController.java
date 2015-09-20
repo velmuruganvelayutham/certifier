@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,8 +49,7 @@ public class LoginController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public String home(
-			Locale locale,
+	public String home(Locale locale,
 			@RequestParam(value = "login_error", required = false) String error,
 			Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -61,30 +59,36 @@ public class LoginController {
 			model.addAttribute("error", "Invalid username or password");
 		return "login.";
 	}
-	
-	@RequestMapping(value = { "/login/validate" }, method = RequestMethod.GET ,produces = {"application/json"}) 
-	public  @ResponseBody String validateEmail(
-			@RequestParam("email") String email,
-			Model model) {
+
+	@RequestMapping(value = {
+			"/login/validate" }, method = RequestMethod.GET, produces = {
+					"application/json" })
+	public @ResponseBody String validateEmail(
+			@RequestParam("email") String email, Model model) {
 		// fetch the user by email { "valid": true }
-		 Users findByEmail = userService.findByEmail(email);
-		 if(findByEmail==null) {
-			 return Json.createObjectBuilder().add("valid", Boolean.FALSE).build().toString();
-		 }
-		return Json.createObjectBuilder().add("valid", Boolean.TRUE).build().toString();
-	}
-	@RequestMapping(value = { "/signup/validate" }, method = RequestMethod.GET ,produces = {"application/json"}) 
-	public  @ResponseBody String isEmailExists(
-			@RequestParam("email") String email,
-			Model model) {
-		// fetch the user by email { "valid": true }
-		 Users findByEmail = userService.findByEmail(email);
-		 if(findByEmail==null) {
-			 return Json.createObjectBuilder().add("valid", Boolean.TRUE).build().toString();
-		 }
-		return Json.createObjectBuilder().add("valid", Boolean.FALSE).build().toString();
+		Users findByEmail = userService.findByEmail(email);
+		if (findByEmail == null) {
+			return Json.createObjectBuilder().add("valid", Boolean.FALSE)
+					.build().toString();
+		}
+		return Json.createObjectBuilder().add("valid", Boolean.TRUE).build()
+				.toString();
 	}
 
+	@RequestMapping(value = {
+			"/signup/validate" }, method = RequestMethod.GET, produces = {
+					"application/json" })
+	public @ResponseBody String isEmailExists(
+			@RequestParam("email") String email, Model model) {
+		// fetch the user by email { "valid": true }
+		Users findByEmail = userService.findByEmail(email);
+		if (findByEmail == null) {
+			return Json.createObjectBuilder().add("valid", Boolean.TRUE).build()
+					.toString();
+		}
+		return Json.createObjectBuilder().add("valid", Boolean.FALSE).build()
+				.toString();
+	}
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String invalidUsername(Model model) {
@@ -100,7 +104,8 @@ public class LoginController {
 		List<String> list2 = map.get("password");
 		if (StringUtils.equals(list.get(0), list2.get(0))) {
 			return "landing.";
-		} else {
+		}
+		else {
 			model.addAttribute("error", "Invalid username or password");
 			return "login.";
 		}

@@ -32,6 +32,7 @@ public class SearchController {
 
 	@Autowired
 	VendorService vendorService;
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(SearchController.class);
 
@@ -55,8 +56,8 @@ public class SearchController {
 		return test();
 	}
 
-	public static void main(String[] args) throws SolrServerException,
-			IOException {
+	public static void main(String[] args)
+			throws SolrServerException, IOException {
 		new SearchController().test();
 	}
 
@@ -67,8 +68,9 @@ public class SearchController {
 	 */
 	public String test() throws SolrServerException, IOException {
 		final String baseTempPath = System.getProperty("java.io.tmpdir");
-		File tempDir = new File(baseTempPath + File.separator
-				+ System.getProperty("user.name") + File.separator + "solrhome");
+		File tempDir = new File(
+				baseTempPath + File.separator + System.getProperty("user.name")
+						+ File.separator + "solrhome");
 		if (!tempDir.exists()) {
 			tempDir.mkdirs();
 		}

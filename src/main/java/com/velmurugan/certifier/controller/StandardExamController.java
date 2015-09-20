@@ -29,10 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.bean.CsvToBean;
-import au.com.bytecode.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
-
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;
 import com.dropbox.core.DbxException;
@@ -41,6 +37,10 @@ import com.dropbox.core.DbxWriteMode;
 import com.velmurugan.certifier.dao.Page;
 import com.velmurugan.certifier.entity.Vendor;
 import com.velmurugan.certifier.service.VendorService;
+
+import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.bean.CsvToBean;
+import au.com.bytecode.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 
 /**
  * Handles requests for the application home page.
@@ -51,6 +51,7 @@ public class StandardExamController {
 
 	@Autowired
 	VendorService vendorService;
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(StandardExamController.class);
 
@@ -62,42 +63,38 @@ public class StandardExamController {
 		return "standardExam.";
 	}
 
-	@RequestMapping(value = "/data", method = RequestMethod.GET, produces = { "application/json" })
+	@RequestMapping(value = "/data", method = RequestMethod.GET, produces = {
+			"application/json" })
 	public @ResponseBody String data(Locale locale, Model model,
 			@RequestParam(value = "limit", defaultValue = "1") int limit,
 			@RequestParam(value = "offset", defaultValue = "0") int offset,
 			@RequestParam(value = "order", defaultValue = "asc") String order) {
 		JsonBuilderFactory factory = Json.createBuilderFactory(null);
-		JsonObject value = factory
-				.createObjectBuilder()
-				.add("totalQ", "65")
+		JsonObject value = factory.createObjectBuilder().add("totalQ", "65")
 				.add("q", "This is the second version of Certifier")
 				.add("a",
 						factory.createArrayBuilder()
-								.add(factory
-										.createObjectBuilder()
+								.add(factory.createObjectBuilder()
 										.add("option",
-												"java"
-														+ System.currentTimeMillis())
+												"java" + System
+														.currentTimeMillis())
 										.add("checked", false))
-								.add(factory
-										.createObjectBuilder()
+								.add(factory.createObjectBuilder()
 										.add("option",
-												"ccccc"
-														+ System.currentTimeMillis())
+												"ccccc" + System
+														.currentTimeMillis())
 										.add("checked", false))
-								.add(factory
-										.createObjectBuilder()
+								.add(factory.createObjectBuilder()
 										.add("option",
-												"python"
-														+ System.currentTimeMillis())
+												"python" + System
+														.currentTimeMillis())
 										.add("checked", false))
-								.add(factory
-										.createObjectBuilder()
+								.add(factory.createObjectBuilder()
 										.add("option",
 												"freedom"
 														+ System.currentTimeMillis())
-										.add("checked", false))).build();
+										.add("checked", false)))
+				.build();
 
 		return value.toString();
 	}
@@ -148,7 +145,7 @@ public class StandardExamController {
 	@RequestMapping(value = "/uploadDropbox", method = RequestMethod.POST)
 	public String uploadFile(Locale locale,
 			@RequestParam("dropbox-file") MultipartFile file, Model model)
-			throws DbxException {
+					throws DbxException {
 		// final String APP_KEY = "gw4w14qy8129lpi";
 		// final String APP_SECRET = "hpycgtegwghz183";
 		//
@@ -157,8 +154,8 @@ public class StandardExamController {
 				Locale.getDefault().toString());
 		DbxClient client = new DbxClient(config,
 				"vmWxWONh_7gAAAAAAAAAE3egnyeHlXJ3EEHBLo8rFv6FU3IGil1Ps9zwGpNlpE5Z");
-		// System.out.println("Linked account: " +
-		// client.getAccountInfo().displayName);
+				// System.out.println("Linked account: " +
+				// client.getAccountInfo().displayName);
 
 		// File inputFile = new File("working-draft.txt");
 		// FileInputStream inputStream = new FileInputStream(inputFile);
@@ -169,13 +166,16 @@ public class StandardExamController {
 					"/suppliers/" + file.getOriginalFilename(),
 					DbxWriteMode.add(), file.getSize(), inputStream);
 			System.out.println("Uploaded: " + uploadedFile.toString());
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			try {
 				inputStream.close();
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -190,7 +190,7 @@ public class StandardExamController {
 	@RequestMapping(value = "/import/csv", method = RequestMethod.POST)
 	public String importCSVPost(Locale locale,
 			@RequestParam("csv-file") MultipartFile file, Model model)
-			throws IOException {
+					throws IOException {
 
 		logger.info("-- CSV imporing is started --   " + file.getName());
 		HeaderColumnNameTranslateMappingStrategy<Vendor> beanStrategy = new HeaderColumnNameTranslateMappingStrategy<Vendor>();

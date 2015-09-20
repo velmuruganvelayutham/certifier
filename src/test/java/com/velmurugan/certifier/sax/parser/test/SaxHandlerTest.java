@@ -34,7 +34,8 @@ public class SaxHandlerTest {
 				System.out.println(questionBean);
 			}
 			Assert.assertEquals(2, questions.size());
-		} catch (Throwable err) {
+		}
+		catch (Throwable err) {
 			err.printStackTrace();
 		}
 

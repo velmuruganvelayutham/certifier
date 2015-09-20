@@ -21,8 +21,10 @@ public class Category implements Serializable {
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer category_id;
+
 	@Column
 	private String name;
+
 	@ManyToOne
 	@JoinColumn(name = "vendor_id")
 	private Vendor vendor;

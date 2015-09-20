@@ -1,7 +1,5 @@
 package com.velmurugan.certifier.sax.parser;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,8 +15,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.velmurugan.certifier.model.OptionBean;
 import com.velmurugan.certifier.model.QuestionBean;
 import com.velmurugan.certifier.model.TestBean;
-
-import junit.framework.Assert;
 
 public class SaxHandler extends DefaultHandler {
 
