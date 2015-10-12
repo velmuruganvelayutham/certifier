@@ -62,6 +62,9 @@ edit the **persistence-mysql.properties** file inside **certifier/src/main/resou
 _access the application at_ __[localhost:8080/certifier](http://localhost:8080/certifier)__
 
 
+### Debug Locally ###
+
+https://velmuruganv.wordpress.com/2015/10/11/eclipse-maven-jetty-remote-java-web-application-debugging/
 
 
 
