@@ -23,7 +23,7 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
 ## Demo Instance:
 
 
-The demo  of this project is deployed [Click Here ] (http://52.10.55.149:8080/certifier-1.0.0-BUILD-SNAPSHOT/login)
+This project is still under development. !,... The demo  of this project is deployed [Click Here ] (http://52.10.55.149:8080/certifier-1.0.0-BUILD-SNAPSHOT/login)
 
 
 
