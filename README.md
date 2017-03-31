@@ -69,5 +69,18 @@ _access the application at_ __[localhost:8080/certifier](http://localhost:8080/c
 https://velmuruganv.wordpress.com/2015/10/11/eclipse-maven-jetty-remote-java-web-application-debugging/
 
 
+### Docker ###
+
+To start the mysql container.
+
+docker run --name localhost -e MYSQL_ROOT_PASSWORD=root -p3036:3036 -d mysql:latest
+
+To start the Certifier Application Tomcat container.
+
+docker run --rm -p8080:8080 --link localhost:mysql certifier 
+
+
+
+
 
 

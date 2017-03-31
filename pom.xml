@@ -247,7 +247,13 @@
 <!-- 		   <version>4.3.5.Final</version> -->
 <!-- 		   <scope>runtime</scope> -->
 <!-- 		</dependency> -->
- 
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.4</version>
+            <scope>compile</scope>
+        </dependency>
+        
 		<dependency>
 		   <groupId>mysql</groupId>
 		   <artifactId>mysql-connector-java</artifactId>
@@ -389,79 +395,52 @@
         <plugin>
 		  <groupId>org.eclipse.jetty</groupId>
 		  <artifactId>jetty-maven-plugin</artifactId>
-		  <version>9.2.7.v20150116</version>
+		  <version>9.2.0.v20140526</version>
 		  <configuration>
 		    <scanIntervalSeconds>10</scanIntervalSeconds>
 		    <webApp>
 		      <contextPath>/certifier</contextPath>
 		    </webApp>
+                    <httpConnector>
+                        <port>${jetty.port}</port>
+                        <host>${jetty.host}</host>
+                    </httpConnector>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>spring.profiles.active</name>
+                            <value>${spring.profiles.active}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>datasource.dialect</name>
+                            <value>${datasource.dialect}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>datasource.driver</name>
+                            <value>${datasource.driver}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>datasource.url</name>
+                            <value>${datasource.url}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>datasource.username</name>
+                            <value>${datasource.username}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>datasource.password</name>
+                            <value>${datasource.password}</value>
+                        </systemProperty>
+                        <!-- <systemProperty> <name>datasource.disable.migration</name> <value>${datasource.disable.migration}</value>
+							</systemProperty> -->
+                    </systemProperties>
 		  </configuration>
 		</plugin>
+		
+		
 			
   <!-- maven sql execute script plugin -->
 			
-	<plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>sql-maven-plugin</artifactId>
-        <version>1.5</version>
-
-        <dependencies>
-          <!-- specify the dependent jdbc driver here -->
-         <dependency>
-		   <groupId>mysql</groupId>
-		   <artifactId>mysql-connector-java</artifactId>
-		   <version>${mysql.version}</version>
-		   <scope>compile</scope>
-		</dependency>
-        </dependencies>
-
-        <!-- common configuration shared by all executions -->
-        <configuration>
-          <driver>${jdbc.driverClassName}</driver>
-          <url>${jdbc.url}</url>
-          <username>${jdbc.user}</username>
-          <password>${jdbc.pass}</password>
-          <!-- You can comment out username/password configurations and
-               have maven to look them up in your settings.xml using ${settingsKey}
-          -->
-          <settingsKey>sensibleKey</settingsKey>
-          <!--all executions are ignored if -Dmaven.test.skip=true-->
-          <skip>${maven.test.skip}</skip>
-        </configuration>
-
-        <executions>
-          <execution>
-            <id>create-db</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <url>${jdbc.url}</url>
-              <!-- no transaction -->
-              <autocommit>true</autocommit>
-              <sqlCommand>create database tradeshow</sqlCommand>
-               <!-- ignore error when database is not avaiable -->
-              <onError>continue</onError>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>create-schema</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <autocommit>true</autocommit>
-              <srcFiles>
-                <srcFile>src/main/resources/sql/tradeshow_users.sql</srcFile>
-                <srcFile>src/main/resources/sql/tradeshow_user_roles.sql</srcFile>
-              </srcFiles>
-            </configuration>
-          </execution>  
-        </executions>
-      </plugin>
+	
 					
 			
        <!--  <plugin>
@@ -509,6 +488,69 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+
+       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sql-maven-plugin</artifactId>
+        <version>1.5</version>
+
+        <dependencies>
+          <!-- specify the dependent jdbc driver here -->
+         <dependency>
+                  <groupId>mysql</groupId>
+                  <artifactId>mysql-connector-java</artifactId>
+                  <version>${mysql.version}</version>
+                  <scope>compile</scope>
+               </dependency>
+        </dependencies>
+
+       <!-- common configuration shared by all executions -->
+        <configuration>
+          <driver>${datasource.driver}</driver>
+          <url>${datasource.url}</url>
+          <username>${datasource.username}</username>
+          <password>${datasource.password}</password>
+          <!-- You can comment out username/password configurations and
+               have maven to look them up in your settings.xml using ${settingsKey}
+          -->
+          <settingsKey>sensibleKey</settingsKey>
+          <!--all executions are ignored if -Dmaven.test.skip=true-->
+          <skip>${maven.test.skip}</skip>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>create-db</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <url>${datasource.url}</url>
+              <!-- no transaction -->
+             <autocommit>true</autocommit>
+              <sqlCommand>create database tradeshow</sqlCommand>
+               <!-- ignore error when database is not avaiable -->
+              <onError>continue</onError>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>create-schema</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <autocommit>true</autocommit>
+             <srcFiles>
+                <srcFile>src/main/resources/sql/tradeshow_users.sql</srcFile>
+                <srcFile>src/main/resources/sql/tradeshow_user_roles.sql</srcFile>
+              </srcFiles>
+            </configuration>
+          </execution>  
+        </executions>
+      </plugin>
         </plugins>
         <pluginManagement>
         	<plugins>
@@ -578,4 +620,38 @@
     </repository>
 </repositories>
     
+    
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <fast-build>false</fast-build>
+                <jetty.port>8080</jetty.port>
+                <jetty.host>0.0.0.0</jetty.host>
+                <datasource.driver>org.hsqldb.jdbcDriver</datasource.driver>
+                <datasource.dialect>org.hibernate.dialect.HSQLDialect</datasource.dialect>
+                <datasource.url>jdbc:hsqldb:file:tradeshow;create=true</datasource.url>
+                <datasource.username>sa</datasource.username>
+                <datasource.password />
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <fast-build>false</fast-build>
+                <jetty.port>8080</jetty.port>
+                <jetty.host>0.0.0.0</jetty.host>
+                <datasource.driver>com.mysql.jdbc.Driver</datasource.driver>
+                <datasource.dialect>org.hibernate.dialect.MySQL5Dialect</datasource.dialect>
+                <datasource.url>jdbc:mysql://localhost:3306/tradeshow?createDatabaseIfNotExist=true</datasource.url>
+                <datasource.username>root</datasource.username>
+                <datasource.password>root</datasource.password>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
+        </profile>
+        </profiles>
 </project>
