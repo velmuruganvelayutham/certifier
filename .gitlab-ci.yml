@@ -1,5 +1,11 @@
+image: docker:latest
+
 services:
   - mysql:latest
+  - docker:dind
+
+before_script:
+  - docker info
 
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
@@ -17,3 +23,4 @@ build:
     - mvn clean package -Pprod
   tags:
     - docker
+    - shared
