@@ -16,7 +16,7 @@ stages:
 
 build:
   stage: build
-  image: mvn:latest
+  image: maven:latest
   script:
     - mvn clean package -Pprod
   tags:
@@ -29,5 +29,5 @@ docker-build:
   script:
     - docker info
   tags:
-    -docker
-    -shared
+    - docker
+    - shared
