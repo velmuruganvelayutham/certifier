@@ -73,7 +73,7 @@ https://velmuruganv.wordpress.com/2015/10/11/eclipse-maven-jetty-remote-java-web
 
 To start the mysql container.
 
-docker run --name localhost -e MYSQL_ROOT_PASSWORD=root -p3036:3036 -d mysql:latest
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p3036:3036 -d mysql:latest
 
 To start the Certifier Application Tomcat container.
 
