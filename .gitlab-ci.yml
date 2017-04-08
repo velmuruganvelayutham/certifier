@@ -4,9 +4,6 @@ services:
   - mysql:latest
   - docker:dind
 
-before_script:
-  - docker info
-
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
   MYSQL_DATABASE: certifier
@@ -14,13 +11,23 @@ variables:
 
 stages:
   - build
+  - assemble
   - deploy
 
 build:
   stage: build
-  image: docker:latest
+  image: mvn:latest
   script:
     - mvn clean package -Pprod
   tags:
     - docker
     - shared
+
+docker-build:
+  stage: assemble
+  image: docker:latest
+  script:
+    - docker info
+  tags:
+    -docker
+    -shared
