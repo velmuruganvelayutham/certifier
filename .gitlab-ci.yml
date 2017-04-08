@@ -19,6 +19,9 @@ build:
   tags:
     - docker
     - shared
+  artifacts:
+    paths:
+      - target/*.war
 
 docker-build:
   stage: assemble
