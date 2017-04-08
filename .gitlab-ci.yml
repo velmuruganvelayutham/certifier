@@ -1,10 +1,9 @@
-
 services:
   - mysql:latest
 
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
-  MYSQL_DATABASE:certifier
+  MYSQL_DATABASE: certifier
   MYSQL_ROOT_PASSWORD: root
 
 stages:
