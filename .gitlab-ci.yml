@@ -1,8 +1,5 @@
-image: docker:latest
-
 services:
   - mysql:latest
-  - docker:dind
 
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
@@ -26,8 +23,16 @@ build:
 docker-build:
   stage: assemble
   image: docker:latest
+  variables:
+    IMAGE_TAG : $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  services:
+    - docker:dind
   script:
     - docker info
+    - docker build -t $IMAGE_TAG .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $IMAGE_TAG
+    
   tags:
     - docker
     - shared
