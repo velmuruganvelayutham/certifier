@@ -1,4 +1,11 @@
 
+services:
+  - mysql:latest
+
+variables:
+  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
+  MYSQL_DATABASE:certifier
+  MYSQL_ROOT_PASSWORD: root
 
 stages:
   - build
@@ -8,6 +15,6 @@ build:
   stage: build
   image: maven:3.3.9-jdk-8
   script:
-    - mvn clean package
+    - mvn clean package -Pprod
   tags:
     - docker

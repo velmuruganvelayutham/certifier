@@ -647,7 +647,7 @@
                 <jetty.host>0.0.0.0</jetty.host>
                 <datasource.driver>com.mysql.jdbc.Driver</datasource.driver>
                 <datasource.dialect>org.hibernate.dialect.MySQL5Dialect</datasource.dialect>
-                <datasource.url>jdbc:mysql://localhost:3306/tradeshow?createDatabaseIfNotExist=true</datasource.url>
+                <datasource.url>jdbc:mysql://mysql:3306/tradeshow?createDatabaseIfNotExist=true</datasource.url>
                 <datasource.username>root</datasource.username>
                 <datasource.password>root</datasource.password>
                 <spring.profiles.active>prod</spring.profiles.active>
