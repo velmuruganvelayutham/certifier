@@ -1,0 +1,13 @@
+
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: maven:3.3.9-jdk-8
+  script:
+    - mvn clean package
+  tags:
+    - docker
