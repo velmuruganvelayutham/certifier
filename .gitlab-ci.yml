@@ -59,3 +59,16 @@ docker-build-sqlscript:
   tags:
     - docker
     - shared
+ 
+deploy_local_vm:
+  stage: deploy
+  script:    
+    - curl -s https://raw.githubusercontent.com/velmuruganvelayutham/shell-scripts/master/deploy.sh | bash -s
+  environment:
+    name: local-vm
+    url: http://dev.mock-labs.com
+  only:
+    - master
+  tags:
+    - shell-osboxes
+
