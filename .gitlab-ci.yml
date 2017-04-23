@@ -46,15 +46,15 @@ docker-build-sqlscript:
   stage: assemble
   image: docker:latest
   variables:
-    IMAGE_TAG_SCRIPT : $CI_REGISTRY_IMAGE:sqlscript
+    IMAGE_TAG : $CI_REGISTRY_IMAGE:sqlscript
   services:
     - docker:dind
   script:
     - cd src/main/resources/sql/
     - docker info
-    - docker build -t $IMAGE_TAG_SCRIPT .
+    - docker build -t $IMAGE_TAG .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker push $IMAGE_TAG_SCRIPT
+    - docker push $IMAGE_TAG
 
   tags:
     - docker
