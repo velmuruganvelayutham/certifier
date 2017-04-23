@@ -1,0 +1,29 @@
+version: '2'
+
+volumes:
+    uploads:
+        driver: local
+  
+services:
+    sqlscript:
+        image: registry.gitlab.com/velmuruganv/mock-labs-1:sqlscript
+
+    tomcat:
+        image: registry.gitlab.com/velmuruganv/mock-labs-1:master
+        links:
+            - mysql
+        ports:
+            - "80:8080"
+
+    mysql:
+        image: mysql:5.7
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=tradeshow
+            - MYSQL_USER=admin
+            - MYSQL_PASSWORD=root
+        ports:
+            - "3306:3306"
+        volumes_from:
+            - sqlscript
+
