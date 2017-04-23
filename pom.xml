@@ -369,6 +369,7 @@
 		       
 	</dependencies>
     <build>
+        <finalName>certifier</finalName>
         <plugins>        
         
         <!-- Maven property file plugin -->        
