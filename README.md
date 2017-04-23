@@ -4,6 +4,8 @@
 
 [![Join the chat at https://gitter.im/velmuruganvelayutham/certifier](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/velmuruganvelayutham/certifier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![build status](https://gitlab.com/velmuruganv/mock-labs-1/badges/master/build.svg)](https://gitlab.com/velmuruganv/mock-labs-1/commits/master)
+
 Spring MVC application for Online assessment test, Candidate Screening, aptitude assessment tests.
 
 1. Candidate Pre Screening.
