@@ -1,4 +1,4 @@
-package com.velmurugan.certifier.sax.parser.test;
+package com.velmurugan.certifier.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +33,7 @@ public class SaxHandlerTest {
 			for (QuestionBean questionBean : questions) {
 				System.out.println(questionBean);
 			}
-			Assert.assertEquals(2, questions.size());
+			Assert.assertEquals(10, questions.size());
 		}
 		catch (Throwable err) {
 			err.printStackTrace();
