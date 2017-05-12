@@ -83,7 +83,7 @@ docker run --rm -p8080:8080 --link localhost:mysql certifier
 
 ### Docker Compose ###
 
-docker-compose build
+docker-compose build && 
 docker-compose up -d
 
 Access the application at http://localhost/certifier
