@@ -39,5 +39,13 @@ Similar to standard Test , but answers can be evaluated before moving to the nex
 It can be either standard or practice test or Objective wise Tests but Total no of questions , timings, 
 Question Toughness can be choosen by the Candidate.
 
+
+--
+nginx web server.
+redis spring session.
+websocket.
+elastic search. 
+
+
  
  

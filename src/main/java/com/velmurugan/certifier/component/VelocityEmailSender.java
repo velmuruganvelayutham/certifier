@@ -18,8 +18,11 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 @Component
 public class VelocityEmailSender {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(VelocityEmailSender.class);
+	private static final String UTF_8 = "UTF-8";
+
+	private static final String REGISTRATION_TEMPLATE_VM = "/registrationTemplate.vm";
+
+	private static final Logger logger = LoggerFactory.getLogger(VelocityEmailSender.class);
 
 	private final VelocityEngine velocityEngine;
 
@@ -29,8 +32,7 @@ public class VelocityEmailSender {
 	 * Constructor
 	 */
 	@Autowired
-	public VelocityEmailSender(VelocityEngine velocityEngine,
-			JavaMailSender mailSender) {
+	public VelocityEmailSender(VelocityEngine velocityEngine, JavaMailSender mailSender) {
 		this.velocityEngine = velocityEngine;
 		this.mailSender = mailSender;
 	}
@@ -39,11 +41,12 @@ public class VelocityEmailSender {
 	 * Sends e-mail using Velocity template for the body and the properties
 	 * passed in as Velocity variables.
 	 *
-	 * @param msg The e-mail message to be sent, except for the body.
-	 * @param hTemplateVariables Variables to use when processing the template.
+	 * @param msg
+	 *            The e-mail message to be sent, except for the body.
+	 * @param hTemplateVariables
+	 *            Variables to use when processing the template.
 	 */
-	public void send(final SimpleMailMessage msg,
-			final Map<String, Object> hTemplateVariables) {
+	public void send(final SimpleMailMessage msg, final Map<String, Object> hTemplateVariables) {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -52,9 +55,8 @@ public class VelocityEmailSender {
 				message.setFrom(msg.getFrom());
 				message.setSubject(msg.getSubject());
 
-				String body = VelocityEngineUtils.mergeTemplateIntoString(
-						velocityEngine, "/registrationTemplate.vm",
-						hTemplateVariables);
+				String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, REGISTRATION_TEMPLATE_VM,
+						UTF_8, hTemplateVariables);
 
 				logger.info("body={}", body);
 
