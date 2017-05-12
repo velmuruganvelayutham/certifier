@@ -10,7 +10,7 @@ public interface UserService {
 	public List<Users> findAll();
 
 	public Users find(Long id);
-	
+
 	public Users findByEmail(String email);
 
 	public List<Users> findAll(Page page);
@@ -22,4 +22,6 @@ public interface UserService {
 	public void delete(Users Users);
 
 	public Long count();
+
+	public Users getUsersByToken(String token);
 }
