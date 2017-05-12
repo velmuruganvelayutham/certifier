@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -48,9 +47,6 @@ public class LoginController {
 
 	@Autowired
 	VelocityEmailSender velocityEmailSender;
-
-	@Autowired
-	SimpleMailMessage templateMessage;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -129,23 +125,21 @@ public class LoginController {
 		String appURL = request.getScheme() + "://" + request.getServerName() + request.getContextPath();
 		String confirmationURL = appURL + "/confirmation/token/" + token;
 		// send confirmation mail
-		sendMail(userBean.getEmail(), confirmationURL);
-		logger.info("email is sent to {}", user);
-		model.addAttribute("error", "confirmation link has beed sent to  " + user.getUsername() + "Please confirm !");
+		sendMailConfirmationLink(userBean.getEmail(), confirmationURL);
+		logger.info("email is sent to {}", user.getUsername());
+		model.addAttribute("error",
+				"confirmation link has beed sent to  " + user.getUsername() + " Please confirm it!.");
 		return "login.";
 
 	}
 
-	private void sendMail(String mail, String confirmationURL) {
-		// mail sending
-		templateMessage.setTo(mail);
+	private void sendMailConfirmationLink(String mail, String confirmationURL) {
 
 		Map<String, Object> props = new HashMap<String, Object>();
 		props.put("email", mail);
 		props.put("confirmURL", confirmationURL);
-		// props.put("lastName", "Smith");
 
-		velocityEmailSender.send(templateMessage, props);
+		velocityEmailSender.sendEmailConfirmation(mail, props);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -175,8 +169,18 @@ public class LoginController {
 
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
 	public String forgotPassword(Model model, @RequestParam("email") String email) {
-		sendMail(email, "");
-		model.addAttribute("error", "password has been sent to your mail.");
+		logger.info("getting user for email {} ", email);
+		Users findByEmail = userService.findByEmail(email);
+		if (null != findByEmail) {
+			logger.info("User is found for email {} ", email);
+			Map<String, Object> props = new HashMap<String, Object>();
+			props.put("password", findByEmail.getPassword());
+			velocityEmailSender.sendPassword(email, props);
+			model.addAttribute("error", "password has been sent to your mail.");
+		} else {
+			model.addAttribute("error", "User is either inactive or not available.");
+		}
+
 		return "login.";
 
 	}

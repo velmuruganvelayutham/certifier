@@ -1,8 +1,18 @@
 <html>
 <body>
-<h1>Welcome to Certifier </h1>
-<p>Welcome ${email}. </p>
-<p>Thank you for joining the site. Happy Learning !.</p>
-<a href="${confirmURL}"> Confirm Email</a>
+
+<h3>Welcome ${email}. </h3>
+<br>
+<p>You registration with <b>certifier </b> is a click away.</p>
+<br>
+<hr>
+<a href="${confirmURL}"> <h2> Confirm Email <h2> </a>
+<hr>
+
+<br>
+<br>
+Thanks
+Certifier Team.
+
 </body>
 </html>
