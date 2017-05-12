@@ -69,6 +69,7 @@ deploy_local_vm:
     url: http://dev.mock-labs.com
   only:
     - master
+  when: manual
   tags:
     - shell-osboxes
 
