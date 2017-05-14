@@ -56,15 +56,12 @@ public class AssignTestController {
 	}
 
 	@RequestMapping(value = "/assignTest", method = RequestMethod.POST)
-	public String assignTest(Locale locale, Model model,
-			@RequestParam(value = "selectedTests", required = false) String selectedTests,
-			@RequestParam("selectedUser") String selectedUser, BindingResult result) {
+	public String assignTest(Locale locale,
+			@RequestParam(value = "selectedTests", required = false, defaultValue = "1") String selectedTests,
+			@RequestParam("selectedUser") String selectedUser, Model model) {
 
 		logger.info("Selected Tests and Seleted User is {} {}.", selectedTests, selectedUser);
-		if (result.hasErrors()) {
-			model.addAttribute("message", "Selected test can not be empty ");
-			return fetchAllTests(model);
-		}
+
 		if (StringUtils.isEmpty(selectedTests)) {
 			model.addAttribute("message", "Selected Test can not be empty ");
 			return fetchAllTests(model);
