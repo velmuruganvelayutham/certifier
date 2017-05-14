@@ -69,9 +69,11 @@ response.setDateHeader ("Expires", -1);
             <span class="glyphicon glyphicon-bell"></span> </a>
         </li>
         </sec:authorize>
-        <li class="active"><a href="<c:url value="/notifications"/>">Study Materials
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+        <li class="active"><a href="<c:url value="/assignTest"/>">Assign Test
             <span class="glyphicon glyphicon-book"></span> </a>
         </li>
+        </sec:authorize>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 	         <li class="active"><a  href="<c:url value="/settings"/>">Settings
 	            <span class="glyphicon glyphicon-cog"></span> </a>
