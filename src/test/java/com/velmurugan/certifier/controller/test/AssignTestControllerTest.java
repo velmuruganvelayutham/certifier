@@ -58,6 +58,6 @@ public class AssignTestControllerTest {
 
 	@Test
 	public void test() throws Exception {
-		this.mockMvc.perform(get("/assignTest")).andDo(print()).andExpect(view().name("error."));
+		this.mockMvc.perform(get("/assignTest")).andDo(print()).andExpect(view().name("assignTest."));
 	}
 }
