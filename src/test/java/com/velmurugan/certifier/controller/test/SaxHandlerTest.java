@@ -1,4 +1,4 @@
-package com.velmurugan.certifier.test;
+package com.velmurugan.certifier.controller.test;
 
 import java.io.File;
 import java.io.FileInputStream;
