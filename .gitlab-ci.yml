@@ -15,7 +15,7 @@ build:
   stage: build
   image: maven:latest
   script:
-    - mvn clean package -Pprod
+    - mvn clean jacoco:report package -Pprod
   tags:
     - docker
     - shared
