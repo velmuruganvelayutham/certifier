@@ -23,7 +23,9 @@ build:
     name: "${CI_PROJECT_NAME}_${CI_COMMIT_REF_NAME}_${CI_PIPELINE_ID}"
     paths:
       - target/*.war
+      - target/site/
     expire_in: 1 week
+
 
 docker-build-app:
   stage: assemble
@@ -59,6 +61,20 @@ docker-build-sqlscript:
   tags:
     - docker
     - shared
+
+pages:
+  stage: deploy
+  dependencies:
+    - build
+  script:
+    - mv target/site/ public/
+  artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_COMMIT_REF_NAME}_${CI_PIPELINE_ID}_pages"
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master
  
 deploy_local_vm:
   stage: deploy
