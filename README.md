@@ -26,8 +26,9 @@ Spring MVC application for Online assessment test, Candidate Screening, aptitude
    
 ## Demo Instance:
 
+[[!http://mocklabs.com/certifier](http://104.199.146.224/certifier/)]
 
-This project is still under development. !,... 
+username/password  --> admin@admin.com/admin 
 
 
 
