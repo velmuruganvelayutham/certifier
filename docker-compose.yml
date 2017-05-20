@@ -14,11 +14,11 @@ services:
             context: .
             dockerfile: Dockerfile
         links:
-            - mysql
+            - velmuruganv-mysql
         ports:
             - "80:8080"
 
-    mysql:
+    velmuruganv-mysql:
         image: mysql:5.7
         environment:
             - MYSQL_ROOT_PASSWORD=root
