@@ -8,7 +8,7 @@ build:
   stage: build
   image: maven:latest
   services:
-    - velmuruganv/mysql:latest
+    - velmuruganv/mysql
   script:
     - mvn clean test jacoco:report package -Pprod
   tags:
