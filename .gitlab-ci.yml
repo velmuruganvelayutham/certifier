@@ -1,12 +1,14 @@
-services:
-  - mysql:latest
 
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
   MYSQL_DATABASE: certifier
   MYSQL_ROOT_PASSWORD: root
+  
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 stages:
+  - assemble-mysql-image
   - build
   - assemble
   - deploy
@@ -14,6 +16,8 @@ stages:
 build:
   stage: build
   image: maven:latest
+  services:
+    - $CI_REGISTRY_IMAGE:sqlscript
   script:
     - mvn clean test jacoco:report package -Pprod
   tags:
@@ -25,6 +29,8 @@ build:
       - target/*.war
       - target/site/
     expire_in: 1 week
+  dependencies:
+    - docker-build-sqlscript
 
 
 docker-build-app:
@@ -45,7 +51,7 @@ docker-build-app:
     - shared
 
 docker-build-sqlscript:
-  stage: assemble
+  stage: assemble-mysql-image
   image: docker:latest
   variables:
     IMAGE_TAG : $CI_REGISTRY_IMAGE:sqlscript
