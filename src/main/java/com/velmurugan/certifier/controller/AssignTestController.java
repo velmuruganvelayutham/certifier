@@ -74,6 +74,14 @@ public class AssignTestController {
 			model.addAttribute("message", "Selected Tests is already assigned to user ");
 			return fetchAllTests(model);
 		}
+		if(null == test){
+			model.addAttribute("message", "test is not found");
+			return fetchAllTests(model);
+		}
+		if(null == user){
+			model.addAttribute("message", "user is not found");
+			return fetchAllTests(model);
+		}
 		UserTest userTest = new UserTest();
 		userTest.setTest(test);
 		userTest.setUsername(user);

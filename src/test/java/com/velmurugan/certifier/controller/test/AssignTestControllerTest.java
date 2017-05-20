@@ -1,8 +1,8 @@
 package com.velmurugan.certifier.controller.test;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import javax.servlet.ServletContext;
 
@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,6 +29,8 @@ import com.velmurugan.certifier.service.UserTestService;
 @WebAppConfiguration
 public class AssignTestControllerTest {
 
+	private static final String MAIN_LAYOUT_JSP = "/pages/tradeshow/templates/bootstrap/mainLayout.jsp";
+
 	@Autowired
 	UserService userService;
 
@@ -43,7 +46,7 @@ public class AssignTestControllerTest {
 	private MockMvc mockMvc;
 
 	@Test
-	public void givenWac_whenServletContext_thenItProvidesGreetController() {
+	public void givenWac_whenServletContext_thenItAssignTestController() {
 		ServletContext servletContext = wac.getServletContext();
 
 		Assert.assertNotNull(servletContext);
@@ -58,6 +61,37 @@ public class AssignTestControllerTest {
 
 	@Test
 	public void test() throws Exception {
-		this.mockMvc.perform(get("/assignTest")).andDo(print()).andExpect(view().name("assignTest."));
+		this.mockMvc.perform(get("/assignTest")).andDo(print()).andExpect(view().name("assignTest."))
+				.andExpect(status().isOk()).andExpect(forwardedUrl(MAIN_LAYOUT_JSP));
 	}
+
+	@Test
+	public void assignTestToNewUser() throws Exception {
+		this.mockMvc
+				.perform(post("/assignTest").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+						.param("selectedUser", "admin@admin.com").param("selectedTests", "1"))
+				.andDo(print()).andExpect(view().name("assignTest.")).andExpect(status().isOk())
+				.andExpect(model().attribute("message",
+						"Selected Tests is assigned to user successfully " + "1" + "admin@admin.com"))
+				.andExpect(forwardedUrl(MAIN_LAYOUT_JSP));
+	}
+
+	@Test
+	public void assignTestToNonExistsUser() throws Exception {
+		this.mockMvc
+				.perform(post("/assignTest").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+						.param("selectedUser", "non-exists@gmail.com").param("selectedTests", "1"))
+				.andDo(print()).andExpect(view().name("assignTest.")).andExpect(status().isOk())
+				.andExpect(model().attribute("message", "user is not found")).andExpect(forwardedUrl(MAIN_LAYOUT_JSP));
+	}
+
+	@Test
+	public void assignNonExistsTestToUser() throws Exception {
+		this.mockMvc
+				.perform(post("/assignTest").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+						.param("selectedUser", "admin@admin.com").param("selectedTests", "100"))
+				.andDo(print()).andExpect(view().name("assignTest.")).andExpect(status().isOk())
+				.andExpect(model().attribute("message", "test is not found")).andExpect(forwardedUrl(MAIN_LAYOUT_JSP));
+	}
+
 }
