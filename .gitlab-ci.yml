@@ -1,12 +1,3 @@
-
-variables:
-  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
-  MYSQL_DATABASE: certifier
-  MYSQL_ROOT_PASSWORD: root
-  
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-
 stages:
   - assemble-mysql-image
   - build
@@ -18,6 +9,10 @@ build:
   image: maven:latest
   services:
     - $CI_REGISTRY_IMAGE:sqlscript
+  variables:
+  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
+    MYSQL_DATABASE: tradeshow
+    MYSQL_ROOT_PASSWORD: root
   script:
     - mvn clean test jacoco:report package -Pprod
   tags:
