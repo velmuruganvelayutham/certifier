@@ -17,7 +17,7 @@
 		<tomcat-dbcp.version>7.0.47</tomcat-dbcp.version>
 		<hibernate.version>3.6.10.Final</hibernate.version>
 		<javassist.version>3.18.1-GA</javassist.version>
-		<solr.version>4.10.1</solr.version>
+		<solr.version>8.2.0</solr.version>
 		<mysql.version>5.1.30</mysql.version>
 		<jackson.version>1.9.10</jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
